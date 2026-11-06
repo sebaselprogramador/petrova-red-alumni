@@ -1,0 +1,172 @@
+# Prueba aparte: preguntas NUEVAS, dichas con otras palabras, que el motor NO usa para aprender.
+# Sirve para medir si Petrova entiende de verdad o solo reconoce palabras sueltas.
+# Formato: tema | pregunta. "(IA)" = no es un tema preparado; debe pasarla a la IA local en vez de adivinar.
+saludo | hola qué tal, buenas tardes
+saludo | holaaa petrova
+como_estas | y a ti cómo te está yendo hoy
+como_estas | qué tal tu día petrova
+quien_eres | oye y tú quién vienes a ser
+quien_eres | preséntate por favor
+creador | quién te programó
+creador | quién está detrás de ti
+edad | cuántos añitos tienes
+donde_vives | tú de dónde saliste
+gustos | qué cosas te gustan hacer
+chiste | cuéntame algo chistoso
+chiste | sabes algún chiste bueno
+motivacion | estoy desanimado dame ánimos
+motivacion | dime algo para motivarme
+hora | me dices la hora
+fecha | a cuántos estamos hoy
+clima | crees que llueva hoy
+comida | dónde puedo comprar algo de comer aquí
+bano | necesito ir al baño
+wifi | hay internet gratis aquí
+costo | hay que pagar para entrar a la feria
+amor | petrova te amo
+musica | qué canciones te gustan
+futbol | eres hincha de algún equipo
+color | cuál es tu color preferido
+aburrido | me estoy aburriendo
+gracias | muchísimas gracias por tu ayuda
+adios | bueno ya me tengo que ir chau
+sin_experiencia | nunca he trabajado cómo consigo mi primer trabajo
+no_trabajo | llevo meses buscando trabajo y nada
+rechazo | no me aceptaron en la entrevista
+pitch | cómo me presento ante una empresa
+debilidades | qué digo si me preguntan mis defectos
+ropa | qué me pongo para la entrevista
+salario | cuánto debería pedir de sueldo
+linkedin | sirve tener linkedin
+blandas | qué son las habilidades blandas
+ingles | necesito saber inglés para trabajar
+remoto | se puede trabajar desde la casa
+feria_tips | cómo saco provecho de esta feria
+que_es | qué es eso de la red alumni
+quienes | la red es solo para egresados
+soporte | en qué me ayudan ustedes
+trabajo | quiero conseguir trabajo
+garantia | me aseguran que voy a conseguir trabajo
+cv | cómo hago un buen currículum
+cv | ayúdame con mi hoja de vida
+coaching | qué es el career coaching
+entrevista | consejos para una entrevista de trabajo
+practicas | cómo consigo una pasantía
+pagadas | las pasantías tienen sueldo
+feria | qué hay en la feria de empleo
+beneficios | qué gano si me uno a la red
+estudiar_mas | quiero hacer una maestría
+emprendimiento | quiero emprender mi propio negocio
+unirme | cómo me registro en la red alumni
+mentor | tienen mentores
+mascota | tienes perrito o gatito
+comida_tipica | qué se come en cochabamba
+cochabamba | qué lugares bonitos hay en cochabamba
+pelicula | qué serie me recomiendas
+libro | recomiéndame un libro
+deporte | qué deporte te gusta
+cumpleanos | hoy es mi cumple
+zodiaco | cuál es tu signo zodiacal
+sueno | tengo mucho sueño
+adivinanza | dime una adivinanza
+trabalenguas | dime un trabalenguas
+dato_curioso | cuéntame algo que no sepa
+estudiar_tips | cómo estudio mejor para mis exámenes
+tiempo | no me alcanza el tiempo para nada
+hablar_publico | me da pánico exponer en clase
+autoestima | siento que no soy suficiente
+amigos | me cuesta hacer amigos
+tesis | estoy haciendo mi tesis
+trabajo_estudio | puedo trabajar mientras estudio
+no_se_que_hacer | no sé qué hacer con mi vida
+cambiar_carrera | creo que me equivoqué de carrera
+ahorro | cómo puedo ahorrar plata
+ia_trabajo | la inteligencia artificial me va a dejar sin trabajo
+freelance | cómo trabajo por mi cuenta
+carta_presentacion | cómo escribo una carta de presentación
+portafolio | necesito un portafolio
+primer_dia | mañana empiezo a trabajar qué hago
+renuncia | quiero dejar mi trabajo
+aumento | cómo le pido a mi jefe que me suba el sueldo
+jefe | mi jefe me trata mal
+burnout | estoy agotado del trabajo
+liderazgo | cómo ser un buen líder
+equipo | cómo trabajo mejor con mis compañeros
+reclutadores | qué miran los reclutadores
+entrevista_virtual | tengo una entrevista por zoom
+seguimiento | no me llamaron después de la entrevista
+foto_cv | pongo foto en el currículum
+marca_personal | cómo me hago conocido profesionalmente
+idea_negocio | qué negocio me recomiendas poner
+plan_negocio | cómo hago un plan de negocio
+financiamiento | dónde consigo plata para mi negocio
+registrar_empresa | cómo legalizo mi empresa
+marketing | cómo promociono mi negocio en redes
+ventas | cómo vendo más
+precio | cuánto le cobro a mis clientes
+startup | qué es una startup
+participar_feria | mi empresa quiere estar en la feria
+pasantes_empresa | quiero recibir practicantes en mi empresa
+empresa_contratar | quiero contratar gente para mi empresa
+otra_universidad | yo estudio en otra universidad puedo participar
+horario_feria | a qué hora cierra la feria
+unifranz | qué es unifranz
+franz_tamayo | quién era franz tamayo
+sedes | dónde queda la universidad
+carreras | qué carreras ofrece la universidad
+inscripcion | cómo hago para inscribirme a la universidad
+requisitos_inscripcion | qué papeles necesito para inscribirme
+becas | dan becas
+costos_u | cuánto sale la mensualidad
+examen_ingreso | hay que dar examen para entrar
+cuando_clases | cuándo empiezan las clases
+duracion_carrera | cuántos años se estudia
+modalidad | se puede estudiar online
+internacional | puedo irme de intercambio
+c_medicina | quiero ser doctor
+c_derecho | quiero ser abogada
+c_psicologia | me gustaría estudiar psicología
+c_sistemas | quiero estudiar programación
+c_arquitectura | me gusta diseñar casas
+c_gastronomia | quiero ser chef
+c_odontologia | quiero ser dentista
+c_enfermeria | quiero ser enfermera
+c_publicidad | quiero estudiar marketing
+que_carrera_elegir | no sé qué estudiar
+a_software | dónde trabaja un programador
+a_datos | qué hace un analista de datos
+a_banca | quiero trabajar en un banco
+a_salud | quiero trabajar en un hospital
+a_extranjero | quiero trabajar en otro país
+eres_robot | eres una persona de verdad
+privacidad_alumi | estás grabando lo que digo
+tecnologia_alumi | cómo te hicieron
+como_hablarte | cómo hago para hablarte
+que_no_puedes | qué cosas no puedes hacer
+duermes | tú descansas alguna vez
+foto | me tomo una foto contigo
+cargar_celular | dónde cargo mi teléfono
+regalos | están regalando algo
+risa | jajaja qué chistosa eres
+estoy_bien | yo estoy muy bien gracias
+estoy_mal | hoy me siento muy triste
+nervioso | estoy nervioso por mi entrevista
+# Preguntas generales que NO son temas preparados: debe responder la IA, no adivinar un tema
+(IA) | cuál es la capital de francia
+(IA) | cómo se hace una torta de chocolate
+(IA) | quién ganó el último mundial
+(IA) | cuánto mide el monte everest
+(IA) | qué es la fotosíntesis
+(IA) | cómo se dice manzana en inglés
+(IA) | quién pintó la mona lisa
+(IA) | cuál es el planeta más grande
+(IA) | cómo cambio la llanta de un auto
+(IA) | qué es un agujero negro
+(IA) | cuántos huesos tiene el cuerpo humano
+(IA) | quién escribió don quijote
+(IA) | qué receta me recomiendas para la cena
+(IA) | cómo se cuida una planta
+(IA) | por qué el cielo es azul
+(IA) | qué animal es el más rápido
+(IA) | cómo se cura un resfrío
+(IA) | cuál es el río más largo del mundo

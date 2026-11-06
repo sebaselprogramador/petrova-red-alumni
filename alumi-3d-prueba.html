@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Petrova 3D prueba</title>
+<style>
+:root{--primario:#c8102e;--fondo1:#ffe3dc;--fondo2:#fff7f2;--texto:#1d2330;--tarjeta:#fff;--borde:#eadfda}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--fondo1:#3a1820;--fondo2:#16181d;--texto:#eef0f4;--tarjeta:#1f222a;--borde:#323745}}
+:root[data-theme="dark"]{--fondo1:#3a1820;--fondo2:#16181d;--texto:#eef0f4;--tarjeta:#1f222a;--borde:#323745}
+html,body{margin:0;height:100%;overflow:hidden;font-family:system-ui,"Segoe UI",sans-serif;color:var(--texto);background:radial-gradient(ellipse at 50% 40%,var(--fondo1),var(--fondo2) 75%)}
+canvas{display:block;touch-action:none;cursor:grab}
+.titulo{position:fixed;top:14px;left:16px;font-weight:800;color:var(--primario);font-size:clamp(16px,2.2vh,28px)}
+.titulo small{display:block;font-weight:500;opacity:.7;color:var(--texto);font-size:.6em}
+.botones{position:fixed;left:0;right:0;bottom:18px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:0 16px;max-width:1100px;margin:0 auto}
+.botones button{border:2px solid var(--primario);background:var(--tarjeta);color:var(--primario);border-radius:999px;padding:.45em .95em;font-weight:700;font-size:clamp(13px,1.6vh,22px);cursor:pointer}
+.botones button:hover,.botones button.activo{background:var(--primario);color:#fff}
+.aviso{position:fixed;top:14px;right:16px;max-width:46%;font-size:13px;opacity:.75;text-align:right}
+</style>
+</head>
+<body>
+<div class="titulo">Petrova en 3D<small>Prueba aparte · arrastra para girarla</small></div>
+<div class="aviso" id="aviso"></div>
+<div class="botones">
+  <button data-a="saludar">👋 Saludar</button>
+  <button data-a="hablar">🗣️ Hablar</button>
+  <button data-a="bailar">💃 Bailar</button>
+  <button data-a="saltar">⬆️ Saltar</button>
+  <button data-a="girar">🌀 Girar</button>
+  <button data-a="voltereta">🤸 Voltereta</button>
+  <button data-a="birrete">🎓 Lanzar birrete</button>
+  <button data-a="celebrar">🎉 Celebrar</button>
+  <button data-a="aplaudir">👏 Aplaudir</button>
+  <button data-a="corazon">💖 Corazones</button>
+  <button data-a="carcajada">😂 Carcajada</button>
+  <button data-a="guino">😉 Guiño</button>
+  <button data-a="sorpresa">😮 Sorpresa</button>
+  <button data-a="pensar">🤔 Pensar</button>
+  <button data-a="timida">☺️ Tímida</button>
+  <button data-a="reverencia">🙇 Reverencia</button>
+  <button data-a="estirar">🙆 Estirarse</button>
+  <button data-a="asentir">👍 Sí</button>
+  <button data-a="negar">🙅 No</button>
+  <button data-a="auto">🤖 Modo automático</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="audios/indice.js"></script>
+<script>
+/* Prueba 3D de Petrova hecha solo con figuras básicas (sin modelos externos). */
+if(!window.THREE){ document.getElementById("aviso").textContent="Necesitas internet para cargar la librería 3D (Three.js)."; throw new Error("sin THREE"); }
+const escena=new THREE.Scene();
+const camara=new THREE.PerspectiveCamera(35, innerWidth/innerHeight, .1, 100);
+const render=new THREE.WebGLRenderer({antialias:true, alpha:true});
+render.setPixelRatio(Math.min(devicePixelRatio,2)); render.shadowMap.enabled=true;
+document.body.prepend(render.domElement);
+function ajustar(){ render.setSize(innerWidth,innerHeight); camara.aspect=innerWidth/innerHeight;
+  // en pantallas verticales (1080×1920) aleja la cámara para que entre completa
+  const vertical=innerHeight>innerWidth; camara.position.set(0,1.55,vertical?8.2:6.2); camara.lookAt(0,1.35,0); camara.updateProjectionMatrix(); }
+addEventListener("resize",ajustar); ajustar();
+
+escena.add(new THREE.HemisphereLight(0xffffff,0x553344,.55));
+const sol=new THREE.DirectionalLight(0xffffff,.55); sol.position.set(3,6,4); sol.castShadow=true; sol.shadow.mapSize.set(1024,1024); escena.add(sol);
+
+const mat=c=>new THREE.MeshToonMaterial({color:c});
+const ROJO=mat(0xc8102e), DORADO=mat(0xf2c14e), PIEL=mat(0xffd9b8), PELO=mat(0x3b2418), NEGRO=mat(0x1d2330), BLANCO=mat(0xffffff), ROSA=mat(0xff8fa3), BOCA=mat(0x8f1d2c), ZAPATO=mat(0x2b3245);
+const malla=(g,m,x=0,y=0,z=0)=>{ const o=new THREE.Mesh(g,m); o.position.set(x,y,z); o.castShadow=true; return o; };
+
+// Piso y sombra
+const piso=new THREE.Mesh(new THREE.CircleGeometry(1.6,48), new THREE.ShadowMaterial({opacity:.18}));
+piso.rotation.x=-Math.PI/2; piso.receiveShadow=true; escena.add(piso);
+
+// Personaje
+const alumi=new THREE.Group(); escena.add(alumi);
+const cuerpo=new THREE.Group(); alumi.add(cuerpo);
+cuerpo.add(malla(new THREE.CylinderGeometry(.42,.82,1.55,32),ROJO,0,.85,0));
+cuerpo.add(malla(new THREE.SphereGeometry(.13,16,16),ZAPATO,-.25,.07,.25), malla(new THREE.SphereGeometry(.13,16,16),ZAPATO,.25,.07,.25));
+const cuello=malla(new THREE.CylinderGeometry(.13,.15,.25,16),PIEL,0,1.72,0); cuerpo.add(cuello);
+const cuelloV=malla(new THREE.ConeGeometry(.2,.35,3),BLANCO,0,1.5,.36); cuelloV.rotation.x=Math.PI; cuelloV.scale.z=.3; cuerpo.add(cuelloV);
+[-1,1].forEach(l=>{ const e=malla(new THREE.BoxGeometry(.12,1.35,.04),DORADO,.18*l,.95,.62); e.rotation.x=-.27; e.rotation.z=.08*l; cuerpo.add(e); });
+
+// Brazos con pivote en el hombro
+function brazo(lado){ const piv=new THREE.Group(); piv.position.set(.6*lado,1.5,.08);
+  const b=malla(new THREE.CylinderGeometry(.11,.14,.75,16),ROJO,0,-.36,0); const m=malla(new THREE.SphereGeometry(.12,16,16),PIEL,0,-.78,0);
+  piv.add(b,m); piv.rotation.z=.2*lado; cuerpo.add(piv); return piv; }
+const brazoI=brazo(-1), brazoD=brazo(1);
+
+// Cabeza
+const cabeza=new THREE.Group(); cabeza.position.set(0,2.32,0); cuerpo.add(cabeza);
+cabeza.add(malla(new THREE.SphereGeometry(.62,40,40),PIEL));
+const pelo=malla(new THREE.SphereGeometry(.65,40,40,0,Math.PI*2,0,Math.PI*.55),PELO,0,.03,-.04); pelo.rotation.x=-.35; cabeza.add(pelo);
+const coleta=new THREE.Group(); coleta.position.set(.35,.15,-.45); coleta.add(malla(new THREE.SphereGeometry(.2,20,20),PELO,0,-.15,-.05), malla(new THREE.SphereGeometry(.07,12,12),ROJO,0,.05,0)); cabeza.add(coleta);
+[-1,1].forEach(l=>cabeza.add(malla(new THREE.SphereGeometry(.1,16,16),PIEL,.6*l,-.02,0)));
+const ojos=[]; [-1,1].forEach(l=>{ const g=new THREE.Group(); g.position.set(.22*l,.05,.53);
+  const b=malla(new THREE.SphereGeometry(.13,24,24),BLANCO); b.scale.set(1,1.15,.5);
+  const p=malla(new THREE.SphereGeometry(.075,20,20),NEGRO,0,-.01,.05); p.scale.z=.5; const brillo=malla(new THREE.SphereGeometry(.025,8,8),BLANCO,.03,.04,.09);
+  g.add(b,p,brillo); cabeza.add(g); ojos.push({g,p}); });
+[-1,1].forEach(l=>{ const c=malla(new THREE.SphereGeometry(.09,16,16),ROSA,.36*l,-.2,.47); c.scale.set(1.3,.6,.4); c.material=c.material.clone(); c.material.transparent=true; c.material.opacity=.5; cabeza.add(c); });
+const cejas=[-1,1].map(l=>{ const c=malla(new THREE.BoxGeometry(.2,.035,.03),PELO,.22*l,.27,.57); c.rotation.z=-.12*l; cabeza.add(c); return c; });
+// Boca: sonrisa en reposo, sonrisa abierta al hablar o reír, y "O" de sorpresa
+const sonrisa=malla(new THREE.TorusGeometry(.16,.032,12,32,Math.PI),BOCA,0,-.2,.6); sonrisa.rotation.set(.35,0,Math.PI); cabeza.add(sonrisa);
+const risa=new THREE.Group(); risa.position.set(0,-.2,.6); risa.rotation.x=.35; cabeza.add(risa);
+risa.add(malla(new THREE.CircleGeometry(.17,32,Math.PI,Math.PI),BOCA));
+risa.add(malla(new THREE.BoxGeometry(.24,.04,.01),BLANCO,0,-.02,.004));
+const lengua=malla(new THREE.CircleGeometry(.08,20,0,Math.PI),ROSA,0,-.165,.003); lengua.material=lengua.material.clone(); risa.add(lengua);
+const boca=malla(new THREE.SphereGeometry(.11,24,24),BOCA,0,-.28,.55); cabeza.add(boca);
+const cachetes=cabeza.children.filter(c=>c.material&&c.material.opacity===.5);
+
+// Birrete con borla
+const birrete=new THREE.Group(); birrete.position.set(0,.55,-.02); cabeza.add(birrete);
+birrete.add(malla(new THREE.CylinderGeometry(.42,.45,.2,32),NEGRO,0,0,0));
+const tabla=malla(new THREE.BoxGeometry(1.15,.05,1.15),NEGRO,0,.12,0); tabla.rotation.y=Math.PI/4; birrete.add(tabla);
+const borla=new THREE.Group(); borla.position.set(0,.16,0); birrete.add(borla);
+borla.add(malla(new THREE.SphereGeometry(.04,8,8),DORADO));
+const hilo=malla(new THREE.CylinderGeometry(.012,.012,.55,6),DORADO,.4,-.1,.0); hilo.rotation.z=1.2; borla.add(hilo);
+const pomp=malla(new THREE.SphereGeometry(.06,10,10),DORADO,.62,-.3,0); borla.add(pomp);
+
+// Partículas: confeti y corazones
+const particulas=[];
+const geoConfeti=new THREE.PlaneGeometry(.07,.11), COLORES=[0xc8102e,0xf2c14e,0x2f80ed,0x27ae60,0xff8fa3,0xffffff];
+function lanzarConfeti(n,y){ for(let i=0;i<n;i++){
+  const m=new THREE.Mesh(geoConfeti,new THREE.MeshBasicMaterial({color:COLORES[i%COLORES.length],side:THREE.DoubleSide}));
+  m.position.set(Math.random()*.6-.3,y,Math.random()*.6-.3); escena.add(m);
+  particulas.push({m,v:new THREE.Vector3((Math.random()*2-1)*1.8,2+Math.random()*2.5,(Math.random()*2-1)*1.4),giro:new THREE.Vector3(Math.random()*9,Math.random()*9,Math.random()*9),vida:3.2,grav:4.5,aire:.6}); } }
+const formaCorazon=new THREE.Shape(); formaCorazon.moveTo(0,-.5);
+formaCorazon.bezierCurveTo(-.2,-.3,-.6,-.1,-.5,.2); formaCorazon.bezierCurveTo(-.4,.5,-.05,.5,0,.25);
+formaCorazon.bezierCurveTo(.05,.5,.4,.5,.5,.2); formaCorazon.bezierCurveTo(.6,-.1,.2,-.3,0,-.5);
+const geoCorazon=new THREE.ExtrudeGeometry(formaCorazon,{depth:.12,bevelEnabled:true,bevelSize:.05,bevelThickness:.05,bevelSegments:3});
+function lanzarCorazon(){ const m=new THREE.Mesh(geoCorazon,new THREE.MeshToonMaterial({color:0xff4d6d,transparent:true}));
+  const sc=.12+Math.random()*.08; m.scale.set(sc,sc,sc); m.position.set(Math.random()*.5-.25,1.6,.8); escena.add(m);
+  particulas.push({m,v:new THREE.Vector3((Math.random()*2-1)*.3,.9+Math.random()*.5,.1),giro:new THREE.Vector3(0,1.5,0),vida:2.2,grav:0,aire:0,desvanece:true}); }
+function moverParticulas(dt){ for(let i=particulas.length-1;i>=0;i--){ const p=particulas[i]; p.vida-=dt;
+  p.v.y-=p.grav*dt; p.v.multiplyScalar(1-p.aire*dt); p.m.position.addScaledVector(p.v,dt);
+  if(p.m.position.y<.01){ p.m.position.y=.01; p.v.set(0,0,0); p.giro.set(0,0,0); }
+  p.m.rotation.x+=p.giro.x*dt; p.m.rotation.y+=p.giro.y*dt; p.m.rotation.z+=p.giro.z*dt;
+  if(p.desvanece) p.m.material.opacity=Math.min(1,p.vida);
+  if(p.vida<=0){ escena.remove(p.m); p.m.material.dispose(); particulas.splice(i,1); } } }
+
+// Arrastrar para girar
+let arrastrando=false, x0=0, giroUsuario=0, mouse={x:0,y:0};
+render.domElement.addEventListener("pointerdown",e=>{arrastrando=true;x0=e.clientX;render.domElement.style.cursor="grabbing";});
+addEventListener("pointerup",()=>{arrastrando=false;render.domElement.style.cursor="grab";});
+addEventListener("pointermove",e=>{ mouse.x=e.clientX/innerWidth*2-1; mouse.y=e.clientY/innerHeight*2-1; if(arrastrando){ giroUsuario+=(e.clientX-x0)*.01; x0=e.clientX; } });
+
+// Acciones
+let accion=null, tAccion=0, hablando=null, extra=0, auto=false, esperaAuto=2;
+const DUR={saludar:2.2,bailar:4,saltar:1.4,girar:1.6,birrete:2.4,celebrar:2.4,aplaudir:2,reverencia:2.2,pensar:3,sorpresa:1.8,guino:1.5,
+  voltereta:1.5,estirar:2.6,asentir:1.6,negar:1.6,corazon:2.8,timida:2.6,carcajada:2.4};
+function iniciar(a){
+  if(a==="auto"){ auto=!auto; document.querySelector('[data-a="auto"]').classList.toggle("activo",auto); esperaAuto=.5; return; }
+  if(a==="hablar") return hablar();
+  accion=a; tAccion=0; extra=0;
+  if(a==="celebrar") lanzarConfeti(90,2.6);
+}
+document.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>iniciar(b.dataset.a));
+
+// Habla con un audio grabado de Elena: la boca sigue el tiempo de cada palabra
+function hablar(){
+  const A=window.AUDIOS; if(!A||!A.c){ document.getElementById("aviso").textContent="No encontré la carpeta audios/ junto a esta página."; return; }
+  const claves=Object.keys(A.c).filter(k=>{ const p=A.c[k]; return p.length>12 && p.length<40; });
+  const k=claves[Math.floor(Math.random()*claves.length)];
+  if(hablando){ hablando.audio.pause(); }
+  const audio=new Audio("audios/"+k+".mp3"); hablando={audio, palabras:A.c[k]}; audio.play().catch(()=>{});
+  audio.onended=()=>{ hablando=null; };
+  accion="hablarGesto"; tAccion=0;
+}
+const suave=t=>t<0?0:t>1?1:t*t*(3-2*t);
+const ola=(t,f)=>Math.sin(t*Math.PI*2*f);
+const entrada=k=>suave(k*5)*(1-suave((k-.8)*5)); // sube al inicio y baja al final
+
+// Animación
+const reloj=new THREE.Clock(); let parpadeo=2;
+function animar(){
+  requestAnimationFrame(animar);
+  const dt=Math.min(reloj.getDelta(),.05), t=reloj.elapsedTime; tAccion+=dt;
+  // base: respirar, balancearse, seguir el puntero con la mirada
+  cuerpo.scale.y=1+ola(t,.3)*.012; alumi.position.set(0,0,0); alumi.rotation.set(0,giroUsuario+ola(t,.12)*.08,0);
+  cabeza.rotation.set(-mouse.y*.15, mouse.x*.35, ola(t,.17)*.05);
+  ojos.forEach(o=>{ o.p.position.x=mouse.x*.035; o.p.position.y=-.01-mouse.y*.03; });
+  coleta.rotation.z=ola(t,.4)*.15; borla.rotation.z=ola(t,.5)*.12;
+  brazoI.rotation.set(0,0,-.2+ola(t,.3)*.03); brazoD.rotation.set(0,0,.2-ola(t,.3)*.03);
+  cejas.forEach(c=>c.position.y=.27);
+  let abrir=0, oh=0, ojoI=1, ojoD=1, cejaY=0, rubor=.5;
+  // parpadeo
+  parpadeo-=dt; const cerrado=parpadeo<.12; if(parpadeo<0) parpadeo=2+Math.random()*3;
+  // hablar con el audio
+  if(hablando && !hablando.audio.paused){ const ms=hablando.audio.currentTime*1000; const w=hablando.palabras.find(p=>ms>=p[0]&&ms<=p[0]+p[1]);
+    abrir = w ? .35+Math.abs(Math.sin(ms/70))*.65 : .08; cabeza.rotation.z+=ola(t,1.4)*.04;
+    brazoD.rotation.z=.12+(.5+ola(t,.45)*.35); brazoI.rotation.z=-.12-(.25+ola(t,.35)*.2); }
+
+  // acciones
+  const d=accion?DUR[accion]:0, k=accion&&d?tAccion/d:0, e=entrada(k);
+  if(accion==="saludar"){ brazoD.rotation.z=.12+suave(k*4)*2.6-suave((k-.8)*5)*2.6+ola(tAccion,2.2)*.35*(k<.85); cabeza.rotation.z+=.12; abrir=Math.max(abrir,.4*e); }
+  if(accion==="bailar"){ alumi.position.x=ola(tAccion,1)*.35; alumi.position.y=Math.abs(ola(tAccion,2))*.25; alumi.rotation.y+=ola(tAccion,.5)*.6;
+    brazoI.rotation.z=-1.2-ola(tAccion,2)*.9; brazoD.rotation.z=1.2-ola(tAccion,2)*.9; cabeza.rotation.z+=ola(tAccion,2)*.18; abrir=Math.max(abrir,.5*e); }
+  if(accion==="saltar"){ const s=(tAccion%.7)/.7; alumi.position.y=Math.sin(s*Math.PI)*.8; cuerpo.scale.y*=1-(s<.12?(.12-s):0); brazoI.rotation.z=-1.6*Math.sin(s*Math.PI); brazoD.rotation.z=1.6*Math.sin(s*Math.PI); abrir=.6; }
+  if(accion==="girar"){ alumi.rotation.y+=suave(k)*Math.PI*2; alumi.position.y=Math.sin(k*Math.PI)*.4; abrir=.5; }
+  if(accion==="celebrar"){ alumi.position.y=Math.abs(ola(tAccion,1.6))*.5; brazoI.rotation.z=-2.6; brazoD.rotation.z=2.6; abrir=.9; ojoI=ojoD=.15; }
+  if(accion==="birrete"){ brazoD.rotation.z=.12+suave(k*3)*2.7-suave((k-.8)*5)*2.7;
+    const v=Math.sin(Math.min(1,k/.85)*Math.PI); birrete.position.y=.55+v*2.6; birrete.rotation.y=k*Math.PI*6; birrete.rotation.x=v*.6;
+    cabeza.rotation.x=-v*.35; ojos.forEach(o=>o.p.position.y=.03*v); abrir=.7*v;
+    if(k>.45&&!extra){ extra=1; lanzarConfeti(70,4.2); } }
+  else { birrete.position.y=.55; birrete.rotation.set(0,0,0); }
+  if(accion==="aplaudir"){ const c=Math.abs(ola(tAccion,2.6)); brazoD.rotation.set(-1.25*e,0,(-.42-.24*c)*e); brazoI.rotation.set(-1.25*e,0,(.42+.24*c)*e);
+    alumi.position.y=c*.05; abrir=.7*e; ojoI=ojoD=1-.8*e; }
+  if(accion==="reverencia"){ const b=Math.sin(k*Math.PI); alumi.rotation.x=b*.38; brazoD.rotation.set(-1.1*b,0,-.55*b); brazoI.rotation.z=-.2-.7*b;
+    ojoI=ojoD=b>.5?.12:1; abrir=.25*b; }
+  if(accion==="pensar"){ brazoD.rotation.set(-2.2*e,0,-.5*e); cabeza.rotation.z+=.2*e; cabeza.rotation.x-=.15*e;
+    ojos.forEach(o=>{ o.p.position.y=-.01+.05*e; o.p.position.x+=.03*e; }); cejas[1].position.y=.27+.07*e; oh=.35*e; brazoI.rotation.z-=.15*e; }
+  if(accion==="sorpresa"){ alumi.position.y=Math.sin(Math.min(1,k*4)*Math.PI)*.25; oh=e; cejaY=.08*e; ojoI=ojoD=1+.3*e;
+    brazoD.rotation.z=.2+1.1*e; brazoI.rotation.z=-.2-1.1*e; cabeza.rotation.x-=.1*e; }
+  if(accion==="guino"){ ojoD=1-.88*e; cabeza.rotation.z-=.2*e; abrir=.3*e; brazoD.rotation.set(-1.3*e,0,.15*e); rubor=.5+.3*e; }
+  if(accion==="voltereta"){ const r=-suave(k)*Math.PI*2, h=1.3, sal=Math.sin(k*Math.PI)*1.1;
+    alumi.rotation.x=r; alumi.position.set(0,h+sal-h*Math.cos(r),-h*Math.sin(r)); brazoI.rotation.z=-2.4; brazoD.rotation.z=2.4; abrir=.8; }
+  if(accion==="estirar"){ brazoI.rotation.z=-.2-2.7*e; brazoD.rotation.z=.2+2.7*e; cuerpo.scale.y*=1+.06*e; ojoI=ojoD=1-.88*e; oh=.85*e; cabeza.rotation.x-=.2*e; }
+  if(accion==="asentir"){ cabeza.rotation.x+=ola(tAccion,2.2)*.25*e; abrir=.35*e; }
+  if(accion==="negar"){ cabeza.rotation.y+=ola(tAccion,2.4)*.4*e; brazoD.rotation.set(-1.2*e,0,.1+ola(tAccion,2.4)*.25*e); cejaY=-.03*e; }
+  if(accion==="corazon"){ brazoD.rotation.set(-1.4*e,0,-.6*e); brazoI.rotation.set(-1.4*e,0,.6*e); rubor=.5+.4*e; abrir=.45*e; ojoI=ojoD=1-.8*e;
+    if(tAccion>extra){ extra=tAccion+.22; if(k<.8) lanzarCorazon(); } }
+  if(accion==="timida"){ cabeza.rotation.z+=.25*e; cabeza.rotation.x+=.18*e; ojos.forEach(o=>o.p.position.y=-.01-.05*e); rubor=.5+.45*e;
+    brazoD.rotation.set(-.5*e,0,-.35*e); brazoI.rotation.set(-.5*e,0,.35*e); alumi.rotation.y+=ola(tAccion,.7)*.22*e; }
+  if(accion==="carcajada"){ abrir=Math.max(.15,e*(.6+Math.abs(Math.sin(tAccion*14))*.4)); ojoI=ojoD=1-.85*e; cabeza.rotation.x-=.25*e;
+    alumi.position.y=Math.abs(ola(tAccion,4))*.08*e; brazoD.rotation.set(-.9*e,0,-.5*e); brazoI.rotation.set(-.9*e,0,.5*e); }
+  if(accion && d && tAccion>d) accion=null;
+  if(accion==="hablarGesto" && !hablando) accion=null;
+
+  // modo automático: hace algo distinto cada pocos segundos
+  if(auto && !accion && !hablando){ esperaAuto-=dt; if(esperaAuto<0){ esperaAuto=2+Math.random()*2.5;
+    const lista=Object.keys(DUR).concat(["hablar","hablar"]); iniciar(lista[Math.floor(Math.random()*lista.length)]); } }
+
+  // aplica cara: ojos, cejas, boca y rubor
+  ojos[0].g.scale.y=cerrado?.1:ojoI; ojos[1].g.scale.y=cerrado?.1:ojoD;
+  cejas.forEach(c=>c.position.y+=cejaY);
+  // una sola boca a la vez: la forma que más se abre manda y la otra desaparece al instante
+  if(oh>abrir){ abrir=0; risa.scale.y=.001; } else if(abrir>0){ oh=0; boca.scale.set(.001,.001,.4); }
+  risa.scale.y+=(Math.max(.001,abrir)-risa.scale.y)*.35; risa.visible=risa.scale.y>.06;
+  boca.scale.set(.75*oh+.001,1.05*oh+.001,.4); boca.visible=oh>.05;
+  sonrisa.visible=!risa.visible&&!boca.visible;
+  cachetes.forEach(c=>c.material.opacity+=(rubor-c.material.opacity)*.15);
+  moverParticulas(dt);
+  render.render(escena,camara);
+}
+animar();
+</script>
+</body>
+</html>
