@@ -19,7 +19,7 @@ Chatbot por voz con un personaje 3D animado, hecho con **cero presupuesto** para
 ## Petrova también es una demo de IA
 
 - **Voz a texto:** Web Speech API del navegador.
-- **Entendimiento (procesamiento de lenguaje natural):** palabras clave + comparación con más de 850 frases de ejemplo (TF-IDF y similitud coseno), con sinónimos, recorte de terminaciones y corrección fonética.
+- **Entendimiento (procesamiento de lenguaje natural):** palabras clave + comparación con más de 1.200 frases de ejemplo (TF-IDF y similitud coseno), con sinónimos, recorte de terminaciones y corrección fonética.
 - **Voz:** síntesis neuronal pregrabada con los tiempos de cada palabra para mover la boca.
 - **IA opcional:** si en la computadora corre [Ollama](https://ollama.com) con `qwen2.5:3b`, responde lo que no está preparado. En la versión publicada en internet esa parte no está disponible.
 

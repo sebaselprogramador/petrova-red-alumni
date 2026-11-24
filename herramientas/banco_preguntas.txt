@@ -885,3 +885,391 @@ hablar_publico | me da miedo hablar frente a la gente
 que_carrera_elegir | no sé qué carrera seguir
 que_carrera_elegir | no tengo idea de qué estudiar
 quien_eres | tú quién eres
+
+# ===== Más formas de preguntar (directas, indirectas, cortas, formales y coloquiales) =====
+# --- Turing Lab ---
+turing_lab | en qué consiste el turing lab
+turing_lab | me explicas el turing lab
+turing_lab | qué onda este evento
+turing_lab | turing lab
+turing_lab | qué se hace en el turing lab
+turing_lab | para qué organizan esta expo
+turing_lab | a qué vine aquí
+turing_lab | cuál es el objetivo de la expo
+islas | cuáles son las áreas de la expo
+islas | cómo se divide la expo
+islas | qué zonas tiene la feria tecnológica
+islas | qué temas puedo visitar
+islas | dónde veo lo de inteligencia artificial
+islas | qué me recomiendas visitar primero
+demos | qué puedo probar aquí
+demos | se pueden tocar los proyectos
+demos | qué inventos hay
+demos | qué apps hicieron
+demos | hay algún robot
+demos | qué cosas interesantes hay para ver
+presentar_proyecto | cómo explico mi prototipo al público
+presentar_proyecto | consejos para mi demo
+presentar_proyecto | qué digo cuando presento mi proyecto
+horario_expo | qué día es el turing lab
+horario_expo | la expo es hoy
+horario_expo | hasta cuándo dura esto
+horario_expo | a qué hora abren
+horario_expo | en qué fecha es la expo
+participar_expo | los colegiales pueden presentar proyectos
+participar_expo | cómo hago para estar en la próxima expo
+participar_expo | quiénes son los expositores
+alan_turing | quién fue el famoso turing
+alan_turing | qué hizo alan turing en la guerra
+alan_turing | quién inventó la computación
+alan_turing | quién es el padre de la computación
+alan_turing | qué tiene que ver turing con las computadoras
+test_turing | en qué consiste el test de turing
+test_turing | cómo se prueba si una ia es inteligente
+test_turing | eres capaz de engañar a una persona
+premio_turing | quién gana el premio turing
+premio_turing | existe un nobel de informática
+# --- Carrera y malla ---
+c_sistemas | cómo es la carrera de sistemas
+c_sistemas | vale la pena estudiar sistemas
+c_sistemas | qué es innovación digital
+c_sistemas | dónde puedo estudiar sistemas en unifranz
+c_sistemas | ingeniería de sistemas
+malla | cuántos semestres tiene sistemas
+malla | qué aprendo en cada semestre
+malla | qué ven en el primer año
+malla | qué materias son difíciles
+microcredenciales | qué es una microcredencial
+microcredenciales | para qué sirven las microcredenciales
+microcredenciales | las microcredenciales son certificados
+microcredenciales | cuándo te dan las microcredenciales
+mc_software | qué materias tiene la microcredencial de software
+mc_software | qué es gestión de datos
+mc_software | qué son las estructuras de datos
+mc_agiles | qué es trabajar ágil
+mc_agiles | qué es un sprint
+mc_agiles | qué significa metodología ágil
+mc_etica | por qué la tecnología necesita ética
+mc_etica | qué es la gobernanza digital
+mc_etica | qué es una auditoría informática
+mc_innovacion | qué es la programación inmersiva
+mc_innovacion | qué es un modelo de negocio
+mc_innovacion | qué es la microcredencial de innovación
+mc_ofensiva | qué es ciberseguridad ofensiva
+mc_ofensiva | qué es buscar vulnerabilidades
+mc_ofensiva | cómo se encuentran fallas de seguridad
+mc_redes | qué es un servidor
+mc_redes | qué es una infraestructura de red
+mc_redes | cómo se protege una red
+menciones | qué es una mención
+menciones | cuál es la mención de ia
+menciones | qué diferencia hay entre las menciones
+proyectos_integradores | cuándo empiezan los proyectos en la carrera
+proyectos_integradores | qué es un proyecto integrador final
+proyectos_integradores | se aprende haciendo proyectos
+practica_grado | cuándo hago la práctica profesional
+practica_grado | cómo es el taller de grado
+practica_grado | puedo graduarme sin tesis
+donde_trabaja_sistemas | en qué empresas trabaja un ingeniero de sistemas
+donde_trabaja_sistemas | hay mucha demanda de ingenieros de sistemas
+donde_trabaja_sistemas | qué puestos puedo tener
+perfil_sistemas | qué habilidades tiene un ingeniero de sistemas
+perfil_sistemas | qué sabe hacer alguien de sistemas
+# --- Inteligencia artificial ---
+ia | ia
+ia | qué es la ia en palabras simples
+ia | dame un ejemplo de inteligencia artificial
+ia | dónde se usa la inteligencia artificial
+ia | la inteligencia artificial piensa
+ia | cómo trabaja una ia
+machine_learning | qué es aprendizaje de máquina
+machine_learning | qué diferencia hay entre ia y machine learning
+machine_learning | qué es un dataset
+machine_learning | cómo se le enseña a una computadora
+redes_neuronales | cómo funcionan las redes neuronales
+redes_neuronales | qué tiene que ver el cerebro con la ia
+redes_neuronales | qué es una neurona artificial
+ia_generativa | qué es gemini
+ia_generativa | qué es claude
+ia_generativa | cómo hace la ia para dibujar
+ia_generativa | puedo confiar en chatgpt
+ia_generativa | la ia puede escribir código
+nlp | cómo entiende una computadora el español
+nlp | qué es el reconocimiento de voz
+nlp | cómo sabe alexa lo que digo
+nlp | cómo funcionan los asistentes de voz
+vision | cómo reconoce caras el celular
+vision | cómo ve una computadora
+vision | qué son los autos que se manejan solos
+etica_ia | la ia es buena o mala
+etica_ia | la ia puede mentir
+etica_ia | hay que tenerle miedo a la ia
+etica_ia | la ia es racista
+etica_ia | quién controla la inteligencia artificial
+ia_trabajo | qué trabajos va a hacer la ia
+ia_trabajo | los programadores van a desaparecer
+ia_trabajo | me conviene aprender ia para trabajar
+aprender_ia | dónde estudio inteligencia artificial
+aprender_ia | qué cursos de ia me recomiendas
+aprender_ia | qué matemáticas necesito para ia
+# --- Ciencia de datos ---
+ciencia_datos | qué estudia la ciencia de datos
+ciencia_datos | qué es un analista de datos
+ciencia_datos | ejemplos de ciencia de datos
+ciencia_datos | ciencia de datos
+big_data | por qué se llama big data
+big_data | cuántos datos son big data
+big_data | dónde se usa big data
+analitica | cómo se hacen predicciones con datos
+analitica | qué es power bi
+analitica | para qué sirven los gráficos de datos
+herramientas_datos | qué es pandas
+herramientas_datos | para qué sirve sql
+herramientas_datos | python sirve para datos
+herramientas_datos | qué programa uso para analizar datos
+# --- Ciberseguridad ---
+ciberseguridad | ciberseguridad
+ciberseguridad | quiénes son los hackers
+ciberseguridad | los hackers son malos
+ciberseguridad | qué es un ciberataque
+ciberseguridad | por qué es importante la ciberseguridad
+protegerme | cómo cuido mi información en internet
+protegerme | qué hago si me roban el facebook
+protegerme | cómo protejo mi whatsapp
+protegerme | consejos para no ser hackeado
+contrasenas | mi contraseña es segura
+contrasenas | cada cuánto cambio mi contraseña
+contrasenas | qué es un gestor de contraseñas
+contrasenas | cómo activo la verificación en dos pasos
+phishing | cómo sé si un link es falso
+phishing | me dijeron que gané un premio es real
+phishing | me piden mis datos por mensaje
+phishing | qué es el smishing
+malware | cómo sé si mi celular tiene virus
+malware | qué hace un troyano
+malware | necesito antivirus
+forense | cómo se investiga un delito informático
+forense | qué hace un perito informático
+forense | qué pasa después de un hackeo
+# --- Blockchain ---
+blockchain | blockchain
+blockchain | para qué inventaron blockchain
+blockchain | blockchain es seguro
+blockchain | qué tiene de especial blockchain
+blockchain | qué es un registro distribuido
+smart_contracts | cómo funciona un smart contract
+smart_contracts | qué es solidity
+smart_contracts | para qué sirven los contratos inteligentes
+cripto | qué es ethereum
+cripto | bitcoin es lo mismo que blockchain
+cripto | se puede ganar plata con cripto
+cripto | qué es minar bitcoin
+usos_blockchain | blockchain sirve solo para criptomonedas
+usos_blockchain | cómo se usa blockchain en la salud
+usos_blockchain | se pueden guardar títulos en blockchain
+# --- Nube ---
+nube | cloud
+nube | qué significa estar en la nube
+nube | dónde está físicamente la nube
+nube | para qué sirve la nube
+nube | ejemplos de la nube
+tipos_nube | qué es iaas
+tipos_nube | qué es paas
+tipos_nube | qué es una nube híbrida
+proveedores_nube | cuál es la mejor nube
+proveedores_nube | qué nube usan las empresas
+proveedores_nube | cómo aprendo aws
+seguridad_nube | se pueden hackear mis datos en la nube
+seguridad_nube | es confiable google drive
+seguridad_nube | cómo protejo mis archivos en la nube
+# --- Más tecnología ---
+iot | qué es iot
+iot | ejemplos de internet de las cosas
+iot | cómo funciona una casa inteligente
+realidad_aumentada | qué diferencia hay entre realidad aumentada y virtual
+realidad_aumentada | qué es el metaverso
+realidad_aumentada | cómo funcionan los filtros de instagram
+apps_web | cuánto cuesta hacer una app
+apps_web | qué necesito para crear una aplicación
+apps_web | cómo publico mi página web
+aprender_programar | es difícil programar
+aprender_programar | puedo aprender a programar solo
+aprender_programar | por dónde empiezo a programar
+aprender_programar | qué es programar
+testing | por qué fallan los programas
+testing | qué hace un tester
+testing | qué es qa
+computadora_cuantica | qué es un qubit
+computadora_cuantica | las computadoras cuánticas existen
+computadora_cuantica | qué es la computación cuántica
+startup | cómo empiezo una startup
+startup | qué es un emprendimiento tecnológico
+startup | startups famosas
+innovacion | qué es la transformación digital
+innovacion | cómo innovo
+innovacion | cómo tengo ideas nuevas
+certificaciones | qué certificaciones de tecnología me recomiendas
+certificaciones | sirven los certificados online
+futuro_trabajo | qué trabajos van a existir en el futuro
+futuro_trabajo | qué estudiar para el futuro
+futuro_trabajo | qué tecnología viene después
+videojuegos | cómo se hacen los videojuegos
+videojuegos | qué estudio para crear videojuegos
+redes_cuidado | qué es la huella digital
+redes_cuidado | es peligroso subir fotos a redes
+# --- Petrova ---
+tecnologia_alumi | eres chatgpt
+tecnologia_alumi | usas chatgpt
+tecnologia_alumi | eres una inteligencia artificial de verdad
+tecnologia_alumi | cómo funcionas tú
+tecnologia_alumi | qué software usas
+como_funcionas | cómo sabes tantas cosas
+como_funcionas | de dónde sacas tus respuestas
+como_funcionas | quién te enseñó todo eso
+aprendes | puedes aprender cosas nuevas
+aprendes | te van a actualizar
+aprendes | aprendes de mí
+privacidad_alumi | me estás escuchando todo el tiempo
+privacidad_alumi | grabas mi voz
+privacidad_alumi | qué haces con lo que te digo
+cuantas_preguntas | cuántas cosas sabes responder
+cuantas_preguntas | qué tanto sabes
+que_no_puedes | qué no sabes hacer
+que_no_puedes | cuáles son tus límites
+eres_gratis | cuánto costó hacerte
+eres_gratis | te pagaron para estar aquí
+eres_mujer | eres chica o chico
+eres_mujer | eres mujer
+quien_eres | quién eres tú
+creador | quién es tu dueño
+nombre_alumi | por qué te llamas así
+nombre_alumi | de dónde salió tu nombre
+eres_robot | eres humana
+eres_robot | hay alguien detrás de la pantalla
+que_haces_aqui | qué haces en esta expo
+que_haces_aqui | cuál es tu trabajo aquí
+que_haces_aqui | para qué sirves
+como_hablarte | cómo funciona el micrófono
+como_hablarte | por qué no me escuchas
+como_hablarte | tengo que hablar fuerte
+duermes | te apagas en la noche
+duermes | no te cansas
+amigos_bot | somos amigos
+sentimientos | sientes cosas
+sentimientos | te puedes enojar
+familia_bot | quiénes son tus papás
+superpoder | si fueras superhéroe qué poder tendrías
+animal_favorito | qué animal te gusta
+cumple_bot | cuándo naciste tú
+edad | eres nueva
+donde_vives | dónde vives tú
+gustos | qué haces cuando no hay nadie
+# --- Cotidianos ---
+saludo | holaa qué tal
+saludo | qué tal
+como_estas | cómo te va hoy
+como_estas | todo bien contigo
+estoy_bien | todo bien gracias
+estoy_bien | estoy súper bien
+estoy_mal | me siento mal hoy
+nervioso | tengo miedo de presentar
+risa_ia | un chiste de informática
+risa_ia | chiste de computadoras
+motivacion | dame una frase
+motivacion | dime algo inspirador
+hora | me dices la hora por favor
+fecha | qué fecha estamos
+clima | cómo está el clima hoy
+clima | hace frío
+comida | dónde puedo comer algo
+bano | hay baños cerca
+costo | la entrada cuesta
+cumplido | eres muy linda
+cumplido | eres genial
+canta | sabes cantar
+baila | baila para mí
+otra_vez | de nuevo por favor
+musica | te gusta la cumbia
+aburrido | qué aburrido está esto
+gracias | muchas gracias por todo
+adios | me voy ya
+comida_tipica | qué es el silpancho
+cochabamba | dónde paseo en cochabamba
+pelicula | qué película me recomiendas
+pelicula | hay alguna película sobre turing
+libro | qué libro leo sobre tecnología
+deporte | te gusta el deporte
+deporte | qué deporte practicas
+cumpleanos | es mi cumpleaños
+zodiaco | cuál es tu signo
+adivinanza | tienes adivinanzas
+trabalenguas | sabes trabalenguas
+trabalenguas | dime uno difícil de pronunciar
+dato_curioso | sabes algo interesante
+que_opinas | qué opinas de la tecnología
+estudiar_tips | cómo estudio mejor
+tiempo | siempre dejo todo para último
+hablar_publico | me da miedo hablar en público
+hablar_publico | cómo expongo mejor
+autoestima | siento que no soy capaz
+cambiar_carrera | me cambio a sistemas
+ahorro | tips para ahorrar
+ejercicio | quiero hacer ejercicio
+ejercicio | cómo me pongo en forma
+dormir_bien | tengo insomnio
+comer_sano | cómo como sano
+comer_sano | qué es una dieta saludable
+cafe | tomas café
+cafe | te gusta el apí
+viajar | a dónde viajo en bolivia
+fiestas | qué fiestas hay en cochabamba
+emergencia | me siento mal
+emergencia | necesito ayuda urgente
+perdi_algo | perdí mi mochila
+perdi_algo | se me perdió el celular
+quechua | sabes quechua
+quechua | cómo se dice gracias en quechua
+felicitaciones | aprobé
+felicitaciones | ganamos el concurso
+felicitaciones | mi proyecto funcionó
+cocinar | cocinas
+foto | puedo sacarte una foto
+saluda_a | saluda a mi mamá
+saluda_a | manda saludos a mis amigos
+numero_bot | me das tu número
+tarea | me haces la tarea
+tarea | ayúdame con mi tarea
+te_gusta_trabajo | eres feliz aquí
+cargar_celular | dónde cargo mi celular
+cargar_celular | tienes cargador
+regalos | hay premios
+# --- Unifranz ---
+unifranz | cuéntame de unifranz
+unifranz | háblame de la universidad
+franz_tamayo | quién es franz tamayo
+carreras | qué puedo estudiar en unifranz
+carreras | cuántas carreras hay
+sedes | dónde está unifranz
+sedes | en qué ciudades hay unifranz
+facultades | cuántas facultades tiene unifranz
+inscripcion | cómo entro a unifranz
+inscripcion | quiero postular a unifranz
+requisitos_inscripcion | qué necesito para inscribirme
+requisitos_inscripcion | qué papeles piden
+costos_u | cuánto cuesta estudiar sistemas
+horarios_u | hay clases en la noche
+duracion_carrera | cuánto dura sistemas
+modalidad | puedo estudiar online
+posgrado_u | hay maestrías
+posgrado_u | tienen posgrados
+internacional | puedo estudiar en otro país
+extranjero_estudiar | soy extranjero puedo estudiar
+contacto_unifranz | cómo contacto a la universidad
+reconocimientos | es buena unifranz
+reconocimientos | qué premios tiene unifranz
+valores_u | cuáles son los valores de unifranz
+investigacion_u | unifranz hace investigación
+que_carrera_elegir | cómo elijo mi carrera
+no_tienen_carrera | hay veterinaria
+c_publicidad | tienen marketing
+c_bioquimica | tienen farmacia
