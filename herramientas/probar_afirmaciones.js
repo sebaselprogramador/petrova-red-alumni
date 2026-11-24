@@ -14,12 +14,18 @@ const SI = ["sí", "si", "claro", "claro que sí", "dale", "sí dale", "dale pue
   // de otros países
   "sí po", "sipo", "ya pe", "sí pe", "ya pues", "órale", "sale y vale", "va que va", "de ley", "joya", "re sí", "dale che", "listo parce", "de una parce",
   "vale tío", "venga", "hecho", "trato hecho", "me apunto", "a la orden", "cómo no", "por qué no", "claro pues", "pues claro", "chido", "fino",
-  "ajá", "mhm", "uhum", "sisi", "ta bien", "yes", "of course", "así es", "totalmente", "correcto", "tal cual", "oki doki", "clarísimo", "ya ya", "de pelos"];
+  "ajá", "mhm", "uhum", "sisi", "ta bien", "yes", "of course", "así es", "totalmente", "correcto", "tal cual", "oki doki", "clarísimo", "ya ya", "de pelos",
+  // más de Bolivia y del resto
+  "ya pues ya", "dale nomás", "ya nomás", "claro nomás", "sí ps", "ya ps", "de lujo", "a full", "piola", "venga va", "sale pues", "va pues",
+  "métele", "hágale", "hágale pues", "listo pues", "fijo", "diez cuatro", "afirmativo", "positivo", "uju", "ta weno", "weno", "dale que va",
+  "cómo no pues", "obvio pues", "ya cumpa", "dale chango", "sí po amiga", "órale wey", "dale che", "vale tío", "de una parce", "sí causa", "claro chamo"];
 const NO = ["no", "no gracias", "nel", "ahora no", "después", "mejor no", "paso", "así está bien", "no hace falta", "otro día", "todavía no",
   "no por ahora", "nop", "para nada", "no quiero", "luego", "más tarde", "no, gracias Petrova", "no todavía", "olvídalo", "en otro momento", "ahorita no",
   // de otros países
   "nel pastel", "nel", "ni modo", "nanay", "nah", "ni loco", "ni de broma", "qué va", "ni ahí", "no da", "no po", "no pe", "no pues", "ya no",
-  "despuesito", "al rato", "otro rato", "no me interesa", "negativo", "nunca", "jamás", "de ninguna manera", "nada que ver", "no gracias parce", "no wey"];
+  "despuesito", "al rato", "otro rato", "no me interesa", "negativo", "nunca", "jamás", "de ninguna manera", "nada que ver", "no gracias parce", "no wey",
+  "no pues", "no ps", "ya no pues", "nada pues", "ni de vainas", "ni de coña", "ni a palos", "ni por asomo", "otro ratito", "en otra",
+  "paso pues", "mejor no nomás", "todavía no pues", "después nomás", "no gracias pues", "olvídalo nomás", "no cumpa", "nel carnal", "no po", "no che", "no tío"];
 // con un tema claro dentro, manda el tema y no la oferta
 const TEMA = [["sí, pero cuéntame un chiste", "chiste"], ["no, mejor háblame de las becas", "becas"], ["claro, y dónde están las sedes", "sedes"]];
 

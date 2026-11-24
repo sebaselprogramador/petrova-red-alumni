@@ -450,7 +450,7 @@ const CONFIG = {
   nombreBot: "Petrova",
   creador: "Sebastián Rocha",   // quien creó a Petrova
   expoNombre: "A. Turing Lab – Engineering & Computational Innovation",
-  expoFecha: "",           // ej. "el jueves 27 de noviembre, de 9:00 a 18:00" (vacío si no está confirmado)
+  expoFecha: "el jueves 26 de noviembre de 2026",   // ej. "el jueves 27 de noviembre, de 9:00 a 18:00" (vacío si no está confirmado)
   expoLugar: "",           // ej. "el campus de Cochabamba"
   idiomaVoz: "es-BO",      // idioma para escuchar al visitante
   reinicioInactividadSeg: 90, // modo kiosco: reinicia tras X segundos sin uso (0 = nunca)
@@ -741,7 +741,7 @@ const TEMAS = [
   d:["Voz a texto: Web Speech API","Entendimiento: TF-IDF + similitud coseno sobre ~1000 frases, sinónimos y corrección fonética","Voz: síntesis neuronal pregrabada con tiempos por palabra","Personaje 3D: Three.js / WebGL","IA local opcional: Ollama con qwen2.5 3B","Costo: cero"]},
  {id:"idiomas_bot", g:"reir", k:["hablas ingles","speak english","cuantos idiomas","otro idioma","hello","do you speak"],
   r:["Un poquito: hello, nice to meet you! Pero me defiendo muchísimo mejor en español."]},
- {id:"mascota", g:"reir", k:["tienes mascota","mascota","mascotas","perro","perrito","gato","gatito"],
+ {id:"mascota", g:"reir", k:["tienes mascota","mascota","mascotas","tienes perro","mi perro","un perro","perros","perrito","gato","gatito"],
   r:["No tengo, pero si tuviera, sería un perrito robot llamado Byte. ¿Y tú tienes mascota?"]},
  {id:"comida_favorita", g:"celebrar", k:["comida favorita","que te gusta comer","plato favorito","que comes"],
   r:["Si pudiera comer, elegiría un buen silpancho cochabambino. ¡O un pique macho para compartir con amigos! Mientras tanto, me alimento de datos."]},
@@ -1086,15 +1086,45 @@ const PALABRAS_CLAVE = new Set(TEMAS.flatMap(t=>t.kk.filter(c=>!c.multi&&!c.exac
    Las palabras raras pesan más que las comunes (TF-IDF), se ignoran las de relleno, se unen sinónimos
    («plata» = «dinero», «chamba» = «trabajo») y se recortan las terminaciones («aburriendo» ≈ «aburrido»).
    Así entiende frases que nunca vio y no se deja llevar por una sola palabra suelta. */
-const VACIAS=new Set("a al con de del el la las lo los un una unos unas y e o u en se oye petrova porfa favor pues entonces bueno ya mmm este osea que q".split(" "));
-const SINONIMOS={plata:"dinero",lana:"dinero",guita:"dinero",chamba:"trabajo",pega:"trabajo",laburo:"trabajo",curro:"trabajo",empleo:"trabajo",empleos:"trabajo",trabajos:"trabajo",
+const VACIAS=new Set("pero a al con de del el la las lo los un una unos unas y e o u en se oye petrova porfa favor pues entonces bueno ya mmm este osea que q".split(" "));
+const SINONIMOS={luca:"dinero",lucas:"dinero",pasta:"dinero",varo:"dinero",billete:"dinero",pesos:"dinero",compu:"computadora",computador:"computadora",ordenador:"computadora",laptop:"computadora",lap:"computadora",pc:"computadora",notebook:"computadora",celu:"celular",fono:"celular",smartphone:"celular",whats:"whatsapp",wasap:"whatsapp",guasap:"whatsapp",chambear:"trabajo",laburar:"trabajo",currar:"trabajo",profe:"profesor",cuates:"amigos",panas:"amigos",parceros:"amigos",chamos:"jovenes",changos:"jovenes",plata:"dinero",lana:"dinero",guita:"dinero",chamba:"trabajo",pega:"trabajo",laburo:"trabajo",curro:"trabajo",empleo:"trabajo",empleos:"trabajo",trabajos:"trabajo",
   salario:"sueldo",paga:"sueldo",telefono:"celular",cel:"celular",movil:"celular",pasantia:"practica",pasantias:"practica",practicante:"practica",practicantes:"practica",pasante:"practica",
   pasantes:"practica",practicas:"practica",curriculum:"cv",curriculo:"cv",doctor:"medico",doctora:"medico",medica:"medico",dentista:"odontologo",u:"universidad",uni:"universidad",
   facu:"universidad",cancion:"musica",canciones:"musica",maestria:"posgrado",magister:"posgrado",diplomado:"posgrado",doctorado:"posgrado",agotada:"agotado",quemado:"agotado",
   quemada:"agotado",inscribirme:"inscripcion",inscribo:"inscripcion",inscribir:"inscripcion",matricula:"inscripcion",matricularme:"inscripcion",chistes:"chiste",
   anitos:"anos",preferido:"favorito",preferida:"favorito",favorita:"favorito",profe:"profesor",cole:"colegio",compu:"computadora",chico:"joven",chica:"joven"};
 const tallo=w=>{ if(w.length<=4) return w; const r=w.replace(/(amientos|imientos|amiento|imiento|aciones|uciones|acion|ucion|adores|adoras|adora|ador|ancias|ancia|mente|ables|able|ibles|ible|istas|ista|itos|itas|ito|ita|osos|osas|oso|osa|ivos|ivas|ivo|iva|ando|iendo|ados|adas|ado|ada|idos|idas|ido|ida|aron|ieron|aban|aba|ar|er|ir|as|es|os|a|e|o|s)$/,""); return r.length>=3?r:w; };
-const fichas=s=>norm(s).replace(/^(?:(?:oye|mira|disculpa|disculpe|perdon|una pregunta|pregunta|hola|petrova|oiga)\s+)+/,"").replace(/\s+(?:por favor|porfa|porfis|gracias)$/,"").replace(/\bhoja de vida\b/g,"cv").split(" ").filter(w=>w&&!VACIAS.has(w)).map(w=>tallo(fon(SINONIMOS[w]||w)));
+// Formas de preguntar de Bolivia y otros países: «oye», «una consulta», «te quería preguntar», «me podrías decir»,
+// «qué onda con…», «¿…, pues?», «¿…, nomás?», «¿…, no cierto?». Se quitan para quedarse con lo que de verdad se pregunta.
+const RODEOS_INICIO=["oye","oiga","oigan","oe","mira","mire","escucha","disculpa","disculpe","perdon","perdona","perdone","permiso","con permiso",
+  "hola","holi","ola","hey","ey","ea","eh","ah","este","mmm","pucha","puchica","uy","ay","che","weon","wey","guey","bro","mano","hermano","hermana",
+  "cumpa","chango","joven","amiga","amigo","petrova","pues","bueno","entonces","y","a ver","aver","ya","oka","ok",
+  "una pregunta","una consulta","una duda","una cosa","una cosita","tengo una pregunta","tengo una consulta","tengo una duda","pregunta","consulta",
+  "te queria preguntar","te quiero preguntar","queria preguntar","quiero preguntar","quisiera preguntar","te pregunto","te hago una pregunta",
+  "quisiera saber","quiero saber","queria saber","me gustaria saber","me interesa saber","necesito saber","me da curiosidad",
+  "me podrias decir","me puedes decir","podrias decirme","puedes decirme","me dirias","me dices","me decis","decime","dime",
+  "me podrias explicar","me puedes explicar","podrias explicarme","me explicas","me explicarias","explicame","explicamelo",
+  "me podrias contar","me puedes contar","me cuentas","me contarias","contame","cuentame",
+  "sabes","sabias","tu sabes","vos sabes","usted sabe","sabe usted","de casualidad sabes","por casualidad sabes",
+  "que onda con","que pasa con","que hay de","que hay con","y que hay de","y eso de","eso de","lo de","que tal lo de","que me dices de",
+  "wena","wenas","quiubo","quiubole","quihubo","que hubo","epale","epa","orale","andale","venga","vale","fijate","fijate que","mira que","resulta que",
+  "pana","parce","parcero","causa","chamo","chama","tio","tia","carnal","cuate","mijo","mija","compa","compadre","loco","men","ñaño","nano","po","pe","pues mira",
+  "una preguntita","preguntita","una consultita","consultita","una pregunta po","una consulta po","una pregunta pe","pregunta rapida","una pregunta rapida",
+  "me podria decir","me podria explicar","podria decirme","podria explicarme","me podria contar","me puede decir","me puede explicar","me dice","digame","expliqueme","cuenteme",
+  "buenos dias","buenas tardes","buenas noches","muy buenas","hola hola","saludos"];
+const COLETILLAS_FIN=["por favor","porfa","porfis","porfavor","por fa","plis","please","pues","ps","pe","po","pi","nomas","no mas","che","oe",
+  "gracias","petrova","amiga","amigo","hermano","cumpa","bro","wey","mano","parce","pana","tio","tia","joven",
+  "no cierto","no es cierto","no es verdad","verdad que si","o no","sabes","oye","viste","mmm","eh","cachai","cachay","boludo","boluda","wey","guey","carnal","cuate","chamo","chama","mijo","mija","pues mijo","pues mija","pues causa","causa",
+  "vale","tio","tia","pana","parce","parcero","si es tan amable","si fuera tan amable","si puedes","si se puede","porfavorcito","porfita","pliss","pls","ok","okey"];
+const reRodeo=new RegExp(`^(?:(?:${RODEOS_INICIO.sort((a,b)=>b.length-a.length).join("|")})\\s+)+`), reColeta=new RegExp(`(?:\\s+(?:${COLETILLAS_FIN.sort((a,b)=>b.length-a.length).join("|")}))+$`);
+// Deja solo la pregunta; si no queda nada (dijo solo «oye» o «hola»), devuelve lo que dijo
+// Si lo que queda es muy corto («muchas gracias» → «muchas», «sabías que» → «que»), mejor se queda la frase completa
+// y si solo quedan palabras de relleno («petrova, por favor»), también: era un saludo o una muletilla
+const PALABRAS_RELLENO=new Set([...RODEOS_INICIO,...COLETILLAS_FIN].flatMap(x=>x.split(" ")));
+const soloRelleno=t=>t.split(" ").every(w=>PALABRAS_RELLENO.has(w));
+const limpiarPregunta=n=>{ let t=n.replace(reRodeo,"").trim(); if(t.split(" ").length<2||soloRelleno(t)) t=n;
+  const u=t.replace(reColeta,"").trim(); return u.split(" ").length>=2&&!soloRelleno(u)?u:t; };
+const fichas=s=>limpiarPregunta(norm(s)).replace(/hoja de vida/g,"cv").split(" ").filter(w=>w&&!VACIAS.has(w)).map(w=>tallo(fon(SINONIMOS[w]||w)));
 const MODELO=(()=>{
   const ejemplos=[...TEMAS.flatMap(t=>t.k.map(k=>[t.id,k.replace(/^=/,"").split(":")[0]])), ...(typeof EJEMPLOS!=="undefined"?EJEMPLOS:[])];
   const docs=ejemplos.map(([id,q])=>({id,t:fichas(q)})).filter(d=>d.t.length);
@@ -1179,9 +1209,9 @@ const simple = (texto,g,sig) => ({texto, textoSin:texto, html:esc(texto), g, sig
 
 // Formas de decir «sí» y «no» (también como las transcribe el micrófono). Una frase cuenta como «sí» o «no»
 // solo si está hecha de estas palabras y muletillas, así «sí, quiero saber de becas» sigue yendo al tema de becas.
-const AFIRMACIONES="si+|sip|sep|zi|claro|clarin|dale|ok|okey|okay|oki|okis|bueno|buenisimo|ya|simon|obvio|obviamente|por supuesto|desde luego|de una|de ley|va|vale|venga|listo|lista|perfecto|genial|excelente|super|chevere|bacan|me parece bien|me parece|esta bien|de acuerdo|afirmativo|adelante|cuentame|cuenta|dime|dimelo|explicame|muestrame|ensename|quiero saber|quiero|si quiero|me gustaria|me encantaria|me interesa|con gusto|seguro|exacto|andale|sale|a ver|aver|hazlo|sigue|continua|porfa|porfavor|por favor|me late|suena bien|me sirve|sirve|de veras|bien|sipo|si po|sipi|sipis|sisi|ajam|aja|aha|mhm|uhum|ujum|orale|sale y vale|va que va|vamos|vamo|vamos alla|hecho|trato hecho|me apunto|cuenta conmigo|de ley|joya|re si|ya pe|si pe|ya pues|bueno pues|claro pues|pues si|pues claro|chido|fino|a la orden|yes|yeah|of course|sure|hagamosle|hagamoslo|si senor|si senora|desde luego que si|faltaba mas|naturalmente|totalmente|absolutamente|correcto|asi es|exactamente|eso mismo|tal cual|oki doki|okidoki|clarisimo|claro que claro|ya ya|ya dale|ta bien|tabien|sta bien|ok dale|ya esta|ya fue|de pelos|chevere pues";
-const NEGACIONES="no+|nop|nope|nel|nones|no gracias|no quiero|ahora no|ahorita no|despues|luego|mas tarde|otro dia|en otro momento|mejor no|paso|asi esta bien|asi nomas|no hace falta|no es necesario|para nada|tal vez despues|quizas despues|nada|todavia no|aun no|por ahora no|no por ahora|no todavia|no te preocupes|olvidalo|dejalo|nel pastel|nelson|ni modo|nanay|na|nah|nopi|ni loco|ni loca|ni de broma|ni de chiste|ni hablar|que va|ni ahi|no da|no po|no pe|no pues|ya no|olvidate|despuesito|al rato|otro rato|en otra ocasion|tal vez luego|quizas otro dia|no me interesa|no estoy interesado|no estoy interesada|mejor otro dia|estoy bien asi|dejalo asi|no tanto|no mucho|negativo|no way|no thanks|nunca|jamas|de ninguna manera|nada que ver";
-const MULETILLAS_SI="petrova|gracias|pues|entonces|mas|eso|po|nomas|que|si|claro|tambien|me|a|la|lo|un|una|poco|poquito|todo|bien|oye|mira|ah|eh|mmm|este|bueno|ya|por|favor|amiga|porfa|parce|parcero|che|wey|guey|mano|hermano|hermana|amigo|pana|compa|joven|senorita|la|verdad|creo|supongo|osea|o|sea|pe|pa|sii|noo|tio|tia|chamo|chama|causa|cuate|carnal|bro|broder|primo|prima|mija|mijo|vecina|vecino|jefe|jefa|profe";
+const AFIRMACIONES="si+|sip|sep|zi|claro|clarin|dale|ok|okey|okay|oki|okis|bueno|buenisimo|ya|simon|obvio|obviamente|por supuesto|desde luego|de una|de ley|va|vale|venga|listo|lista|perfecto|genial|excelente|super|chevere|bacan|me parece bien|me parece|esta bien|de acuerdo|afirmativo|adelante|cuentame|cuenta|dime|dimelo|explicame|muestrame|ensename|quiero saber|quiero|si quiero|me gustaria|me encantaria|me interesa|con gusto|seguro|exacto|andale|sale|a ver|aver|hazlo|sigue|continua|porfa|porfavor|por favor|me late|suena bien|me sirve|sirve|de veras|bien|sipo|si po|sipi|sipis|sisi|ajam|aja|aha|mhm|uhum|ujum|orale|sale y vale|va que va|vamos|vamo|vamos alla|hecho|trato hecho|me apunto|cuenta conmigo|de ley|joya|re si|ya pe|si pe|ya pues|bueno pues|claro pues|pues si|pues claro|chido|fino|a la orden|yes|yeah|of course|sure|hagamosle|hagamoslo|si senor|si senora|desde luego que si|faltaba mas|naturalmente|totalmente|absolutamente|correcto|asi es|exactamente|eso mismo|tal cual|oki doki|okidoki|clarisimo|claro que claro|ya ya|ya dale|ta bien|tabien|sta bien|ok dale|ya esta|ya fue|de pelos|chevere pues|ya ps|si ps|sip ps|ya pues ya|dale nomas|ya nomas|claro nomas|asi nomas es|ta bueno|ta weno|weno|wenas|buenaza|buenazo|de lujo|a full|joya joya|piola|vale vale|venga va|venga vale|obvio pues|claro que si pues|simon que si|uju|anja|positivo|afirmativo|diez cuatro|sale pues|va pues|chi|shi|sip sip|si si si|claro claro|por supuesto que si|of course yes|yes yes|okey dokey|cuando quieras|adelante nomas|metele|dale que va|a nomas|de una pues|de una vez nomas|listo pues|bueno ya pues|ya dale pues|ya listo|hagale|hagale pues|eso es|exacto pues|fijo|seguro que si"
+const NEGACIONES="no+|nop|nope|nel|nones|no gracias|no quiero|ahora no|ahorita no|despues|luego|mas tarde|otro dia|en otro momento|mejor no|paso|asi esta bien|asi nomas|no hace falta|no es necesario|para nada|tal vez despues|quizas despues|nada|todavia no|aun no|por ahora no|no por ahora|no todavia|no te preocupes|olvidalo|dejalo|nel pastel|nelson|ni modo|nanay|na|nah|nopi|ni loco|ni loca|ni de broma|ni de chiste|ni hablar|que va|ni ahi|no da|no po|no pe|no pues|ya no|olvidate|despuesito|al rato|otro rato|en otra ocasion|tal vez luego|quizas otro dia|no me interesa|no estoy interesado|no estoy interesada|mejor otro dia|estoy bien asi|dejalo asi|no tanto|no mucho|negativo|no way|no thanks|nunca|jamas|de ninguna manera|nada que ver|no pues|no ps|ya no pues|nada pues|ni de vainas|ni de coña|ni de cona|ni a palos|ni por asomo|ni de chiste|ni mucho menos|jamas de los jamases|otro ratito|en otra|paso pues|mejor no nomas|todavia no pues|ahorita no pues|despues nomas|luego nomas|no gracias pues|no por ahora pues|nada nada|para nada pues|no me interesa pues|no hace falta pues|tranqui no|estoy bien gracias|asi nomas esta bien|olvidalo nomas"
+const MULETILLAS_SI="petrova|gracias|pues|entonces|mas|eso|po|nomas|que|si|claro|tambien|me|a|la|lo|un|una|poco|poquito|todo|bien|oye|mira|ah|eh|mmm|este|bueno|ya|por|favor|amiga|porfa|parce|parcero|che|wey|guey|mano|hermano|hermana|amigo|pana|compa|joven|senorita|la|verdad|creo|supongo|osea|o|sea|pe|pa|sii|noo|tio|tia|chamo|chama|causa|cuate|carnal|bro|broder|primo|prima|mija|mijo|vecina|vecino|jefe|jefa|profe|ps|cumpa|cumpita|chango|changa|imilla|llokalla|nano|nana|men|loco|loca|compadre|comadre|don|dona|seno|senora|caballero|ombe|hombre|mujer|uy|ay|pucha|puchica|anda|vamos|venga|igual|asi|entonces|osea|tipo|literal|obvio|re|bien bien|ya ya|si si|claro claro"
 const reSi=new RegExp(`^(?:(?:${AFIRMACIONES}|${MULETILLAS_SI})(?: |$))+$`), reSiNucleo=new RegExp(`(?:^| )(?:${AFIRMACIONES})(?: |$)`);
 const reNo=new RegExp(`^(?:(?:${NEGACIONES}|${MULETILLAS_SI})(?: |$))+$`), reNoNucleo=new RegExp(`(?:^| )(?:${NEGACIONES})(?: |$)`);
 const reSiConNo=new RegExp(`^(?:por que no|porque no|como no|pues como no|claro como no|y por que no)(?: (?:${MULETILLAS_SI}))*$`);
@@ -1211,7 +1241,7 @@ const CORRECCIONES_MIC=[
 ];
 const corregirMic=n=>CORRECCIONES_MIC.reduce((t,[re,b])=>t.replace(re,b),n);
 function procesar(original){
-  const n=corregirMic(norm(original)), palabras=n.split(" ");
+  const nCompleta=corregirMic(norm(original)), n=limpiarPregunta(nCompleta), palabras=n.split(" ");
   const previo=mem.ultimoId; mem.ultimoId=null;
   const temaPorId = id => TEMAS.find(t=>t.id===id);
   // 1) Comandos de voz
@@ -1221,7 +1251,7 @@ function procesar(original){
   if(/^(callate|silencio|shh+|basta|detente|para ya)/.test(n)){ return {...simple("Okey, me quedo calladita 🤐. Cuando quieras, me hablas.","encoger"), mudo:true}; }
 
   // 2) El visitante dice su nombre
-  let m=original.toLowerCase().match(/(?:me llamo|mi nombre es|ll[aá]mame)\s+([a-záéíóúñü]{2,})/);
+  let m=original.toLowerCase().match(/(?:me llamo|mi nombre es|ll[aá]mame|me dicen|puedes llamarme|me puedes llamar|me conocen como)\s+([a-záéíóúñü]{2,})/);
   if(!m && palabras.length<=3){ const s=original.toLowerCase().match(/^(?:soy|yo soy)\s+([a-záéíóúñü]{2,})$/); if(s && !PALABRAS_CLAVE.has(raiz(fon(norm(s[1]))))) m=s; }
   if(!m && mem.ofrece==="_nombre" && palabras.length<=3 && mejorTema(n).puntos<3 && !/^(no|si)$/.test(n)){
     const w=original.trim().split(/\s+/).pop().replace(/[^a-záéíóúñü]/gi,""); if(w.length>=2) m=[null,w.toLowerCase()];
@@ -1234,15 +1264,15 @@ function procesar(original){
 
   // 2b) Respondió a «¿Y tú cómo estás?»
   if(previo==="como_estas" && mejorTema(n).puntos<4){
-    if(ANIMO_MAL.test(n) && /mal|fatal|triste|cansad|estresad|bajonead|polvo|patada|pesimo|hart/.test(n)) return construir(temaPorId("estoy_mal"));
-    if(ANIMO_REGULAR.test(n)) return construir(temaPorId("estoy_regular"));
-    if(ANIMO_BIEN.test(n)) return construir(temaPorId("estoy_bien"));
+    if(ANIMO_MAL.test(nCompleta) && /mal|fatal|triste|cansad|estresad|bajonead|polvo|patada|pesimo|hart/.test(nCompleta)) return construir(temaPorId("estoy_mal"));
+    if(ANIMO_REGULAR.test(nCompleta)) return construir(temaPorId("estoy_regular"));
+    if(ANIMO_BIEN.test(nCompleta)) return construir(temaPorId("estoy_bien"));
   }
 
   // 3) Respuesta a una pregunta de seguimiento ("¿Quieres que te cuente...?")
   // Un «sí» o un «no» dicho de muchas formas («claro», «dale», «de una», «mejor no», «paso»…) responde a la oferta;
   // si además nombra otro tema («sí, pero cuéntame un chiste»), manda el tema.
-  const siConNo=reSiConNo.test(n), neg=!siConNo && esNegacion(n), afi=siConNo || (!neg && esAfirmacion(n));
+  const siConNo=reSiConNo.test(nCompleta), neg=!siConNo && esNegacion(nCompleta), afi=siConNo || (!neg && esAfirmacion(nCompleta));
   if(mem.ofrece && mem.ofrece!=="_nombre" && (afi || neg || mejorTema(n).puntos<3)){
     if(afi) return construir(temaPorId(mem.ofrece));
     if(neg){ mem.ofrece=null; return simple(pick(["¡Está bien! 😊 ¿Sobre qué otra cosa te gustaría conversar?","¡Sin problema! Aquí sigo por si necesitas algo. 😉","¡Claro, cuando quieras! 😊 ¿Te interesa otro tema?"]),"asentir"); }
