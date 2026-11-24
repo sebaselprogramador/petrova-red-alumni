@@ -20,6 +20,7 @@ for (const t of M.TEMAS) {
     const base = v.replace(/\{n\}/g, "");
     frases.add(t.of ? base + " " + t.of.t : base);
   }
+  for (const nivel of ["t", "f"]) for (const v of t[nivel] || []) frases.add(v.replace(/\{n\}/g, ""));
 }
 M.RELLENOS.forEach(f => frases.add(f));
 const extra = " Si prefieres, una persona del equipo te puede ayudar aquí en el stand. 🙂";

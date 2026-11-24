@@ -764,7 +764,7 @@ smart_contracts | qué es un smart contract
 smart_contracts | qué es un contrato inteligente
 cripto | qué es bitcoin
 cripto | conviene invertir en criptomonedas
-cripto | qué es un nft
+nft | qué es un nft
 usos_blockchain | para qué sirve blockchain
 usos_blockchain | dónde se usa blockchain en la vida real
 # --- Computación en la nube ---
@@ -1063,7 +1063,7 @@ smart_contracts | para qué sirven los contratos inteligentes
 cripto | qué es ethereum
 cripto | bitcoin es lo mismo que blockchain
 cripto | se puede ganar plata con cripto
-cripto | qué es minar bitcoin
+consenso | qué es minar bitcoin
 usos_blockchain | blockchain sirve solo para criptomonedas
 usos_blockchain | cómo se usa blockchain en la salud
 usos_blockchain | se pueden guardar títulos en blockchain
@@ -1273,3 +1273,243 @@ que_carrera_elegir | cómo elijo mi carrera
 no_tienen_carrera | hay veterinaria
 c_publicidad | tienen marketing
 c_bioquimica | tienen farmacia
+# ===== Áreas nuevas =====
+tipos_aprendizaje | qué tipos de aprendizaje automático hay
+tipos_aprendizaje | qué es el aprendizaje supervisado
+tipos_aprendizaje | qué es el aprendizaje por refuerzo
+tipos_aprendizaje | cómo aprendió una ia a jugar ajedrez
+tipos_aprendizaje | qué es el aprendizaje no supervisado
+llm_tokens | qué es un token en inteligencia artificial
+llm_tokens | qué significa gpt
+llm_tokens | qué es un transformer
+llm_tokens | cómo funciona chatgpt por dentro
+llm_tokens | qué son los parámetros de un modelo
+agentes_ia | qué es un agente de inteligencia artificial
+agentes_ia | la ia puede hacer tareas sola
+agentes_ia | qué son los agentes de ia
+prompts | qué es un prompt
+prompts | cómo le pido bien las cosas a chatgpt
+prompts | qué es la ingeniería de prompts
+prompts | cómo escribo mejores instrucciones para la ia
+alucinaciones | por qué chatgpt inventa cosas
+alucinaciones | la ia puede equivocarse
+alucinaciones | qué es una alucinación de ia
+alucinaciones | por qué la ia da información falsa
+ia_salud | cómo se usa la ia en medicina
+ia_salud | la ia puede detectar el cáncer
+ia_salud | la ia reemplazará a los doctores
+ia_bolivia | cómo puede ayudar la ia a bolivia
+ia_bolivia | se usa inteligencia artificial en bolivia
+ia_bolivia | ia para la agricultura
+robotica | qué es la robótica
+robotica | cómo funciona un robot
+robotica | qué robots existen
+robotica | los robots piensan
+estadistica | qué es la estadística
+estadistica | para qué sirve la estadística en datos
+estadistica | qué diferencia hay entre media y mediana
+estadistica | correlación es causalidad
+limpieza_datos | qué es limpiar datos
+limpieza_datos | por qué hay que limpiar los datos
+limpieza_datos | qué son datos sucios
+proteccion_datos | quién usa mis datos personales
+proteccion_datos | las aplicaciones venden mis datos
+proteccion_datos | cómo protejo mis datos personales
+ingeniero_datos | qué hace un ingeniero de datos
+ingeniero_datos | qué diferencia hay entre analista y científico de datos
+ingeniero_datos | qué roles hay en datos
+ingenieria_social | qué es la ingeniería social
+ingenieria_social | me llamaron diciendo que eran del banco
+ingenieria_social | qué es el cuento del tío por celular
+ingenieria_social | cómo me pueden engañar por teléfono
+vpn | qué es una vpn
+vpn | para qué sirve una vpn
+vpn | necesito una vpn
+wifi_publico | es peligroso el wifi público
+wifi_publico | puedo entrar a mi banco con wifi gratis
+wifi_publico | es seguro conectarme al wifi de un café
+firewall | qué es un firewall
+firewall | para qué sirve un cortafuegos
+criptografia | qué es la criptografía
+criptografia | qué es encriptar
+criptografia | qué significa cifrado de extremo a extremo
+criptografia | qué es el candado del navegador
+criptografia | qué es https
+ddos | qué es un ataque ddos
+ddos | por qué se caen las páginas
+ddos | cómo tumban una página web
+filtracion | cómo sé si mi contraseña se filtró
+filtracion | qué hago si se filtraron mis datos
+filtracion | cómo sé si me hackearon el correo
+hackear_ajeno | cómo hackeo el facebook de mi ex
+hackear_ajeno | enséñame a hackear
+hackear_ajeno | cómo espío el celular de alguien
+hackear_ajeno | cómo hackeo una cuenta de whatsapp
+hash | qué es un hash
+hash | para qué sirve un hash
+hash | qué es sha 256
+consenso | qué es la prueba de trabajo
+consenso | qué es la prueba de participación
+consenso | cómo se ponen de acuerdo en una blockchain
+consenso | qué hacen los mineros de bitcoin
+wallet | qué es una billetera digital
+wallet | qué es una wallet de cripto
+wallet | qué es la frase semilla
+nft | qué son los nft
+nft | para qué sirve un nft
+nft | qué es un token no fungible
+contenedores | qué es docker
+contenedores | qué es kubernetes
+contenedores | qué es un contenedor de software
+contenedores | qué diferencia hay entre máquina virtual y contenedor
+serverless | qué es serverless
+serverless | qué significa sin servidor
+serverless | qué son las funciones en la nube
+data_center | qué es un data center
+data_center | dónde están los servidores de internet
+data_center | dónde se guardan mis fotos de la nube físicamente
+devops | qué es devops
+devops | qué es integración continua
+devops | qué es ci cd
+algoritmo | qué es un algoritmo
+algoritmo | cómo funciona el algoritmo de tiktok
+algoritmo | por qué me salen los mismos videos
+algoritmo | ejemplos de algoritmos
+hardware_software | qué es el hardware
+hardware_software | qué es el software
+hardware_software | qué diferencia hay entre hardware y software
+hardware_software | qué es la memoria ram
+hardware_software | qué hace el procesador
+binario | qué es el código binario
+binario | por qué las computadoras usan ceros y unos
+binario | qué es un bit
+binario | qué es un byte
+internet_funciona | cómo funciona internet
+internet_funciona | qué es una dirección ip
+internet_funciona | qué es el dns
+internet_funciona | cómo viaja la información por internet
+api | qué es una api
+api | para qué sirven las apis
+api | cómo se comunican las aplicaciones
+base_datos | qué es una base de datos relacional
+base_datos | qué es nosql
+base_datos | cómo guardan los datos los bancos
+open_source | qué es el software libre
+open_source | qué es el código abierto
+open_source | qué es linux
+git_github | qué es git
+git_github | para qué sirve github
+git_github | qué es el control de versiones
+git_github | qué es un repositorio
+cinco_g | qué es el 5g
+cinco_g | el 5g es peligroso
+cinco_g | para qué sirve el 5g
+impresion_3d | qué es una impresora 3d
+impresion_3d | cómo funciona la impresión 3d
+impresion_3d | qué se puede imprimir en 3d
+tecnologia_sostenible | la tecnología contamina
+tecnologia_sostenible | cuánta energía gasta la inteligencia artificial
+tecnologia_sostenible | qué es la basura electrónica
+frustracion_programar | no me sale el código
+frustracion_programar | me frustro mucho programando
+frustracion_programar | siempre me sale error al programar
+frustracion_programar | creo que no sirvo para programar
+mujeres_tecnologia | las mujeres pueden estudiar sistemas
+mujeres_tecnologia | quién fue ada lovelace
+mujeres_tecnologia | hay mujeres programadoras
+malo_matematicas | soy malo en matemáticas puedo estudiar sistemas
+malo_matematicas | se necesita mucha matemática para programar
+malo_matematicas | no me gustan las matemáticas
+edad_aprender | soy muy mayor para aprender a programar
+edad_aprender | a los cuarenta puedo estudiar sistemas
+edad_aprender | es tarde para aprender tecnología
+impostor | siento que todos saben más que yo
+impostor | qué es el síndrome del impostor
+impostor | no me siento capaz
+colegio_prepararme | estoy en el colegio qué hago para estudiar sistemas
+colegio_prepararme | cómo me preparo desde el colegio
+colegio_prepararme | soy bachiller y quiero estudiar tecnología
+compu_lenta | mi computadora está muy lenta
+compu_lenta | cómo hago que mi laptop sea más rápida
+compu_lenta | por qué se traba mi computadora
+celular_bateria | mi celular se descarga muy rápido
+celular_bateria | cómo cuido la batería de mi celular
+celular_bateria | está mal cargar el celular toda la noche
+que_laptop | qué laptop me compro para la universidad
+que_laptop | qué computadora necesito para programar
+que_laptop | cuánta ram necesito para programar
+tecnologia_miedo | no entiendo nada de tecnología
+tecnologia_miedo | me da miedo la tecnología
+tecnologia_miedo | soy malísimo con las computadoras
+gracias_explicacion | qué buena explicación
+gracias_explicacion | ahora sí entendí
+gracias_explicacion | explicas muy bien
+# ===== Áreas nuevas: más formas =====
+hackear_ajeno | cómo entro a la cuenta de otra persona
+hackear_ajeno | quiero ver los mensajes de mi pareja
+hackear_ajeno | cómo saco la contraseña de alguien
+hackear_ajeno | cómo entro al instagram de alguien sin su permiso
+hackear_ajeno | cómo hackeo el correo de otra persona
+hackear_ajeno | quiero revisar el celular de alguien a escondidas
+hackear_ajeno | cómo robo una cuenta
+ingenieria_social | me piden plata diciendo que son mi familiar
+ingenieria_social | me escribió un número raro pidiendo dinero
+ingenieria_social | me dicen que mi hijo está detenido y piden plata
+ingenieria_social | un desconocido me pide un código que me llegó
+filtracion | me robaron la contraseña
+filtracion | alguien sabe mi contraseña
+filtracion | apareció mi correo en una filtración
+criptografia | cómo se protegen mis mensajes
+criptografia | whatsapp está cifrado
+criptografia | alguien puede leer mis chats
+proteccion_datos | qué hacen las aplicaciones con mi información
+proteccion_datos | las apps me espían
+proteccion_datos | por qué las apps piden tantos permisos
+alucinaciones | por qué la ia responde cosas sin sentido
+alucinaciones | la ia se inventa datos
+alucinaciones | no le creo todo a chatgpt
+prompts | cómo le hablo a la ia para que entienda
+prompts | cómo le pregunto mejor a chatgpt
+prompts | tips para usar chatgpt
+llm_tokens | cómo funciona gpt por dentro
+llm_tokens | cómo piensa un modelo de lenguaje
+llm_tokens | por qué chatgpt escribe tan bien
+tipos_aprendizaje | de cuántas formas aprende una máquina
+tipos_aprendizaje | cómo aprenden las máquinas de distintas formas
+tipos_aprendizaje | qué es aprender con premios en ia
+consenso | cómo se minan criptomonedas
+consenso | por qué minar bitcoin gasta tanta energía
+consenso | qué es la minería de criptomonedas
+data_center | dónde está guardada la nube
+data_center | cómo es un centro de datos por dentro
+hardware_software | qué partes tiene una computadora
+hardware_software | cómo funciona una compu por dentro
+hardware_software | qué hace la tarjeta madre
+api | cómo se conecta una app con otra
+api | cómo hablan los programas entre sí
+api | cómo una app usa google maps
+frustracion_programar | me desespero programando
+frustracion_programar | mi programa no funciona y ya no sé qué hacer
+frustracion_programar | quiero dejar de programar porque no me sale
+malo_matematicas | las matemáticas no son lo mío
+malo_matematicas | me va mal en matemáticas puedo ser ingeniero
+malo_matematicas | odio las matemáticas puedo estudiar tecnología
+compu_lenta | mi compu anda muy lenta
+compu_lenta | mi laptop se cuelga
+compu_lenta | mi computadora tarda mucho en prender
+que_laptop | qué compu me recomiendas
+que_laptop | qué laptop es buena para estudiar
+que_laptop | me conviene mac o windows para programar
+robotica | cómo se hace un robot
+robotica | qué estudio para hacer robots
+estadistica | para qué sirve el promedio
+estadistica | qué es la desviación estándar
+vpn | es seguro usar vpn
+vpn | qué vpn uso
+git_github | cómo uso github
+git_github | para qué sirve git a un programador
+binario | cómo convierte la computadora todo en ceros y unos
+binario | qué significa binario
+contenedores | para qué se usa kubernetes
+algoritmo | qué significa el algoritmo de las redes sociales
+algoritmo | cómo decide youtube qué me muestra

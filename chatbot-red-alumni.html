@@ -553,7 +553,7 @@ const TEMAS = [
  {id:"baila", g:"bailar", k:["baila","bailar","bailemos","un baile","muevete","bailas"],
   r:["¡Con gusto! 💃 Uno, dos, tres… ¡música, maestro!","¡Ahí va mi mejor paso! 🕺 Un poquito de caporal virtual."],
   sig:["¡Otra vez!","Cuéntame un chiste","¿Qué es el Turing Lab?"]},
- {id:"otra_vez", g:"voltereta", k:["otra vez","de nuevo","otra","otro mas"],
+ {id:"otra_vez", g:"voltereta", k:["=otra vez","=de nuevo","=otra","=otro mas","=otra vez por favor","=de nuevo por favor","=otra mas"],
   r:["¡Ahí va! 🌀"]},
  {id:"musica", g:"bailar", k:["musica favorita","que musica","cancion favorita","que musica te gusta"],
   r:["Me gusta la música que da energía… ¡como un buen caporal o una cueca! 🎶 ¿Sabías que hoy la inteligencia artificial también compone música?"]},
@@ -688,7 +688,7 @@ const TEMAS = [
   of:{t:"¿Te cuento qué es un smart contract?", id:"smart_contracts"}},
  {id:"smart_contracts", g:"idea", k:["smart contract","smart contracts","contratos inteligentes","contrato inteligente","ethereum"],
   r:["Un smart contract es un programa guardado en una blockchain que se ejecuta solo cuando se cumplen ciertas condiciones. Por ejemplo: si llega el pago, se libera automáticamente el certificado. Nadie puede cambiarlo a escondidas, y en la mención de Ciberseguridad y Blockchain se estudian para la seguridad."]},
- {id:"cripto", g:"rascar", k:["criptomonedas","criptomoneda","bitcoin","cripto","invertir en bitcoin","conviene bitcoin","nft","nfts","comprar cripto"],
+ {id:"cripto", g:"rascar", k:["criptomonedas","criptomoneda","bitcoin","cripto","invertir en bitcoin","conviene bitcoin","comprar cripto"],
   r:["Bitcoin fue la primera gran aplicación de blockchain: dinero digital sin un banco central. Pero blockchain es mucho más que criptomonedas. Eso sí: no soy asesora financiera, y las criptomonedas son muy riesgosas, así que no te puedo recomendar invertir."]},
  {id:"usos_blockchain", g:"senalar", k:["para que sirve blockchain","usos de blockchain","aplicaciones de blockchain","blockchain en la vida real","trazabilidad","certificados en blockchain"],
   r:["Blockchain sirve para registrar cosas que no deben alterarse: la trazabilidad de alimentos desde el productor, certificados y títulos verificables, contratos, votaciones o la cadena de suministro. Su gran valor es la confianza sin intermediarios."]},
@@ -921,7 +921,7 @@ const TEMAS = [
   r:["Unifranz tiene más de trescientos convenios internacionales y cinco redes internacionales, y una de cada cuatro personas que estudian ahí es extranjera. ¡Hay muchas oportunidades de intercambio!"]},
  {id:"extranjero_estudiar", g:"saludar", k:["extranjero","extranjera","soy extranjero","soy extranjera","no soy boliviano","no soy boliviana","requisitos para extranjeros","vengo de otro pais"],
   r:["¡Bienvenida, bienvenido! Unifranz recibe a muchos estudiantes de otros países. Los requisitos para extranjeros están en la sección de extranjeros de su página web."]},
- {id:"contacto_unifranz", g:"saludar", k:["contacto","contactar","como los contacto","como me comunico","telefono","whatsapp","correo","email","hablar con alguien","hablar con una persona","asesor","redes sociales","instagram","facebook","whatsapp de unifranz","telefono de unifranz","contacto de la universidad","redes de unifranz","instagram de unifranz","facebook de unifranz","numero de la universidad"],
+ {id:"contacto_unifranz", g:"saludar", k:["contacto","contactar","como los contacto","como me comunico","=telefono","=whatsapp","=correo","=email","hablar con alguien","hablar con una persona","asesor","redes sociales","=instagram","=facebook","whatsapp de unifranz","telefono de unifranz","contacto de la universidad","redes de unifranz","instagram de unifranz","facebook de unifranz","numero de la universidad"],
   r:["Puedes escribirle a Unifranz por su WhatsApp oficial, el más cinco nueve uno, siete uno cinco cero dos dos uno uno. ¡Y búscala como Unifranz en Instagram, Facebook y TikTok!"],
   x:()=>`\n\n<a href="https://wa.me/59171502211" target="_blank" rel="noopener">💬 +591 71502211</a>\n<a href="https://unifranz.edu.bo/" target="_blank" rel="noopener">🌐 unifranz.edu.bo</a>`},
  {id:"reconocimientos", g:"birrete", p:"trofeo", k:["es buena la universidad","es buena unifranz","por que estudiar en unifranz","ranking","reconocimientos","acreditacion","vale la pena unifranz","qs stars"],
@@ -1075,6 +1075,332 @@ TEMAS.push(
   r:["Te entiendo{n}, hay días así 🙂. A veces una buena conversación ayuda a mejorar el día.","Gracias por contarme con sinceridad. Los días regulares también pasan, ¡y aquí estoy para hacerte compañía! 💛"],
   of:{t:"¿Quieres que te diga una frase para animarte?", id:"motivacion"}}
 );
+/* ---------- Niveles de explicación ----------
+   r: más formas de responder (amistosa, cercana, típica)
+   t: «más a fondo», explicación científica y técnica
+   f: «más fácil», con analogías de la vida diaria */
+const NIVELES={
+ turing_lab:{
+  r:["¡Bienvenido al Turing Lab! Imagina una feria donde cada isla es un mundo de la tecnología: inteligencia artificial, datos, ciberseguridad, blockchain y la nube. Los estudiantes te muestran en vivo lo que construyeron. ¡Prepárate para probar cosas!"],
+  t:["El Turing Lab funciona como una exhibición de prototipos de ingeniería: cada solución se diseña bajo una microcredencial de la malla, pasa por análisis del problema, diseño, desarrollo, pruebas y despliegue, y se presenta como demostración funcional. Es aprendizaje basado en proyectos: la evaluación no es un examen, sino un producto que funciona."],
+  f:["Es como una feria de ciencias, pero de tecnología: los estudiantes muestran lo que inventaron y tú lo puedes probar."]},
+ alan_turing:{
+  r:["Alan Turing es como el abuelo de todas las computadoras, ¡incluida yo! Imaginó cómo debía funcionar una computadora antes de que existieran, ayudó a ganar una guerra descifrando códigos y se preguntó si las máquinas podían pensar."],
+  t:["En 1936 Turing publicó el artículo sobre los números computables, donde definió la máquina de Turing: una cinta infinita, un cabezal que lee y escribe símbolos, y una tabla de reglas. Con ella demostró que existen problemas que ninguna computadora puede resolver, como el problema de la parada. En Bletchley Park diseñó la Bombe, una máquina electromecánica que aceleró el descifrado de Enigma."],
+  f:["Alan Turing fue un genio de las matemáticas que inventó la idea de la computadora, como quien dibuja el plano de una casa antes de construirla."]},
+ test_turing:{
+  t:["Turing lo propuso en 1950 en el artículo «Computing Machinery and Intelligence». En lugar de definir qué es pensar, planteó un juego de imitación: un evaluador conversa por texto con un humano y una máquina; si no logra distinguirlos de forma confiable, la máquina pasa. Hoy se critica porque mide la capacidad de imitar lenguaje, no la comprensión real."],
+  f:["Es como un juego de adivinar: chateas con dos personas sin verlas y una es una computadora. Si no adivinas cuál es, ¡la computadora ganó!"]},
+ c_sistemas:{
+  r:["Si te gusta entender cómo funcionan las cosas y crear soluciones, Sistemas e Innovación Digital es para ti. Vas a programar, trabajar con datos, proteger redes y hacer proyectos reales desde el primer semestre."],
+  t:["La carrera tiene nueve semestres en tres niveles. Integra cinco áreas: producción de sistemas, control de calidad y testeo, redes y comunicaciones, innovación tecnológica e inteligencia numérica, articuladas por proyectos integradores en cada semestre. Al final eliges una mención: inteligencia artificial y ciencia de datos, o ciberseguridad y blockchain."],
+  f:["Es la carrera para aprender a crear programas, apps, sistemas seguros e inteligencia artificial."]},
+ microcredenciales:{
+  t:["Una microcredencial certifica un conjunto acotado de competencias, evaluadas al aprobar un grupo de materias relacionadas. En la malla se apilan a lo largo de la carrera: no reemplazan al título, lo complementan, y te permiten demostrar habilidades específicas en el mercado laboral antes de egresar."],
+  f:["Son como medallas que vas ganando mientras estudias: cada una demuestra que ya dominas algo, sin esperar a terminar la carrera."]},
+ menciones:{
+  f:["Al final de la carrera eliges tu especialidad: inteligencia artificial y datos, o ciberseguridad y blockchain. Es como elegir tu superpoder."]},
+ ia:{
+  r:["¡Me encanta este tema, porque yo soy un ejemplo! La inteligencia artificial está en tu celular cuando desbloqueas con tu cara, en las recomendaciones de videos y en los traductores. Son programas que aprenden de ejemplos para tomar decisiones."],
+  t:["Técnicamente, la IA abarca métodos simbólicos, basados en reglas y lógica, y métodos estadísticos, como el aprendizaje automático. Hoy domina el aprendizaje profundo: modelos con millones o miles de millones de parámetros que se ajustan minimizando una función de error sobre grandes conjuntos de datos. No tienen conciencia: optimizan patrones estadísticos."],
+  f:["La inteligencia artificial es como un estudiante que aprende viendo muchísimos ejemplos. Si le muestras mil fotos de gatos, aprende a reconocer gatos."]},
+ machine_learning:{
+  r:["Piénsalo así: en lugar de darle a la computadora todas las reglas, le das ejemplos y ella descubre las reglas sola. Así funcionan los filtros de spam o las recomendaciones de música."],
+  t:["En aprendizaje automático, un modelo es una función con parámetros. Durante el entrenamiento se calcula el error entre sus predicciones y las respuestas correctas, y un algoritmo de optimización, como el descenso del gradiente, ajusta los parámetros para reducirlo. Luego se evalúa con datos que nunca vio, para comprobar que generaliza y no solo memoriza."],
+  f:["Es como aprender a andar en bici: no te dan un manual, practicas, te caes, corriges y cada vez lo haces mejor. La computadora hace lo mismo con datos."]},
+ redes_neuronales:{
+  t:["Cada neurona artificial calcula una suma ponderada de sus entradas, le suma un sesgo y aplica una función de activación no lineal. Las capas se conectan en cascada, y el algoritmo de retropropagación calcula cuánto contribuyó cada peso al error para ajustarlo. Arquitecturas como las convolucionales sirven para imágenes, y los transformers para lenguaje."],
+  f:["Imagina muchísimas lucecitas conectadas: cada una se prende un poco según lo que recibe. Al entrenar, se ajusta cuánto se prende cada una hasta que el conjunto aprende a reconocer algo."]},
+ ia_generativa:{
+  r:["La IA generativa es como una artista y escritora digital: le pides un texto, una imagen o una canción, y la crea. Úsala como ayudante creativa, pero siempre revisa lo que te da."],
+  t:["Los modelos de lenguaje grandes usan la arquitectura transformer, con un mecanismo de atención que relaciona cada palabra con las demás. Se entrenan para predecir el siguiente token en billones de textos, y luego se ajustan con instrucciones y retroalimentación humana. Por eso pueden alucinar: generan lo más probable, no necesariamente lo verdadero."],
+  f:["Es como el autocompletar de tu celular, pero muchísimo más poderoso: adivina la siguiente palabra tantas veces que termina escribiendo textos enteros."]},
+ nlp:{
+  t:["En mi caso, el texto se normaliza, se quitan palabras vacías, se unifican sinónimos y se recortan terminaciones. Luego cada frase se convierte en un vector con pesos TF-IDF, que valoran más las palabras raras, y comparo tu pregunta con casi mil doscientos ejemplos mediante similitud coseno. Los asistentes más avanzados usan modelos neuronales que representan el significado en vectores llamados embeddings."],
+  f:["Cuando me hablas, convierto tus palabras en texto y lo comparo con muchísimas preguntas que ya conozco, como quien busca la pieza que mejor encaja en un rompecabezas."]},
+ vision:{
+  t:["Una imagen es una matriz de píxeles con valores de color. Las redes convolucionales aplican filtros que detectan bordes, luego formas y luego objetos completos, capa tras capa. Para detectar objetos en tiempo real se usan modelos como YOLO, que predicen la posición y la clase de cada objeto en una sola pasada."],
+  f:["Para una computadora, una foto son millones de puntitos de colores. La IA aprende a encontrar patrones en esos puntitos, como bordes y formas, hasta reconocer una cara o un perro."]},
+ etica_ia:{
+  r:["Es una pregunta muy válida, y está bien preocuparse. La IA no es buena ni mala por sí sola: depende de quién la usa y cómo. Por eso es tan importante que la gente que la crea tenga valores y piense en las personas."],
+  t:["Los principales retos éticos son el sesgo algorítmico, cuando los datos de entrenamiento reflejan desigualdades; la opacidad de los modelos de caja negra; la privacidad de los datos personales; la desinformación con deepfakes; y la responsabilidad cuando un sistema automatizado se equivoca. Marcos como la Ley de IA de la Unión Europea clasifican los sistemas según su nivel de riesgo."],
+  f:["La IA es como un cuchillo de cocina: sirve para cocinar algo rico o puede lastimar. Lo importante es usarla con cuidado y con buenas intenciones."]},
+ ia_trabajo:{
+  r:["Te entiendo, es una duda que tiene muchísima gente. Respira: la historia muestra que la tecnología cambia los trabajos más de lo que los elimina. Quien aprende a usar la IA se vuelve más valioso, no menos."],
+  t:["Los estudios del mercado laboral muestran que la IA automatiza tareas, no profesiones completas: sobre todo las repetitivas y predecibles. A la vez surgen roles nuevos, como ingeniería de datos, seguridad de IA o diseño de interacciones. La clave es combinar habilidades técnicas con las humanas, como el criterio, la creatividad y la comunicación."],
+  f:["Cuando apareció la calculadora, los contadores no desaparecieron: empezaron a hacer cosas más importantes. Con la IA pasa algo parecido."]},
+ aprender_ia:{
+  t:["Una ruta sólida: programación en Python; álgebra lineal, cálculo y probabilidad; luego aprendizaje automático clásico con scikit-learn, como regresiones, árboles y clustering; después redes neuronales con PyTorch o TensorFlow; y finalmente proyectos con datos reales, documentados en GitHub."],
+  f:["Primero aprende a programar, después juega con datos y luego entrena modelos pequeñitos. Paso a paso, como subir una escalera."]},
+ ciencia_datos:{
+  r:["¡Los datos están en todas partes! Cada compra, cada like y cada viaje en el mapa generan datos. La ciencia de datos es el arte de hacerles preguntas y encontrar respuestas útiles. Es como ser detective, pero con números."],
+  t:["El ciclo de la ciencia de datos incluye definir la pregunta, obtener y limpiar los datos, que suele llevar la mayor parte del tiempo, explorar con estadística descriptiva, modelar con estadística inferencial o aprendizaje automático, validar los resultados y comunicarlos con visualizaciones. Todo con cuidado ético por la privacidad de las personas."],
+  f:["Es como mirar las notas de todo un curso para descubrir qué ayuda a sacar mejores calificaciones. Los datos cuentan historias si sabes escucharlos."]},
+ big_data:{
+  t:["El big data se describe con las cinco uves: volumen, velocidad, variedad, veracidad y valor. Para procesarlo se reparten los datos y los cálculos entre muchos nodos, con herramientas como Hadoop o Spark, y se almacenan en data lakes o bases de datos distribuidas, normalmente en la nube."],
+  f:["Si una hoja de Excel es un vaso de agua, el big data es un océano: necesitas barcos especiales, o sea, muchas computadoras juntas, para recorrerlo."]},
+ analitica:{
+  t:["La analítica tiene cuatro niveles: descriptiva, qué pasó; diagnóstica, por qué pasó; predictiva, qué pasará, con modelos como regresión o series de tiempo; y prescriptiva, qué conviene hacer, con optimización. La minería de datos aplica técnicas como clasificación, agrupamiento y reglas de asociación para encontrar patrones."],
+  f:["Es como el pronóstico del tiempo: mirando lo que pasó antes, se estima lo que podría pasar mañana."]},
+ ciberseguridad:{
+  r:["¡La ciberseguridad nos cuida a todos! Es como tener cerraduras, alarmas y guardias, pero para tu celular, tus cuentas y los sistemas de los bancos o los hospitales. Y hacen falta muchísimos profesionales en esta área."],
+  t:["La ciberseguridad se basa en la tríada CIA: confidencialidad, integridad y disponibilidad. Combina controles técnicos, como cifrado, autenticación y segmentación de redes; procesos, como la gestión de vulnerabilidades y la respuesta a incidentes; y el factor humano, que es el eslabón más atacado. Marcos como NIST o ISO 27001 ordenan cómo gestionar el riesgo."],
+  f:["La ciberseguridad es como la seguridad de tu casa, pero en internet: candados para tus cuentas y alarmas para detectar ladrones."]},
+ protegerme:{
+  r:["No te preocupes, con unos hábitos sencillos ya estás muchísimo más seguro. Lo más importante: contraseñas distintas, verificación en dos pasos y nunca compartir códigos que te lleguen por mensaje."],
+  t:["La mayoría de los ataques a personas aprovechan contraseñas reutilizadas que se filtraron en otros sitios, ingeniería social y software sin actualizar. La autenticación multifactor bloquea la gran mayoría de los accesos no autorizados a cuentas, y las actualizaciones corrigen vulnerabilidades ya conocidas que los atacantes explotan."],
+  f:["Cuida tus cuentas como cuidas las llaves de tu casa: una llave distinta para cada puerta, y nunca se la prestes a desconocidos."]},
+ contrasenas:{
+  t:["La fuerza de una contraseña se mide en entropía: cuántas combinaciones tendría que probar un atacante. Una frase de varias palabras al azar tiene más entropía que una palabra corta con símbolos. Los sitios bien hechos guardan la contraseña con un hash lento, como bcrypt o Argon2, y no en texto plano."],
+  f:["Una contraseña larga es como una fila enorme de candados: aunque el ladrón abra uno, le quedan muchísimos más."]},
+ phishing:{
+  r:["¡Qué bueno que preguntes antes de hacer clic! Ese es el mejor hábito. Si un mensaje te apura, te asusta o te promete un premio, desconfía. Ningún banco te pide tu clave por mensaje."],
+  t:["El phishing es ingeniería social: explota la urgencia, la autoridad o la curiosidad. Hay variantes por SMS, llamada telefónica o dirigidas a una persona específica. Técnicamente, los atacantes clonan páginas y usan dominios parecidos al real; por eso conviene revisar la dirección exacta y escribir tú mismo la página oficial."],
+  f:["Es como un lobo disfrazado de abuelita: el mensaje se viste de tu banco para que le abras la puerta."]},
+ malware:{
+  t:["El malware se clasifica por su comportamiento: los virus se adjuntan a archivos, los gusanos se propagan solos por la red, los troyanos se disfrazan de software legítimo y el ransomware cifra los datos con criptografía fuerte para pedir rescate. La defensa combina antivirus por firmas y comportamiento, mínimo privilegio y copias de seguridad desconectadas."],
+  f:["El malware es como un bicho que se mete a tu computadora sin permiso. Unos roban, otros dañan y otros secuestran tus archivos."]},
+ mc_ofensiva:{
+  t:["Un pentest sigue fases: reconocimiento, escaneo de puertos y servicios, explotación de vulnerabilidades, escalamiento de privilegios y un informe con recomendaciones. Siempre con autorización escrita y un alcance definido. Se usan herramientas como Nmap, Burp Suite o Metasploit, y metodologías como OWASP o PTES."],
+  f:["Un hacker ético es como un cerrajero contratado para probar si tu casa se puede abrir: si encuentra cómo, te avisa para que pongas mejores cerraduras."]},
+ blockchain:{
+  r:["¡Blockchain es fascinante! Imagina un cuaderno que tienen miles de personas a la vez: cada vez que alguien escribe algo, todos lo copian. Si alguien quiere hacer trampa y borrar una página, los demás se dan cuenta enseguida."],
+  t:["Cada bloque contiene transacciones, una marca de tiempo y el hash criptográfico del bloque anterior. Si se altera un dato, su hash cambia y rompe la cadena. Los nodos se ponen de acuerdo sobre cuál es la versión válida con un mecanismo de consenso, como prueba de trabajo o prueba de participación, sin necesitar una autoridad central."],
+  f:["Es como un cuaderno de clase que todos tienen copiado. Nadie puede borrar nada a escondidas, porque los demás lo notarían."]},
+ smart_contracts:{
+  t:["Un smart contract es código desplegado en una blockchain como Ethereum, escrito por ejemplo en Solidity. Se ejecuta de forma determinista en todos los nodos cuando se cumplen sus condiciones, y su estado queda registrado en la cadena. Como no se puede modificar fácilmente, un error de programación puede ser explotado, por eso se auditan con cuidado."],
+  f:["Es como una máquina de refrescos: pones la moneda y te da la bebida sola, sin que nadie tenga que atenderte."]},
+ cripto:{
+  t:["Bitcoin usa prueba de trabajo: los mineros compiten resolviendo un problema criptográfico para añadir bloques, y eso protege la red pero consume mucha energía. Ethereum pasó a prueba de participación, donde se bloquea capital como garantía. Su precio es muy volátil, por eso no es una recomendación de inversión."],
+  f:["Una criptomoneda es dinero que solo existe en internet, y la blockchain es el cuaderno donde se anota quién tiene cuánto."]},
+ usos_blockchain:{
+  t:["En trazabilidad, cada actor de la cadena de suministro registra un evento que no se puede alterar; en certificados, se guarda el hash del documento para verificar que no fue modificado; y en identidad digital, la persona controla sus credenciales verificables. Su límite está en la escalabilidad y en que solo garantiza lo que se registró, no si el dato de entrada era verdadero."],
+  f:["Sirve para todo lo que debe quedar anotado sin trampa: de dónde viene un alimento, si un título es real o quién votó."]},
+ nube:{
+  r:["¡Tú usas la nube todos los días! Cuando tus fotos se guardan solas, cuando ves una serie o cuando abres tu correo desde cualquier celular. La nube son computadoras gigantes que trabajan para ti desde otro lugar."],
+  t:["La computación en la nube ofrece recursos bajo demanda, autoservicio, elasticidad y pago por uso. Detrás hay centros de datos con miles de servidores virtualizados, donde un mismo equipo físico ejecuta muchas máquinas virtuales o contenedores aislados. Los proveedores reparten la infraestructura en regiones y zonas de disponibilidad para tener redundancia."],
+  f:["La nube es como guardar tus cosas en un depósito gigante y seguro: no lo tienes en tu casa, pero lo sacas cuando quieras desde cualquier lugar."]},
+ tipos_nube:{
+  f:["Es como una pizza: en infraestructura como servicio te dan el horno y tú cocinas todo; en plataforma te dan la masa lista; y en software te llega la pizza a la mesa."]},
+ iot:{
+  t:["Un sistema de internet de las cosas tiene sensores y actuadores, microcontroladores como Arduino o ESP32, conectividad como wifi, Bluetooth o LoRa, protocolos ligeros como MQTT, y una plataforma en la nube que guarda y analiza los datos. La seguridad es su gran reto, porque muchos dispositivos vienen con contraseñas por defecto."],
+  f:["Es cuando los objetos de tu casa, como la luz o el refrigerador, se conectan a internet y puedes controlarlos desde tu celular."]},
+ aprender_programar:{
+  r:["¡Qué emoción que quieras programar! No necesitas ser un genio: necesitas curiosidad y constancia. Empieza con algo que te divierta, como un juego sencillo o una página sobre tu hobby, y celebra cada pequeño avance."],
+  t:["Programar es descomponer un problema en pasos lógicos. Los fundamentos son variables y tipos de datos, estructuras de control, funciones, estructuras de datos como listas y diccionarios, y luego programación orientada a objetos. Después vienen el control de versiones con Git, las bases de datos y las buenas prácticas de pruebas."],
+  f:["Programar es darle instrucciones muy claras a la computadora, como una receta de cocina paso a paso."]},
+ testing:{
+  t:["Las pruebas se organizan en una pirámide: muchas pruebas unitarias, que verifican funciones aisladas; menos pruebas de integración entre componentes; y pocas pruebas de extremo a extremo que simulan al usuario. Se automatizan en pipelines de integración continua para que cada cambio se valide antes de publicarse."],
+  f:["Probar un programa es como revisar un pastel antes de servirlo: lo pruebas por partes para que no llegue nada mal a la mesa."]},
+ computadora_cuantica:{
+  t:["Un qubit puede estar en superposición de cero y uno, y varios qubits pueden entrelazarse, de modo que su estado conjunto no se describe por separado. Algoritmos como el de Shor factorizarían números grandes, lo que amenaza a la criptografía actual, y el de Grover acelera búsquedas. El gran reto es la decoherencia: los qubits pierden su estado con el mínimo ruido."],
+  f:["Una computadora normal prueba los caminos de un laberinto uno por uno; una cuántica, en ciertos problemas, es como si explorara muchos caminos a la vez."]},
+ tecnologia_alumi:{
+  t:["Mi arquitectura: reconocimiento de voz con la Web Speech API; normalización fonética y corrección de errores típicos del micrófono; clasificación de intención combinando palabras clave con TF-IDF y similitud coseno sobre más de mil ejemplos; un pequeño gestor de diálogo para preguntas de seguimiento; síntesis de voz neuronal pregrabada con marcas de tiempo por palabra; y renderizado 3D con Three.js sobre WebGL."],
+  f:["Soy como un rompecabezas de piezas gratis: unas me dejan escuchar, otras entender, otras hablar y otras moverme en 3D."]},
+ mc_agiles:{
+  f:["Trabajar ágil es como armar un rompecabezas por partes: cada semana muestras un pedacito terminado y lo mejoras con lo que te dicen."]},
+ mc_redes:{
+  t:["Las redes se describen con el modelo TCP/IP: enlace, internet, transporte y aplicación. La seguridad se diseña en capas: firewalls, segmentación con VLAN, cifrado con TLS, detección de intrusos y monitoreo. Los sistemas distribuidos reparten el trabajo entre muchas máquinas y deben tolerar fallas parciales."],
+  f:["Una red es como el sistema de calles de una ciudad: los datos son autos que van de una casa a otra, y la seguridad son los semáforos y los guardias."]},
+ startup:{
+  f:["Una startup es un emprendimiento que quiere crecer muy rápido con una idea nueva, como lo hicieron Uber o Netflix cuando empezaron."]}
+};
+for(const [id,n] of Object.entries(NIVELES)){ const t=TEMAS.find(x=>x.id===id); if(!t) continue;
+  if(n.r) t.r.push(...n.r); if(n.t) t.t=n.t; if(n.f) t.f=n.f; }
+/* ---------- Más áreas: tecnología a fondo y conversación cercana ---------- */
+TEMAS.push(
+ /* Inteligencia artificial */
+ {id:"tipos_aprendizaje", g:"idea", p:"foco", k:["aprendizaje supervisado","aprendizaje no supervisado","aprendizaje por refuerzo","tipos de aprendizaje","tipos de machine learning","como aprende la ia por refuerzo"],
+  r:["Hay tres formas principales de aprender. Supervisado: le das ejemplos con la respuesta correcta. No supervisado: la máquina busca grupos o patrones sola. Y por refuerzo: aprende probando y recibiendo premios o castigos, como al entrenar a una mascota."],
+  t:["En el supervisado se entrena con pares de entrada y etiqueta para clasificar o hacer regresión. En el no supervisado se buscan estructuras en datos sin etiquetas, con clustering o reducción de dimensionalidad. En el aprendizaje por refuerzo, un agente maximiza una recompensa acumulada interactuando con un entorno; así aprendió AlphaGo a ganarle a campeones mundiales."],
+  f:["Supervisado es aprender con un profe que te corrige; no supervisado es ordenar tus juguetes por parecido sin que nadie te diga cómo; y por refuerzo es aprender un videojuego probando hasta ganar."]},
+ {id:"llm_tokens", g:"idea", k:["que es un token","tokens","transformer","transformers","como funciona un modelo de lenguaje","que es gpt","que significa gpt","mecanismo de atencion","parametros de un modelo"],
+  r:["Los modelos de lenguaje no leen palabras completas: cortan el texto en pedacitos llamados tokens. Luego predicen cuál token viene después, una y otra vez. GPT significa transformador generativo preentrenado."],
+  t:["Un transformer convierte cada token en un vector y usa capas de autoatención: cada token calcula cuánto debe fijarse en los demás para entender el contexto. Se entrena con miles de millones de parámetros para minimizar el error al predecir el siguiente token, y genera texto eligiendo tokens según probabilidades, controladas con un parámetro llamado temperatura."],
+  f:["Un modelo de lenguaje es como alguien que leyó casi todo internet y juega a adivinar la siguiente palabra de una frase. Lo hace tan bien que parece que conversa."]},
+ {id:"agentes_ia", g:"idea", k:["agentes de ia","agente de ia","agentes inteligentes","ia que hace tareas","asistentes autonomos","ia autonoma"],
+  r:["Un agente de IA no solo responde: también actúa. Puede buscar información, usar herramientas, planificar pasos y completar tareas, como organizar una agenda o revisar código."],
+  t:["Un agente combina un modelo de lenguaje con un ciclo de razonar, actuar y observar: decide qué herramienta usar, como un buscador, una calculadora o una API, ejecuta la acción, lee el resultado y vuelve a planificar. Requiere límites claros de permisos y supervisión humana, porque puede cometer errores en cadena."],
+  f:["Es como un asistente que no solo te contesta, sino que también hace los mandados por ti."]},
+ {id:"prompts", g:"asentir", k:["que es un prompt","prompt","prompts","como le pregunto a chatgpt","como escribir un buen prompt","ingenieria de prompts","prompt engineering"],
+  r:["Un prompt es lo que le escribes a una IA. Un buen prompt es claro: dile quién debe ser, qué quieres, para quién es y en qué formato. Mientras más contexto le des, mejor responde."],
+  t:["La ingeniería de prompts incluye dar un rol, instrucciones explícitas, ejemplos de entrada y salida, restricciones de formato y pedir razonamiento paso a paso. También se usa recuperación de información, o RAG, para darle al modelo documentos confiables y reducir las alucinaciones."],
+  f:["Pedirle algo a una IA es como pedir una pizza: si solo dices «una pizza», te llega cualquiera; si dices el tamaño y los ingredientes, te llega la que quieres."]},
+ {id:"alucinaciones", g:"rascar", k:["por que la ia inventa","la ia se equivoca","alucinaciones","alucinacion","chatgpt miente","la ia dice mentiras","por que la ia da datos falsos"],
+  r:["La IA a veces inventa datos con mucha seguridad: a eso se le llama alucinar. No es que mienta a propósito; genera lo que suena probable. Por eso siempre hay que verificar con fuentes confiables."],
+  t:["Las alucinaciones ocurren porque el modelo optimiza la probabilidad del texto, no su veracidad, y no tiene un mecanismo interno para saber qué es cierto. Se reducen con recuperación de documentos, citas de fuentes, temperatura baja y verificación humana."],
+  f:["Es como un amigo que nunca dice «no sé» y, si no sabe algo, inventa una respuesta que suena bien."]},
+ {id:"ia_salud", g:"corazon", k:["ia en la medicina","ia en la salud","inteligencia artificial en medicina","ia detecta enfermedades","ia en hospitales"],
+  r:["La IA ya ayuda a los médicos: detecta señales de enfermedades en radiografías, ayuda a descubrir medicamentos y predice qué pacientes necesitan atención urgente. Pero la decisión final siempre la toma un profesional de salud."],
+  t:["En salud se usan redes convolucionales para imágenes médicas, modelos predictivos sobre historias clínicas y modelos que predicen la estructura de las proteínas, como AlphaFold. Requieren validación clínica rigurosa, cuidado con los sesgos de los datos y protección estricta de la privacidad."],
+  f:["Es como darle al doctor una lupa súper poderosa que le ayuda a ver detalles que el ojo podría pasar por alto."]},
+ {id:"ia_bolivia", g:"unifranz", k:["ia en bolivia","tecnologia en bolivia","inteligencia artificial en bolivia","ia en el campo","ia en la agricultura","agricultura inteligente"],
+  r:["¡La IA puede hacer mucho por Bolivia! Por ejemplo, analizar imágenes de drones para cuidar cultivos, predecir el clima para los agricultores, traducir idiomas originarios o mejorar los trámites públicos. Y el talento para hacerlo está en salas como esta."],
+  t:["En agricultura de precisión se combinan sensores, imágenes satelitales o de drones y modelos de visión para detectar plagas, estrés hídrico o estimar cosechas. En servicios públicos, la ciencia de datos ayuda a planificar. El reto local es la conectividad y contar con datos propios de calidad."],
+  f:["Es usar la tecnología para resolver problemas de aquí, como cuidar los cultivos o hacer más fáciles los trámites."]},
+ {id:"robotica", g:"bailar", k:["robotica","robots","que es un robot","como funciona un robot","brazo robotico","robot humanoide"],
+  r:["Un robot es una máquina que siente, piensa y actúa: tiene sensores para percibir, un programa para decidir y motores para moverse. Hay robots en fábricas, en hospitales y hasta aspiradoras en casa."],
+  t:["Un robot integra percepción, con cámaras, lidar o sensores de fuerza; planificación y control, con cinemática y algoritmos de trayectoria; y actuación, con motores y servos. Hoy se combina con aprendizaje por refuerzo y visión por computadora para que aprenda tareas en lugar de programarlas a mano."],
+  f:["Un robot es como un muñeco con ojos, cerebro y músculos electrónicos que puede hacer tareas solo."]},
+ /* Datos */
+ {id:"estadistica", g:"asentir", k:["estadistica","que es la estadistica","promedio","media y mediana","probabilidad","para que sirve la estadistica"],
+  r:["La estadística es la base de la ciencia de datos: te ayuda a resumir información, como el promedio, y a saber qué tan seguro puedes estar de una conclusión. ¡Es más útil de lo que parece!"],
+  t:["La estadística descriptiva resume datos con medidas como la media, la mediana y la desviación estándar. La inferencial saca conclusiones sobre una población a partir de una muestra, con intervalos de confianza y pruebas de hipótesis. Ojo con una trampa clásica: correlación no implica causalidad."],
+  f:["Si quieres saber cuánto mide la gente de tu curso, no mides a todo el mundo: mides a algunos y la estadística te ayuda a estimar el resto."]},
+ {id:"limpieza_datos", g:"rascar", k:["limpieza de datos","limpiar datos","datos sucios","calidad de datos","preparar los datos"],
+  r:["¡Dato curioso! Los científicos de datos pasan gran parte de su tiempo limpiando datos: quitando duplicados, corrigiendo errores y llenando vacíos. Datos sucios dan conclusiones equivocadas."],
+  t:["La preparación de datos incluye detectar valores faltantes y decidir si se eliminan o se imputan, normalizar formatos, eliminar duplicados, tratar valores atípicos y transformar variables. Se suele automatizar en pipelines reproducibles para que el análisis se pueda repetir."],
+  f:["Es como lavar las verduras antes de cocinar: si no lo haces, la comida no sale bien."]},
+ {id:"proteccion_datos", g:"guino", k:["proteccion de datos","datos personales","privacidad de mis datos","quien tiene mis datos","venden mis datos","las apps venden mis datos"],
+  r:["Tus datos personales valen mucho. Revisa qué permisos les das a tus apps, no compartas tu carnet ni tu dirección en redes y lee, aunque sea por encima, qué hacen con tu información."],
+  t:["La protección de datos se basa en principios como la minimización, recoger solo lo necesario; la finalidad, usarlos solo para lo que se dijo; el consentimiento; y la seguridad. Técnicas como la anonimización y la privacidad diferencial permiten analizar datos sin exponer a las personas."],
+  f:["Tus datos son como tu diario personal: tú decides quién lo lee."]},
+ {id:"ingeniero_datos", g:"asentir", k:["ingeniero de datos","data engineer","diferencia entre cientifico de datos y analista","analista vs cientifico de datos","que hace un ingeniero de datos"],
+  r:["En datos hay varios roles. El ingeniero de datos construye las tuberías por donde viajan los datos; el analista los explora y hace reportes; y el científico de datos crea modelos para predecir."],
+  t:["El ingeniero de datos diseña pipelines de extracción, transformación y carga, data warehouses y lagos de datos; el analista usa SQL y herramientas de visualización para responder preguntas de negocio; y el científico de datos aplica estadística y aprendizaje automático para construir modelos predictivos y experimentos."],
+  f:["Es como un restaurante: uno trae los ingredientes, otro los ordena y otro inventa la receta."]},
+ /* Ciberseguridad */
+ {id:"ingenieria_social", g:"guino", k:["ingenieria social","me quieren enganar","llamada sospechosa","me llamaron diciendo que eran del banco","estafa telefonica","cuento del tio"],
+  r:["La ingeniería social es engañar a las personas en lugar de hackear computadoras: llamadas falsas, mensajes urgentes o alguien que se hace pasar por un familiar. Si te piden datos o dinero con apuro, corta y verifica por otro medio."],
+  t:["Explota sesgos humanos como la autoridad, la urgencia, la reciprocidad y el miedo. Incluye el phishing, el vishing por teléfono, el pretexting con historias inventadas y el baiting con memorias USB infectadas. La mejor defensa es la capacitación y los procedimientos de verificación."],
+  f:["Es el cuento del tío de toda la vida, pero por celular o por internet."]},
+ {id:"vpn", g:"asentir", k:["que es una vpn","vpn","para que sirve una vpn","necesito vpn","red privada virtual"],
+  r:["Una VPN crea un túnel cifrado entre tu dispositivo e internet, para que nadie en la misma red vea lo que haces. Es útil en redes wifi públicas o para conectarte de forma segura a la red de tu trabajo."],
+  t:["Una VPN encapsula y cifra el tráfico con protocolos como WireGuard o IPsec, y lo saca a internet desde el servidor del proveedor. Protege frente a quien espía la red local, pero no te hace anónimo: el proveedor de la VPN sí puede ver tu tráfico, así que importa en quién confías."],
+  f:["Es como mandar una carta dentro de una caja fuerte: aunque alguien la intercepte en el camino, no puede leerla."]},
+ {id:"wifi_publico", g:"encoger", k:["wifi publico","es seguro el wifi publico","wifi gratis","conectarme a un wifi gratis","wifi de la plaza"],
+  r:["El wifi público es cómodo, pero no es seguro para todo. Úsalo para cosas simples, y evita entrar a tu banco o poner contraseñas importantes. Si puedes, usa tus datos móviles o una VPN."],
+  t:["En una red abierta, un atacante puede montar un punto de acceso falso con el mismo nombre o interceptar el tráfico no cifrado. Hoy la mayoría de las webs usan HTTPS, que protege el contenido, pero aun así conviene verificar el candado y evitar aceptar certificados sospechosos."],
+  f:["Usar un wifi público es como hablar por teléfono en una plaza llena de gente: mejor no decir tus secretos."]},
+ {id:"firewall", g:"asentir", k:["firewall","que es un firewall","cortafuegos","para que sirve un firewall"],
+  r:["Un firewall es como el guardia de la puerta de una red: revisa lo que entra y sale, y bloquea lo que no está permitido."],
+  t:["Un firewall filtra el tráfico según reglas sobre direcciones, puertos y protocolos. Los de nueva generación inspeccionan también las aplicaciones y el contenido, y se combinan con sistemas de detección y prevención de intrusos."],
+  f:["Es el portero de la discoteca de tu red: si no estás en la lista, no entras."]},
+ {id:"criptografia", g:"idea", k:["criptografia","cifrado","encriptar","que es encriptar","cifrado de extremo a extremo","como funciona el cifrado","https"],
+  r:["La criptografía es el arte de esconder mensajes para que solo los lea quien debe. Gracias a ella, cuando ves el candado en tu navegador o usas WhatsApp, tus mensajes viajan cifrados."],
+  t:["Hay cifrado simétrico, como AES, donde la misma clave cifra y descifra, y asimétrico, como RSA o curvas elípticas, con una clave pública y otra privada. HTTPS usa los dos: el asimétrico para acordar una clave y el simétrico para cifrar la conversación. Las funciones hash, como SHA-256, generan huellas digitales que no se pueden revertir."],
+  f:["Es como escribir con un código secreto que solo tú y tu amigo conocen."]},
+ {id:"ddos", g:"sorpresa", k:["ddos","ataque ddos","tumbar una pagina","por que se cae una pagina","ataque de denegacion de servicio"],
+  r:["Un ataque DDoS es cuando miles de computadoras infectadas visitan una página al mismo tiempo para saturarla y que se caiga. Es como si miles de personas llenaran una tienda sin comprar nada."],
+  t:["En un ataque distribuido de denegación de servicio, una red de equipos comprometidos, llamada botnet, satura el ancho de banda o los recursos del servidor. Se mitiga con redes de distribución de contenido, filtrado del tráfico, limitación de peticiones y servicios especializados de protección."],
+  f:["Es como si mil personas llamaran a la vez a una pizzería: la línea se satura y los clientes de verdad no pueden pedir."]},
+ {id:"filtracion", g:"sorpresa", k:["filtracion de datos","se filtraron mis datos","mi contrasena se filtro","como se si me hackearon","han hackeado mi correo"],
+  r:["Si crees que tu contraseña se filtró, cámbiala ya y activa la verificación en dos pasos. Puedes revisar si tu correo apareció en filtraciones conocidas en sitios como haveibeenpwned punto com."],
+  t:["Las filtraciones masivas exponen bases de datos con correos y contraseñas; los atacantes las prueban automáticamente en otros sitios, en lo que se llama relleno de credenciales. Por eso nunca hay que reutilizar contraseñas, y conviene usar un gestor y la autenticación multifactor."],
+  f:["Es como si se perdiera una copia de tu llave: lo primero es cambiar la cerradura."]},
+ {id:"hackear_ajeno", g:"encoger", k:["como hackeo","hackear el facebook de alguien","como hackear","hackear una cuenta","quiero hackear","hackear whatsapp","espiar el celular de alguien"],
+  r:["Eso no te lo puedo enseñar: entrar a cuentas ajenas sin permiso es un delito y le hace daño a una persona real. Pero si te gusta la seguridad, ¡el hacking ético es una carrera increíble y se practica en laboratorios legales!"],
+  f:["Es como querer abrir la casa de otra persona: aunque sepas cómo, no está bien. Mejor aprende a ser el cerrajero que protege."]},
+ /* Blockchain */
+ {id:"hash", g:"idea", k:["que es un hash","hash","funcion hash","sha 256","huella digital de un archivo"],
+  r:["Un hash es como la huella digital de un archivo: un código corto que cambia por completo si modificas aunque sea una letra. Por eso sirve para comprobar que algo no fue alterado."],
+  t:["Una función hash criptográfica, como SHA-256, transforma cualquier entrada en una salida de longitud fija. Es determinista, rápida de calcular, imposible de revertir en la práctica y resistente a colisiones. En blockchain encadena los bloques y en las contraseñas permite verificarlas sin guardarlas."],
+  f:["Es como hacer un batido: con las frutas sacas el batido, pero con el batido no puedes volver a tener las frutas."]},
+ {id:"consenso", g:"asentir", k:["prueba de trabajo","prueba de participacion","proof of work","proof of stake","mineria de bitcoin","que es minar","consenso en blockchain","como se ponen de acuerdo en blockchain"],
+  r:["En una blockchain no hay jefe, así que las computadoras necesitan ponerse de acuerdo sobre qué es verdad. Eso se llama consenso. En Bitcoin se compite resolviendo un acertijo matemático, y a eso le dicen minar."],
+  t:["En la prueba de trabajo, los nodos buscan un número que haga que el hash del bloque cumpla una dificultad; es costoso producirlo y barato verificarlo. En la prueba de participación, los validadores bloquean monedas como garantía y pierden parte si hacen trampa. Ambos buscan tolerar a participantes deshonestos."],
+  f:["Es como una votación entre miles de personas para decidir qué se anota en el cuaderno, sin necesidad de un profesor que mande."]},
+ {id:"wallet", g:"asentir", k:["que es una wallet","billetera digital","billetera cripto","wallet","clave privada","frase semilla"],
+  r:["Una wallet o billetera digital guarda las llaves que te permiten usar tus criptomonedas. La regla de oro: nunca compartas tu clave privada ni tu frase semilla con nadie."],
+  t:["Una wallet gestiona un par de claves: la pública, de la que se deriva tu dirección, y la privada, con la que firmas transacciones. Las wallets frías guardan la clave sin conexión a internet, y la frase semilla permite recuperar todas las claves. Quien tiene la clave privada controla los fondos."],
+  f:["Es como el llavero de tu caja fuerte digital: si alguien te quita la llave, se lleva todo."]},
+ {id:"nft", g:"guino", k:["que es un nft","nft","nfts","tokens no fungibles","arte digital nft"],
+  r:["Un NFT es un certificado digital único registrado en una blockchain que dice quién es dueño de algo, como una imagen o un ticket. Ojo: el NFT certifica la propiedad, pero no impide que alguien copie la imagen."],
+  t:["Un NFT es un token no fungible, normalmente bajo el estándar ERC-721 de Ethereum: cada uno tiene un identificador único y metadatos que apuntan al contenido. Su uso más interesante va más allá del arte: entradas, certificados o propiedad digital verificable. Su valor de mercado es muy especulativo."],
+  f:["Un billete de diez es igual a cualquier otro billete de diez; un NFT es como una figurita única con número de serie."]},
+ /* Nube */
+ {id:"contenedores", g:"asentir", k:["docker","kubernetes","contenedores","que es un contenedor","que es docker","que es kubernetes","maquina virtual"],
+  r:["Un contenedor empaqueta una aplicación con todo lo que necesita para funcionar igual en cualquier computadora. Docker crea los contenedores y Kubernetes los organiza cuando son cientos o miles."],
+  t:["Un contenedor comparte el núcleo del sistema operativo del anfitrión, pero aísla procesos y archivos, así que es mucho más liviano que una máquina virtual, que emula un equipo completo. Kubernetes orquesta los contenedores: los distribuye entre servidores, los reinicia si fallan y los escala según la demanda."],
+  f:["Es como una lonchera: llevas tu comida con todo lo necesario, y la puedes comer igual en cualquier lugar."]},
+ {id:"serverless", g:"asentir", k:["serverless","sin servidor","funciones en la nube","lambda","que es serverless"],
+  r:["Serverless no significa que no haya servidores: significa que tú no te preocupas por ellos. Subes tu código y la nube lo ejecuta solo cuando hace falta, y pagas por cada uso."],
+  t:["En el modelo de funciones como servicio, el proveedor ejecuta funciones disparadas por eventos, como una petición web o un archivo subido, y escala automáticamente desde cero. Ventajas: no administras infraestructura y pagas por milisegundo. Desventajas: el arranque en frío y la dependencia del proveedor."],
+  f:["Es como un taxi: no compras el auto ni lo mantienes, solo pagas cuando lo usas."]},
+ {id:"data_center", g:"girar", k:["data center","centro de datos","donde esta la nube","donde estan los servidores","granja de servidores"],
+  r:["La nube vive en centros de datos: edificios enormes llenos de servidores, con energía de respaldo y sistemas de enfriamiento. ¡Tus fotos están guardadas en uno de ellos!"],
+  t:["Un centro de datos tiene racks de servidores, redes de alta velocidad, almacenamiento redundante, energía con respaldo de baterías y generadores, y enfriamiento de precisión. Su eficiencia se mide con el indicador de eficiencia del uso de energía, y los proveedores replican los datos en varias ubicaciones para que no se pierdan."],
+  f:["Es como una biblioteca gigante, pero en vez de libros guarda datos, y nunca cierra."]},
+ {id:"devops", g:"asentir", k:["devops","que es devops","integracion continua","despliegue continuo","ci cd"],
+  r:["DevOps une a quienes programan con quienes operan los sistemas, para publicar mejoras rápido y sin romper nada. Se automatizan las pruebas y las publicaciones."],
+  t:["DevOps es una cultura y un conjunto de prácticas: control de versiones, integración continua que prueba cada cambio, entrega continua que despliega automáticamente, infraestructura como código y monitoreo constante. Reduce el tiempo entre una idea y su llegada al usuario."],
+  f:["Es como una cocina de restaurante bien organizada, donde cada plato se revisa automáticamente antes de salir."]},
+ /* Fundamentos de computación */
+ {id:"algoritmo", g:"idea", k:["que es un algoritmo","algoritmo","algoritmos","que es un algoritmo de redes sociales","el algoritmo de tiktok"],
+  r:["Un algoritmo es una lista de pasos para resolver un problema. ¡Tú sigues algoritmos todo el tiempo, como una receta de cocina! El famoso algoritmo de las redes decide qué videos mostrarte según lo que te gusta."],
+  t:["Un algoritmo es una secuencia finita de instrucciones bien definidas. Se analiza su eficiencia con la notación de complejidad, que mide cómo crece el tiempo o la memoria según el tamaño de la entrada. Los de recomendación combinan filtrado colaborativo y modelos de aprendizaje automático."],
+  f:["Un algoritmo es como la receta para hacer un queque: pasos en orden para llegar al resultado."]},
+ {id:"hardware_software", g:"asentir", k:["que es el hardware","que es el software","diferencia entre hardware y software","hardware","software","como funciona una computadora","procesador","memoria ram"],
+  r:["El hardware es todo lo que puedes tocar, como el teclado o el procesador; el software son los programas que le dicen qué hacer. Uno sin el otro no sirve de nada."],
+  t:["En la arquitectura de von Neumann, el procesador ejecuta instrucciones que lee de la memoria RAM, en un ciclo de buscar, decodificar y ejecutar. El almacenamiento guarda los datos de forma permanente, y el sistema operativo administra los recursos entre los programas."],
+  f:["El hardware es el cuerpo de la computadora y el software es su mente."]},
+ {id:"binario", g:"guino", k:["codigo binario","binario","ceros y unos","que es un bit","que es un byte","por que las computadoras usan ceros y unos"],
+  r:["Las computadoras solo entienden dos estados: prendido o apagado, uno o cero. Con muchísimos ceros y unos se escribe todo: textos, fotos, música y hasta yo."],
+  t:["Un bit es la unidad mínima de información, y ocho bits forman un byte, que permite 256 combinaciones. Los números se representan en base dos, y los caracteres con codificaciones como UTF-8. Los transistores del procesador actúan como interruptores que implementan la lógica booleana."],
+  f:["Es como hablar con una linterna: prendida es uno, apagada es cero. Combinando destellos puedes decir cualquier cosa."]},
+ {id:"internet_funciona", g:"girar", k:["como funciona internet","que es internet","quien invento internet","como viajan los datos","que es una direccion ip","que es el dns"],
+  r:["Internet es una red de redes: millones de computadoras conectadas que se pasan datos en paquetitos. Sus protocolos los crearon Vint Cerf y Bob Kahn en los años setenta, y la web la inventó Tim Berners-Lee en 1989. Cuando abres una página, tu pedido viaja por cables, incluso submarinos, y vuelve en milisegundos."],
+  t:["Los datos se dividen en paquetes que viajan con el protocolo IP, y TCP se encarga de que lleguen completos y en orden. El DNS traduce nombres como unifranz punto edu punto bo a direcciones IP, y los routers eligen el camino de cada paquete. La web funciona sobre HTTP, cifrado con TLS en HTTPS."],
+  f:["Internet es como un correo súper rápido: tu mensaje se corta en sobrecitos, cada uno viaja por su camino y al llegar se vuelven a juntar."]},
+ {id:"api", g:"asentir", k:["que es una api","apis","para que sirve una api","conectar aplicaciones"],
+  r:["Una API es la forma en que dos programas se hablan. Cuando una app de delivery te muestra un mapa, está usando la API de un servicio de mapas."],
+  t:["Una API define un contrato: qué peticiones se pueden hacer, con qué parámetros y qué respuestas se devuelven. Las más comunes son las REST, que usan HTTP y JSON, y también existen GraphQL o gRPC. Se protegen con autenticación, como claves o tokens, y con límites de uso."],
+  f:["Es como el mesero de un restaurante: tú pides, él lleva el pedido a la cocina y te trae la comida."]},
+ {id:"base_datos", g:"asentir", k:["que es una base de datos","base de datos relacional","sql o nosql","nosql","tabla de base de datos","como se guardan los datos"],
+  r:["Una base de datos es un lugar ordenado para guardar información y encontrarla rápido. Tu banco, tu red social y la universidad usan bases de datos para todo."],
+  t:["Las bases relacionales organizan los datos en tablas con relaciones y se consultan con SQL, garantizando propiedades de consistencia en las transacciones. Las NoSQL, como las documentales o de clave y valor, ganan flexibilidad y escalabilidad. Los índices aceleran las búsquedas, como el índice de un libro."],
+  f:["Es como un archivador gigante y ordenado, donde encuentras cualquier ficha en un segundo."]},
+ {id:"open_source", g:"corazon", k:["software libre","codigo abierto","open source","linux","que es linux","programas gratis"],
+  r:["El software libre o de código abierto es el que cualquiera puede ver, usar y mejorar. ¡Gran parte de internet funciona con él! Yo misma estoy hecha con herramientas de código abierto."],
+  t:["El código abierto se publica con licencias como MIT, GPL o Apache, que definen cómo se puede usar y redistribuir. Linux impulsa la mayoría de los servidores del mundo y Android. Su modelo colaborativo, con revisiones públicas, mejora la calidad y la seguridad."],
+  f:["Es como una receta compartida: todos pueden verla, cocinarla y mejorarla."]},
+ {id:"git_github", g:"asentir", k:["que es git","git","github","para que sirve github","control de versiones","repositorio"],
+  r:["Git guarda la historia de tu código, para que puedas volver atrás si algo sale mal y trabajar en equipo sin pisarse. GitHub es una página donde se guardan y comparten esos proyectos. ¡Es como el portafolio de un programador!"],
+  t:["Git es un sistema de control de versiones distribuido: cada commit guarda una instantánea del proyecto identificada por un hash. Las ramas permiten trabajar en paralelo y luego fusionar los cambios. En GitHub, los pull requests facilitan la revisión de código antes de integrarlo."],
+  f:["Es como el botón de deshacer, pero para todo un proyecto y para todo un equipo."]},
+ {id:"cinco_g", g:"girar", k:["5g","que es el 5g","red 5g","internet 5g","el 5g es peligroso"],
+  r:["El 5G es la quinta generación de redes móviles: más velocidad, menos demora y más dispositivos conectados a la vez. Y tranquilo: no hay evidencia científica de que dañe la salud."],
+  t:["El 5G usa frecuencias más altas y técnicas como MIMO masivo para multiplicar la capacidad, reduce la latencia a pocos milisegundos y permite segmentar la red para distintos usos. Eso habilita aplicaciones como vehículos conectados, telemedicina o fábricas inteligentes."],
+  f:["Si el 4G es una carretera, el 5G es una autopista de muchos carriles: más autos, más rápido."]},
+ {id:"impresion_3d", g:"celebrar", k:["impresion 3d","impresora 3d","que se puede imprimir en 3d","como funciona una impresora 3d"],
+  r:["Una impresora 3D fabrica objetos capa por capa a partir de un diseño digital. Se usa para prototipos, repuestos, prótesis y hasta casas. ¡Es perfecta para crear prototipos como los de esta expo!"],
+  t:["La técnica más común, el modelado por deposición fundida, derrite un filamento de plástico y lo deposita capa por capa siguiendo instrucciones en código G, generadas al rebanar un modelo 3D. Otras tecnologías usan resina curada con luz o polvo fundido con láser."],
+  f:["Es como hacer un pastel de muchísimas capas finitas, pero de plástico, hasta formar el objeto."]},
+ {id:"tecnologia_sostenible", g:"corazon", k:["tecnologia y medio ambiente","la ia contamina","consumo de energia de la ia","tecnologia verde","basura electronica","huella de carbono"],
+  r:["La tecnología también deja huella en el planeta: los centros de datos usan mucha energía y la basura electrónica crece. Por eso se busca energía renovable, programas más eficientes y reciclar los equipos."],
+  t:["Entrenar grandes modelos de IA consume mucha electricidad y agua para refrigeración. Las estrategias incluyen centros de datos con energía renovable, modelos más pequeños y eficientes, y alargar la vida útil del hardware. La basura electrónica contiene metales valiosos y tóxicos que deben reciclarse de forma adecuada."],
+  f:["Cada vez que usamos internet se gasta un poquito de energía; por eso hay que usar la tecnología con responsabilidad, como cuidamos el agua."]},
+ /* Conversación cercana y comprensiva */
+ {id:"frustracion_programar", g:"empatia", k:["no me sale el codigo","me frustro programando","programar es dificil","no entiendo programacion","me sale error","odio programar","no soy bueno programando"],
+  r:["¡Te entiendo un montón! Hasta los mejores programadores se frustran y pasan horas buscando un error. Respira, levántate un ratito y vuelve: muchas veces la solución aparece después de una pausa.",
+     "Que algo no te salga no significa que no sirvas para esto: significa que estás aprendiendo. Lee el error con calma, divide el problema en partes y pide ayuda sin miedo. ¡Así aprendemos todos!"],
+  f:["Programar es como aprender a tocar guitarra: al principio duelen los dedos, pero con práctica todo suena mejor."]},
+ {id:"mujeres_tecnologia", g:"estrella", k:["mujeres en tecnologia","soy mujer puedo estudiar sistemas","las mujeres programan","mujeres ingenieras","mujeres en la ciencia","ada lovelace"],
+  r:["¡Claro que sí! La tecnología necesita más mujeres. De hecho, la primera programadora de la historia fue una mujer, Ada Lovelace, y Grace Hopper ayudó a crear los lenguajes de programación modernos. ¡Este espacio también es tuyo!"],
+  t:["Ada Lovelace escribió en el siglo diecinueve el primer algoritmo pensado para una máquina, la máquina analítica de Babbage. Grace Hopper desarrolló uno de los primeros compiladores, y las programadoras del ENIAC fueron pioneras de la computación. Hoy, los equipos diversos crean productos mejores y con menos sesgos."]},
+ {id:"malo_matematicas", g:"empatia", k:["soy malo en matematicas","soy mala en matematicas","no me gustan las matematicas","necesito ser bueno en matematicas","hay mucha matematica en sistemas"],
+  r:["Tranquilo, tranquila: no tienes que ser un genio de las matemáticas para estudiar tecnología. Las matemáticas se aprenden con práctica, y en programación se usan para resolver problemas concretos, lo que las hace más interesantes. ¡Lo que más importa es la constancia!"],
+  t:["En la carrera hay un área de inteligencia numérica: matemática para ingeniería y modelización y simulación. Se aplican a algoritmos, estadística y gráficos, y muchas herramientas hacen los cálculos pesados por ti. Lo importante es entender la lógica del problema."]},
+ {id:"edad_aprender", g:"empatia", k:["soy muy grande para aprender","soy mayor para programar","es tarde para aprender a programar","a mi edad puedo aprender","tengo cuarenta anos puedo estudiar"],
+  r:["¡Nunca es tarde! Hay personas que empezaron a programar a los cuarenta, cincuenta y hasta setenta años. Tu experiencia de vida es una ventaja: entiendes problemas reales que otros no ven."]},
+ {id:"impostor", g:"empatia", k:["sindrome del impostor","siento que no soy suficiente","no me siento capaz","todos saben mas que yo","no merezco estar aqui"],
+  r:["Eso tiene nombre: síndrome del impostor, y lo sienten hasta las personas más expertas. Que dudes de ti significa que te importa hacerlo bien. Mira cuánto has avanzado, no cuánto te falta. ¡Mereces estar aquí!"]},
+ {id:"colegio_prepararme", g:"idea", k:["estoy en el colegio","soy de colegio","como me preparo para sistemas","que hago en el colegio para estudiar sistemas","soy bachiller"],
+  r:["¡Qué bueno que te prepares desde el colegio! Empieza a programar con recursos gratuitos, juega con proyectos sencillos, practica lógica y matemáticas, y aprende inglés técnico. Y pregúntale a los estudiantes de esta expo cómo es la carrera: ¡nadie te lo cuenta mejor!"]},
+ {id:"compu_lenta", g:"rascar", k:["mi computadora esta lenta","mi compu esta lenta","mi laptop esta lenta","por que mi computadora es lenta","como acelero mi computadora"],
+  r:["Una computadora lenta suele tener demasiados programas abiertos o que se inician solos, poco espacio libre o un disco antiguo. Cierra lo que no uses, desinstala lo que no necesites, actualiza el sistema y, si puedes, cambia a un disco SSD: ¡es como magia!"],
+  t:["La lentitud suele venir de poca memoria RAM, que obliga a usar el disco como memoria virtual; de discos mecánicos con alta latencia; de procesos en segundo plano o de malware. Un disco de estado sólido mejora muchísimo los tiempos de acceso, y ampliar la RAM ayuda cuando trabajas con muchos programas."]},
+ {id:"celular_bateria", g:"rascar", k:["mi celular se descarga rapido","bateria del celular","como cuido la bateria","se me acaba la bateria rapido","cargar el celular toda la noche"],
+  r:["Para cuidar la batería: baja el brillo, cierra las apps que usan ubicación sin necesidad, activa el modo de ahorro y evita el calor extremo. Lo ideal es mantener la carga entre veinte y ochenta por ciento cuando puedas."],
+  t:["Las baterías de iones de litio se desgastan por ciclos de carga y sobre todo por el calor y por estar mucho tiempo al cien o al cero por ciento. Muchos celulares ya traen carga optimizada, que se detiene en ochenta por ciento y termina justo antes de que la uses."]},
+ {id:"que_laptop", g:"asentir", k:["que laptop comprar","que computadora me compro","que laptop para programar","computadora para estudiar sistemas","que compu necesito"],
+  r:["Para empezar a programar no necesitas la computadora más cara. Busca al menos ocho gigas de RAM, mejor dieciséis, un disco SSD y un procesador de los últimos años. Si vas a hacer diseño 3D o inteligencia artificial, ahí sí conviene una tarjeta gráfica."]},
+ {id:"tecnologia_miedo", g:"empatia", k:["me da miedo la tecnologia","no entiendo la tecnologia","soy malo con la tecnologia","la tecnologia me supera","no se usar la computadora"],
+  r:["¡Es totalmente normal! La tecnología cambia tan rápido que a todos nos supera a veces. Aprende de a poquito, una cosa a la vez, y pregunta sin vergüenza. Para eso estoy aquí: no hay preguntas tontas."]},
+ {id:"gracias_explicacion", g:"corazon", k:["que buena explicacion","entendi todo","muy clara tu explicacion","explicas muy bien","ahora si entendi","me quedo claro"],
+  r:["¡Qué alegría! 😊 Me encanta cuando algo hace clic. Si quieres, pregúntame otro tema o pídeme que te lo explique más a fondo.","¡Gracias! Explicar es mi parte favorita. ¿Seguimos con otra isla del Turing Lab?"]}
+);
 // Carreras: también entiende "tienen medicina", "quiero estudiar medicina", "carrera de medicina", "ser médico"
 TEMAS.filter(t=>t.id.startsWith("c_")).forEach(t=>{ const e=[]; t.k.filter(k=>!k.includes(" ")&&!k.includes(":")).forEach(k=>e.push("tienen "+k,"estudiar "+k,"carrera de "+k,"ser "+k,"hay "+k)); t.k.push(...e); });
 // Precalcula las claves normalizadas con su peso
@@ -1179,7 +1505,7 @@ function puntuar(n, tema){
 function cercanos(n){
   const par=parecidoPorTema(n);
   return TEMAS.map(t=>[t,puntajeTema(n,t,par)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]).slice(0,3)
-    .map(([t])=>{ const k=t.k.find(c=>!c.startsWith("=")).split(":")[0]; return "¿"+k.charAt(0).toUpperCase()+k.slice(1)+"?"; });
+    .map(([t])=>{ const k=(t.k.find(c=>!c.startsWith("="))||t.k[0]).replace(/^=/,"").split(":")[0]; return "¿"+k.charAt(0).toUpperCase()+k.slice(1)+"?"; });
 }
 function mejorTema(n){
   let mejor=null,max=0;
@@ -1193,17 +1519,21 @@ function variante(t){
   let i; do{ i=Math.floor(Math.random()*t.r.length); }while(t.r.length>1 && i===mem.usados[t.id]);
   mem.usados[t.id]=i; const v=t.r[i]; return typeof v==="function"?v():v;
 }
-function construir(t){
-  mem.ultimoId=t.id;
-  const v=variante(t); let texto=personalizar(v), textoSin=v.replace(/\{n\}/g,""), relleno=null;
+function construir(t, nivel){
+  mem.ultimoId=t.id; mem.ultimoTema=t.id;
+  const v = nivel && t[nivel] ? pick(t[nivel]) : variante(t);
+  let texto=personalizar(v), textoSin=v.replace(/\{n\}/g,""), relleno=null;
   let html=esc(texto);
   // muletilla hablada (solo en la voz y el subtítulo, no en el historial)
   if(!SOCIAL.has(t.id) && Math.random()<.45) relleno=pick(RELLENOS);
   if(t.d) html+=`<ul>${t.d.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
   if(t.x) html+=t.x();
   mem.ofrece=null;
-  if(t.of){ texto+=" "+t.of.t; textoSin+=" "+t.of.t; html+="\n\n"+esc(t.of.t); mem.ofrece=t.of.id; }
-  return {texto, textoSin, html, g:t.g, p:t.p, relleno, sig:t.sig||(t.of && t.of.id!=="_nombre"?["Sí, cuéntame","No, gracias"]:SUGERENCIAS_INICIO), id:t.id};
+  if(t.of && !nivel){ texto+=" "+t.of.t; textoSin+=" "+t.of.t; html+="\n\n"+esc(t.of.t); mem.ofrece=t.of.id; }
+  // botones para pedir la explicación a otro nivel
+  const niveles=[t.t&&nivel!=="t"?"Más a fondo":null, t.f&&nivel!=="f"?"Más fácil":null].filter(Boolean);
+  const base=t.sig||(t.of && t.of.id!=="_nombre" && !nivel?["Sí, cuéntame","No, gracias"]:SUGERENCIAS_INICIO);
+  return {texto, textoSin, html, g:nivel==="t"?"idea":t.g, p:t.p, relleno, sig:niveles.length?[...niveles,...base].slice(0,8):base, id:t.id};
 }
 const simple = (texto,g,sig) => ({texto, textoSin:texto, html:esc(texto), g, sig:sig||SUGERENCIAS_INICIO});
 
@@ -1240,6 +1570,8 @@ const CORRECCIONES_MIC=[
   [/\b(curricula|curriculo|currículo|curri)\b/g,"curriculum"]
 ];
 const corregirMic=n=>CORRECCIONES_MIC.reduce((t,[re,b])=>t.replace(re,b),n);
+const MAS_FONDO=/^(?:(?:mas a fondo|a fondo|explicame mas|explicamelo mas|explicame mejor|explicamelo mejor|mas detalles|dame mas detalles|mas detallado|con mas detalle|profundiza|profundizame|profundizalo|profundizar|mas profundo|mas tecnico|mas tecnica|en terminos tecnicos|tecnicamente|cientificamente|explicacion cientifica|version tecnica|version cientifica|cuentame mas|dime mas|quiero saber mas|mas informacion|mas info|y que mas|algo mas sobre eso|como funciona por dentro|explicacion completa|detallame|amplia|ampliame|amplialo|desarrolla|desarrollalo|y como funciona|pero como funciona|y por que)(?: |$))+$/;
+const MAS_FACIL=/^(?:(?:mas facil|explicamelo facil|explicamelo simple|explicamelo sencillo|mas simple|mas sencillo|en palabras simples|en palabras sencillas|no entendi nada|no entiendo nada|no le entendi|como para un nino|como a un nino|explicamelo como a un nino|como si tuviera cinco anos|para tontos|para dummies|en resumen|resumido|resumelo|mas corto|mas cortito|con un ejemplo|dame un ejemplo|un ejemplo|ponme un ejemplo|explicame facil|facilito|en criollo|en cristiano|sin tecnicismos)(?: |$))+$/;
 function procesar(original){
   const nCompleta=corregirMic(norm(original)), n=limpiarPregunta(nCompleta), palabras=n.split(" ");
   const previo=mem.ultimoId; mem.ultimoId=null;
@@ -1250,8 +1582,15 @@ function procesar(original){
   if(/^(puedes |podrias )?(habla |hablar )?(mas rapido|mas rapida|rapido)( por favor)?$/.test(n)){ prefs.vel=Math.min(1.4,prefs.vel+.15); guardarPrefs(); return simple("¡Okey! Acelero un poquito ⚡.","saltar"); }
   if(/^(callate|silencio|shh+|basta|detente|para ya)/.test(n)){ return {...simple("Okey, me quedo calladita 🤐. Cuando quieras, me hablas.","encoger"), mudo:true}; }
 
+  // 1b) Más a fondo o más fácil sobre el último tema («explícame más a fondo», «en términos científicos», «más fácil», «como a un niño»)
+  const temaAnterior=mem.ultimoTema&&temaPorId(mem.ultimoTema);
+  if(temaAnterior && !(mem.ofrece && esAfirmacion(nCompleta))){
+    if(MAS_FONDO.test(n)) return temaAnterior.t ? construir(temaAnterior,"t") : simple(pick(["¡Eso es lo más completo que sé de ese tema! Si quieres, pregúntame algo más específico. 😊","Hasta ahí llega lo que sé de eso. ¿Te cuento de otro tema?"]),"rascar");
+    if(MAS_FACIL.test(n) && temaAnterior.f) return construir(temaAnterior,"f");
+  }
+
   // 2) El visitante dice su nombre
-  let m=original.toLowerCase().match(/(?:me llamo|mi nombre es|ll[aá]mame|me dicen|puedes llamarme|me puedes llamar|me conocen como)\s+([a-záéíóúñü]{2,})/);
+  let m=original.toLowerCase().match(/(?:me llamo|mi nombre es|ll[aá]mame|puedes llamarme|me puedes llamar|me conocen como)\s+([a-záéíóúñü]{2,})/);
   if(!m && palabras.length<=3){ const s=original.toLowerCase().match(/^(?:soy|yo soy)\s+([a-záéíóúñü]{2,})$/); if(s && !PALABRAS_CLAVE.has(raiz(fon(norm(s[1]))))) m=s; }
   if(!m && mem.ofrece==="_nombre" && palabras.length<=3 && mejorTema(n).puntos<3 && !/^(no|si)$/.test(n)){
     const w=original.trim().split(/\s+/).pop().replace(/[^a-záéíóúñü]/gi,""); if(w.length>=2) m=[null,w.toLowerCase()];

@@ -142,5 +142,31 @@ proveedores_nube | qué empresas dan servicios de nube
 iot | qué son los objetos conectados a internet
 aprender_programar | con qué lenguaje empiezo a programar
 tecnologia_alumi | qué tecnología usaste para funcionar
-(IA) | quién inventó el internet
+internet_funciona | quién inventó el internet
 (IA) | cuánto pesa un elefante
+# Áreas nuevas (preguntas que el motor no usa para aprender)
+tipos_aprendizaje | de qué maneras aprenden las máquinas
+llm_tokens | cómo piensa por dentro un modelo como gpt
+prompts | cómo hablo con la ia para que me responda mejor
+alucinaciones | por qué la ia a veces responde cualquier cosa
+robotica | cómo se programa un robot
+estadistica | para qué sirve sacar el promedio
+proteccion_datos | qué hacen las apps con mi información
+ingenieria_social | me escribieron diciendo que soy familiar y me piden plata
+vpn | sirve usar una vpn para navegar seguro
+criptografia | cómo se protegen mis mensajes de whatsapp
+filtracion | creo que se robaron mi contraseña
+hackear_ajeno | quiero entrar al instagram de otra persona
+hash | qué es la huella digital de un archivo
+consenso | cómo funciona la minería de criptomonedas
+contenedores | para qué sirve docker
+data_center | dónde vive la nube
+algoritmo | qué es eso del algoritmo de las redes
+hardware_software | cómo funciona por dentro una computadora
+binario | cómo entiende la computadora los ceros y unos
+api | cómo se conectan dos programas
+git_github | para qué usan github los programadores
+frustracion_programar | me desespero cuando mi programa no funciona
+malo_matematicas | las matemáticas no son lo mío puedo ser ingeniero
+compu_lenta | mi laptop anda lentísima
+que_laptop | qué compu me recomiendas para la u
