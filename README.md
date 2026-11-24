@@ -1,6 +1,6 @@
-# Petrova · Asistente virtual de la Red Alumni UNIFRANZ
+# Petrova · Asistente virtual del Turing Lab (UNIFRANZ)
 
-Chatbot por voz con un personaje 3D animado, hecho con **cero presupuesto** para la feria de la Red Alumni y Empleabilidad de UNIFRANZ (Cochabamba, Bolivia).
+Chatbot por voz con un personaje 3D animado, hecho con **cero presupuesto** para **A. Turing Lab – Engineering & Computational Innovation**, la Tech Expo de Ingeniería de Sistemas e Innovación Digital de UNIFRANZ.
 
 **Autor:** Sebastián Rocha
 
@@ -9,16 +9,19 @@ Chatbot por voz con un personaje 3D animado, hecho con **cero presupuesto** para
 ## Qué hace
 
 - Conversa por voz (micrófono) o por texto, con la voz neuronal «Elena» pregrabada y subtítulos palabra por palabra.
-- Responde sobre la Red Alumni, empleabilidad (currículum, entrevistas, prácticas, Career Coaching, ferias), la universidad (carreras, sedes, inscripción, becas) y muchos temas cotidianos.
-- Entiende formas de hablar de distintos países («sí po», «órale», «de una», «nel»…) y corrige errores típicos del micrófono.
-- Personaje 3D (Three.js) con más de 30 animaciones; algunas se activan con palabras (al decir «Unifranz» levanta las manos con el logo).
+- Es experta en las áreas del Turing Lab: **Inteligencia Artificial, Ciencia de Datos, Ciberseguridad, Blockchain y Computación en la Nube**. Explica el formato de la expo por islas temáticas, quién fue Alan Turing y el test de Turing.
+- Conoce la nueva malla de **Ingeniería de Sistemas e Innovación Digital**: 9 semestres, 6 microcredenciales, 2 menciones y proyectos integradores (datos de la página oficial de la carrera).
+- También charla de temas cotidianos y da información general de Unifranz (sedes, carreras, inscripción, becas).
+- Entiende formas de hablar de distintos países y corrige errores típicos del micrófono («touring lab», «block chain», «siber seguridad»…).
+- Personaje 3D (Three.js) con más de 30 animaciones; algunas se activan con palabras.
 - Modo kiosco para pantalla vertical de 1080×1920.
 
-## Cómo funciona por dentro
+## Petrova también es una demo de IA
 
-- Todo es una página web estática: HTML, CSS y JavaScript, sin servidor ni base de datos.
-- **Entendimiento:** palabras clave + comparación con más de 970 frases de ejemplo (TF-IDF y similitud coseno), con sinónimos, recorte de terminaciones y corrección fonética.
-- **IA opcional:** si en la computadora corre [Ollama](https://ollama.com) con el modelo `qwen2.5:3b`, responde lo que no está preparado. En la versión publicada en internet esa parte no está disponible y Petrova sugiere temas.
+- **Voz a texto:** Web Speech API del navegador.
+- **Entendimiento (procesamiento de lenguaje natural):** palabras clave + comparación con más de 850 frases de ejemplo (TF-IDF y similitud coseno), con sinónimos, recorte de terminaciones y corrección fonética.
+- **Voz:** síntesis neuronal pregrabada con los tiempos de cada palabra para mover la boca.
+- **IA opcional:** si en la computadora corre [Ollama](https://ollama.com) con `qwen2.5:3b`, responde lo que no está preparado. En la versión publicada en internet esa parte no está disponible.
 
 ## Pruebas
 

@@ -243,18 +243,11 @@ autoestima | siento que no valgo
 amigos | cómo hago amigos
 amigos | me siento sola
 amigos | quiero conocer gente
-tesis | cómo hago mi tesis
-tesis | qué modalidades de titulación hay
-tesis | ya me voy a titular
-trabajo_estudio | puedo trabajar y estudiar
-trabajo_estudio | busco trabajo de medio tiempo
 no_se_que_hacer | no sé qué hacer con mi vida
 no_se_que_hacer | estoy perdido
 no_se_que_hacer | no sé a qué dedicarme
 cambiar_carrera | quiero cambiar de carrera
 cambiar_carrera | quiero cambiar de rubro
-volver_trabajar | quiero volver a trabajar
-volver_trabajar | dejé de trabajar mucho tiempo
 ahorro | cómo ahorro dinero
 ahorro | qué hago con mi primer sueldo
 ahorro | finanzas personales
@@ -265,180 +258,14 @@ ia_trabajo | uso chatgpt para trabajar
 ia_trabajo | la ia me va a reemplazar
 futuro_trabajo | cuáles son los trabajos del futuro
 futuro_trabajo | qué carreras tienen futuro
-freelance | quiero ser freelance
-freelance | trabajar por mi cuenta
 # --- Empleo y entrevistas ---
-trabajo | busco trabajo
-trabajo | tienen trabajo para mí
-trabajo | dónde veo las vacantes
-trabajo | hay ofertas de empleo
-trabajo | quiero postular a un trabajo
-trabajo | necesito chamba
-trabajo | hay convocatorias
-garantia | me garantizan trabajo
-garantia | unifranz me va a contratar
-garantia | ustedes contratan
-cv | cómo hago mi currículum
-cv | quiero mejorar mi cv
-cv | cómo envío mi hoja de vida
-cv | qué pongo en mi currículum
-cv | tienen una plantilla de cv
-coaching | qué es career coaching
-coaching | quiero una asesoría
-coaching | cómo agendo una sesión de coaching
-coaching | me pueden revisar mi cv
-entrevista | tips para una entrevista
-entrevista | tengo una entrevista mañana
-entrevista | cómo me preparo para una entrevista
-entrevista | qué preguntas hacen en una entrevista
-pitch | cómo me presento
-pitch | háblame de ti cómo respondo
-pitch | cómo me presento en un minuto
-debilidades | qué digo de mis debilidades
-debilidades | cuáles son mis fortalezas
-ropa | cómo me visto para una entrevista
-ropa | qué ropa me pongo
-salario | cuánto pido de sueldo
-salario | cómo negocio mi salario
-salario | pretensión salarial
-sin_experiencia | no tengo experiencia
-sin_experiencia | busco mi primer empleo
-sin_experiencia | me piden experiencia y no tengo
-no_trabajo | no encuentro trabajo
-no_trabajo | estoy desempleado
-no_trabajo | nadie me contrata
-rechazo | me rechazaron
-rechazo | no me llamaron de la entrevista
-rechazo | me fue mal en la entrevista
-linkedin | cómo mejoro mi linkedin
-linkedin | qué pongo en linkedin
-blandas | qué son las habilidades blandas
-blandas | qué buscan las empresas
-ingles | es importante el inglés
-ingles | no hablo inglés
-remoto | quiero trabajo remoto
-remoto | se puede trabajar desde casa
-feria_tips | qué llevo a la feria
-feria_tips | cómo aprovecho la feria
-feria_tips | cómo me acerco a un stand
-carta_presentacion | cómo hago una carta de presentación
-carta_presentacion | carta de motivación
-referencias | qué pongo en referencias
-referencias | necesito una carta de recomendación
-portafolio | cómo hago mi portafolio
 certificaciones | sirven los certificados
 certificaciones | dónde hago cursos gratis
-primer_dia | mañana es mi primer día de trabajo
-periodo_prueba | qué es el periodo de prueba
-contrato | qué reviso antes de firmar un contrato
-renuncia | quiero renunciar
-renuncia | cómo hago una carta de renuncia
-aumento | cómo pido un aumento
-aumento | quiero un ascenso
-jefe | tengo problemas con mi jefe
-jefe | hay mal ambiente en mi trabajo
-burnout | estoy quemado del trabajo
-burnout | trabajo demasiado
-presion | sabes trabajar bajo presión
-primera_impresion | cómo causo una buena impresión
-correo_profesional | cómo escribo un correo formal
-puntualidad | llegué tarde a la entrevista
-etica | qué es la ética profesional
-liderazgo | cómo ser un buen líder
-equipo | cómo trabajar en equipo
-comunicacion | cómo ser más asertivo
-inteligencia_emocional | cómo manejo mis emociones
 innovacion | cómo ser más creativo
-networking_tips | cómo hago networking
-networking_tips | cómo hago contactos profesionales
-reclutadores | qué buscan los reclutadores
-reclutadores | qué hace recursos humanos
-entrevista_virtual | tengo una entrevista por zoom
-entrevista_virtual | tips para entrevista virtual
-entrevista_grupal | tengo una dinámica grupal
-preguntas_empresa | qué le pregunto al entrevistador
-donde_te_ves | dónde te ves en cinco años
-por_que_contratarte | por qué deberían contratarme
-seguimiento | cuánto tardan en responder
-seguimiento | no me llaman
-ats | qué es el ats
-foto_cv | pongo foto en el cv
-cv_largo | cuántas páginas debe tener mi cv
-habilidades_tecnicas | sirve saber excel
-habilidades_tecnicas | habilidades técnicas
-marca_personal | cómo hago mi marca personal
-marca_personal | cómo destacar
 # --- Red Alumni ---
-que_es | qué es la red alumni
-que_es | qué es alumni
-que_es | de qué se trata la red
-que_es | qué hacen ustedes
-significado | qué significa alumni
-historia | cuál es la historia de la red
-historia | cómo empezó la red alumni
-objetivos | cuál es el objetivo de la red
-objetivos | para qué sirve la red alumni
-caracteristicas | qué características tiene la red
-solo_recien | es solo para recién graduados
-solo_recien | me gradué hace años
-quienes | para quién es la red
-quienes | soy estudiante puedo participar
-quienes | estoy en último semestre
-soporte | en qué me pueden ayudar
-soporte | qué servicios tienen
-soporte | qué puedes hacer
-soporte | ayuda
-practicas | cómo consigo una pasantía
-practicas | busco prácticas
-practicas | quiero hacer prácticas preprofesionales
-pagadas | las prácticas son pagadas
-pagadas | pagan las pasantías
-convenio | qué es un convenio
-feria | qué es una feria de empleabilidad
-feria | qué hay en esta feria
-feria | qué es este evento
-next_gen | qué fue next gen talent
-next_gen | cómo le fue a next gen
-talent_summit | qué es el talent summit
-empresas | soy empresa
-empresas | quiero reclutar estudiantes
-empresas | quiero publicar una vacante
-empresas | soy empresario
-beneficios | qué beneficios tengo
-beneficios | hay descuentos para alumni
-estudiar_mas | quiero hacer una maestría
-estudiar_mas | hay diplomados
-emprendimiento | quiero promocionar mi negocio
-emprendimiento | qué es rau en acción
-networking | hay encuentros para graduados
-networking | qué actividades hacen
-pasaporte | qué es el pasaporte profesional
-unirme | cómo me uno a la red
-unirme | quiero ser parte de alumni
-diferencia | cuál es la diferencia entre empleabilidad y alumni
-mentor | quiero ser mentor
-mentor | quiero dar una charla
-encuesta | para qué son las encuestas
-encuesta | qué hacen con mis datos personales
 contacto_unifranz | cómo los contacto
 contacto_unifranz | cuál es su whatsapp
 contacto_unifranz | quiero hablar con una persona
-credencial | cómo obtengo la credencial alumni
-enterarme | cómo me entero de las actividades
-enterarme | dónde publican las novedades
-todas_carreras | es para todas las carreras
-rueda_como | cómo funciona la rueda de entrevistas
-dejar_cv | dónde dejo mi cv
-dejar_cv | puedo dejar mi currículum
-empleabilidad_que | qué es la empleabilidad
-insercion | qué es la inserción laboral
-otra_universidad | soy de otra universidad
-empresas_hoy | qué empresas vinieron hoy
-horario_feria | a qué hora termina la feria
-testimonios | historias de éxito
-nostalgia | extraño la universidad
-bolsa_trabajo | dónde está la bolsa de trabajo
-bolsa_trabajo | plataforma alumni
 # --- Unifranz ---
 unifranz | qué es unifranz
 unifranz | cuéntame de la unifranz
@@ -539,88 +366,8 @@ que_carrera_elegir | qué carrera me recomiendas
 que_carrera_elegir | no sé qué carrera elegir
 que_carrera_elegir | qué carrera tiene más trabajo
 # --- Áreas e industrias ---
-a_software | quiero ser programador
-a_software | qué buscan las empresas de desarrollo
-a_software | cómo entro a una empresa de software
-a_software | quiero aprender a programar
-a_datos | quiero ser analista de datos
-a_datos | qué es ciencia de datos
-a_ciberseguridad | cómo empiezo en ciberseguridad
-a_uxui | qué es diseño ux
-a_uxui | quiero aprender figma
-a_marketing | quiero trabajar en una agencia de marketing
-a_marketing | qué buscan las empresas de marketing
-a_marketing | quiero ser community manager
-a_contenido | quiero ser creador de contenido
-a_contenido | quiero ser youtuber
-a_rrhh | quiero trabajar en recursos humanos
-a_banca | quiero trabajar en un banco
-a_salud | quiero trabajar en un hospital
-a_publico | quiero trabajar en el estado
-a_publico | cómo entro al sector público
-a_ong | quiero trabajar en una ong
-a_docencia | quiero ser docente
-a_extranjero | quiero trabajar en el extranjero
-a_extranjero | quiero irme a otro país
-a_logistica | quiero trabajar en comercio exterior
-a_turismo_trabajo | quiero trabajar en un hotel
-a_gastro_trabajo | quiero abrir un restaurante
-a_gastro_trabajo | quiero vender comida
-a_derecho_trabajo | quiero trabajar en un bufete
-a_psicologia_trabajo | psicología organizacional
-a_arquitectura_trabajo | quiero trabajar en una constructora
-a_emprender_tech | quiero crear una app
-a_emprender_tech | quiero hacer una página web
-empresa_contratar | cómo contrato a mi primer empleado
-empresa_contratar | busco personal para mi empresa
-empresa_contratar | necesito empleados
-empresa_marca | cómo retengo talento
-empresa_marca | cómo atraigo talento
-talento_unifranz | por qué contratar talento unifranz
-talento_unifranz | qué gana mi empresa
-participar_feria | quiero un stand en la feria
-participar_feria | cómo participa mi empresa
-pasantes_empresa | quiero recibir pasantes
-pasantes_empresa | quiero ofrecer prácticas
-perfiles | qué perfiles profesionales tienen
 # --- Emprendimiento ---
-idea_negocio | no tengo idea de negocio
-idea_negocio | qué negocio puedo poner
-empezar_negocio | cómo empiezo un negocio
-empezar_negocio | quiero emprender
-empezar_negocio | quiero abrir una tienda
-plan_negocio | cómo hago un plan de negocio
-canvas | qué es el modelo canvas
-canvas | qué es la propuesta de valor
-financiamiento | cómo consigo financiamiento
-financiamiento | necesito un préstamo
-financiamiento | busco inversionistas
-registrar_empresa | cómo registro mi empresa
-registrar_empresa | cómo saco mi nit
-registrar_empresa | cómo formalizo mi negocio
-marketing | cómo hago publicidad
-marketing | cómo vendo por facebook
-marketing | marketing digital
-ventas | cómo vendo más
-ventas | cómo consigo clientes
-precio | cómo pongo precio a mi producto
-atencion_cliente | tengo un cliente enojado
-atencion_cliente | cómo atiendo quejas
 startup | qué es una startup
-pitch_negocio | cómo presento mi idea a inversionistas
-fracaso | mi negocio fracasó
-fracaso | perdí dinero en mi negocio
-socios | quiero emprender con amigos
-socios | busco un socio
-kpi | qué son los kpi
-kpi | cómo mido resultados
-foda | cómo hago un foda
-pyme | tengo una pequeña empresa
-pyme | negocio familiar
-cultura_org | qué es la cultura organizacional
-rse | qué es la responsabilidad social
-incubadora | hay incubadoras de empresas
-incubadora | concursos de emprendimiento
 # Formas de hablar de otros países
 saludo | qué onda
 saludo | quiubo
@@ -723,23 +470,6 @@ futbol | qué piensas de la selección boliviana
 color | qué color te gusta más
 aburrido | estoy aburrida
 aburrido | me aburro aquí
-no_trabajo | busco trabajo hace tiempo y no encuentro
-no_trabajo | no consigo trabajo por más que busco
-no_trabajo | ya mandé muchos currículums y nadie me llama
-no_trabajo | estoy desempleado
-rechazo | no me eligieron para el puesto
-rechazo | me dijeron que no en la entrevista
-rechazo | no quedé seleccionado
-rechazo | me rechazaron otra vez
-feria_tips | qué hago para aprovechar la feria
-feria_tips | consejos para la feria de empleo
-feria_tips | cómo me preparo para la feria
-garantia | es seguro que consiga trabajo
-garantia | si me uno ya tengo trabajo asegurado
-garantia | ustedes me consiguen trabajo
-emprendimiento | quiero tener mi propio negocio
-emprendimiento | me interesa emprender
-emprendimiento | apoyan a los emprendedores
 comida_tipica | qué comida es típica de cochabamba
 comida_tipica | qué platos hay en cochabamba
 comida_tipica | qué me recomiendas comer en cochabamba
@@ -750,42 +480,6 @@ cambiar_carrera | elegí mal la carrera
 ia_trabajo | los robots van a reemplazar a las personas
 ia_trabajo | la ia quitará empleos
 ia_trabajo | la inteligencia artificial reemplazará mi profesión
-aumento | quiero ganar más en mi trabajo
-aumento | cómo negocio un aumento
-aumento | mi jefe no me sube el sueldo
-burnout | estoy cansado de trabajar tanto
-burnout | el trabajo me tiene agotada
-burnout | estoy quemado en mi trabajo
-equipo | cómo me llevo bien con mis compañeros de trabajo
-equipo | tengo problemas con mis compañeros
-equipo | cómo colaborar mejor en equipo
-seguimiento | ya pasó una semana y no me llaman de la entrevista
-seguimiento | debo llamar a la empresa después de la entrevista
-seguimiento | cuánto espero la respuesta de una entrevista
-marca_personal | cómo me doy a conocer como profesional
-marca_personal | cómo destaco en mi profesión
-marca_personal | cómo construyo mi imagen profesional
-financiamiento | cómo consigo dinero para emprender
-financiamiento | dónde pido un crédito para mi negocio
-financiamiento | necesito inversión para mi emprendimiento
-marketing | cómo hago publicidad a mi negocio
-marketing | cómo vendo por instagram
-marketing | cómo consigo clientes en redes sociales
-precio | cuánto debo cobrar por mi producto
-precio | cómo calculo el precio de lo que vendo
-precio | a cuánto vendo mis productos
-participar_feria | cómo hace mi empresa para participar en la feria
-participar_feria | quiero poner un stand en la feria
-participar_feria | mi empresa puede tener stand
-empresa_contratar | busco personal para mi empresa
-empresa_contratar | necesito contratar trabajadores
-empresa_contratar | cómo encuentro buenos empleados
-otra_universidad | puedo participar si no soy de unifranz
-otra_universidad | soy de otra universidad me pueden ayudar
-otra_universidad | la red es solo para los de unifranz
-horario_feria | hasta qué hora está la feria
-horario_feria | a qué hora termina la feria
-horario_feria | cuándo cierran
 inscripcion | quiero inscribirme a unifranz
 inscripcion | cómo entro a la universidad
 inscripcion | cómo postulo a unifranz
@@ -812,9 +506,6 @@ como_hablarte | cómo uso el micrófono
 como_hablarte | cómo te pregunto algo
 como_hablarte | qué botón toco para hablarte
 como_hablarte | cómo funciona esto
-quienes | quiénes pueden ser parte de la red
-quienes | la red es para estudiantes también
-quienes | puedo entrar a la red si todavía estoy estudiando
 sedes | dónde está la universidad
 sedes | dónde queda unifranz en cochabamba
 sedes | cuál es la dirección de la universidad
@@ -860,9 +551,6 @@ felicitaciones | aprobé mi examen
 felicitaciones | me gradué
 felicitaciones | conseguí trabajo
 felicitaciones | me contrataron
-despido | me despidieron
-despido | perdí mi trabajo
-despido | me quedé sin trabajo
 cocinar | sabes cocinar
 # ===== Entrenamiento extra 2: pares de temas que se confundían =====
 como_estas | cómo te va a ti
@@ -891,30 +579,6 @@ felicitaciones | ya conseguí empleo
 felicitaciones | me dieron el puesto
 felicitaciones | hoy me titulé
 felicitaciones | por fin aprobé
-no_trabajo | hace meses que busco empleo
-no_trabajo | no logro conseguir trabajo
-no_trabajo | nadie me contrata
-rechazo | no me aceptaron en el trabajo
-rechazo | no pasé la entrevista
-rechazo | me rechazaron en la entrevista
-seguimiento | no me han vuelto a llamar
-seguimiento | después de la entrevista nadie me responde
-seguimiento | cuándo me llaman de la entrevista
-garantia | me garantizan un empleo
-garantia | es seguro que me contraten
-garantia | voy a conseguir trabajo seguro si me uno
-feria_tips | qué hago en la feria para conseguir trabajo
-feria_tips | cómo aprovecho la feria al máximo
-feria_tips | tips para la feria
-feria | qué actividades hay en la feria
-feria | de qué se trata esta feria
-feria | qué es esta feria
-horario_feria | a qué hora cierran la feria
-horario_feria | hasta cuándo está abierta la feria
-horario_feria | a qué hora acaba
-participar_feria | cómo inscribo a mi empresa en la feria
-participar_feria | mi empresa quiere participar
-participar_feria | quiero que mi empresa esté en la próxima feria
 comida_tipica | qué se come aquí en cochabamba
 comida_tipica | cuál es la comida más rica de cochabamba
 cochabamba | qué visitar en cochabamba
@@ -925,35 +589,6 @@ cambiar_carrera | me arrepiento de mi carrera
 ia_trabajo | la inteligencia artificial nos va a quitar el trabajo
 ia_trabajo | perderé mi trabajo por la inteligencia artificial
 ia_trabajo | qué trabajos va a reemplazar la ia
-aumento | quiero un aumento de sueldo
-aumento | cómo pido que me paguen más
-aumento | me merezco ganar más
-burnout | estoy harto de mi trabajo
-burnout | estoy agotado de tanto trabajar
-burnout | mi trabajo me está quemando
-equipo | cómo trabajo en equipo
-equipo | mis compañeros no colaboran
-equipo | cómo me llevo con mis colegas
-jefe | mi jefe me grita
-jefe | no me llevo bien con mi jefe
-financiamiento | necesito un préstamo para mi negocio
-financiamiento | de dónde saco dinero para emprender
-financiamiento | hay créditos para emprendedores
-marketing | cómo promociono mis productos
-marketing | cómo hago marketing digital para mi negocio
-marketing | cómo anuncio mi negocio
-precio | qué precio le pongo a mi servicio
-precio | cuánto cobro por mi trabajo
-precio | cómo fijo el precio
-empresa_contratar | quiero contratar personas
-empresa_contratar | mi empresa necesita empleados
-empresa_contratar | cómo contrato a un egresado
-otra_universidad | no estudio en unifranz puedo venir
-otra_universidad | soy de la umss puedo participar
-otra_universidad | soy de la univalle me sirve la red
-quienes | solo los egresados pueden entrar a la red
-quienes | la red alumni es solo para graduados
-quienes | para quién es la red alumni
 inscripcion | cómo me inscribo a la universidad
 inscripcion | quiero entrar a estudiar a unifranz
 inscripcion | qué hago para estudiar en unifranz
@@ -980,9 +615,273 @@ como_hablarte | cómo hago para que me escuches
 como_hablarte | cómo hablo contigo
 como_hablarte | no sé cómo usarte
 estoy_mal | me siento fatal
-entrevista | dame consejos para mi entrevista
-entrevista | cómo me va bien en una entrevista
-entrevista | qué hago en una entrevista de trabajo
-empezar_negocio | cómo empiezo un negocio
-empezar_negocio | primeros pasos para emprender
-emprendimiento | la red ayuda a emprendedores
+# --- Turing Lab: la expo ---
+turing_lab | qué es el turing lab
+turing_lab | de qué se trata esta expo
+turing_lab | qué es esta exposición
+turing_lab | qué están mostrando aquí
+turing_lab | qué evento es este
+turing_lab | explícame qué es todo esto
+turing_lab | para qué es esta expo de tecnología
+turing_lab | cuéntame del turing lab
+islas | qué islas hay
+islas | cómo están organizadas las islas
+islas | por dónde empiezo el recorrido
+islas | qué puedo ver en la expo
+islas | cuántas islas temáticas hay
+islas | dónde está cada isla
+demos | puedo probar los prototipos
+demos | qué proyectos hicieron los estudiantes
+demos | hay demostraciones en vivo
+demos | qué prototipos hay
+demos | muéstrame un proyecto
+presentar_proyecto | cómo presento mi proyecto en la expo
+presentar_proyecto | tips para explicar mi prototipo
+presentar_proyecto | voy a exponer mi proyecto qué hago
+horario_expo | a qué hora termina la expo
+horario_expo | hasta qué hora está abierto
+horario_expo | cuándo es la expo
+horario_expo | dónde es el turing lab
+participar_expo | puedo exponer mi proyecto aquí
+participar_expo | quiénes presentan proyectos
+participar_expo | cómo participo en el turing lab
+alan_turing | quién fue alan turing
+alan_turing | por qué se llama turing lab
+alan_turing | qué hizo turing
+alan_turing | qué es la máquina enigma
+alan_turing | quién descifró enigma
+alan_turing | qué es la máquina de turing
+test_turing | qué es el test de turing
+test_turing | pasarías el test de turing
+test_turing | una máquina puede pensar
+test_turing | qué es el juego de la imitación
+premio_turing | qué es el premio turing
+premio_turing | cuál es el nobel de la computación
+# --- La carrera y la malla ---
+c_sistemas | qué es ingeniería de sistemas e innovación digital
+c_sistemas | cuéntame de la carrera de sistemas
+c_sistemas | quiero estudiar ingeniería de sistemas
+c_sistemas | tienen ingeniería informática
+c_sistemas | qué carrera hizo estos proyectos
+malla | qué materias tiene la carrera
+malla | cómo es la nueva malla
+malla | qué se estudia en sistemas
+malla | qué materias hay en primer semestre
+malla | muéstrame el plan de estudios
+microcredenciales | qué son las microcredenciales
+microcredenciales | cuáles son las microcredenciales
+microcredenciales | qué certificados te dan en la carrera
+microcredenciales | cuántas microcredenciales hay
+mc_software | qué es la microcredencial de desarrollo de software
+mc_agiles | qué son las metodologías ágiles
+mc_agiles | qué es scrum
+mc_etica | qué es la ética digital
+mc_innovacion | qué es lean startup
+mc_ofensiva | qué es el hacking ético
+mc_ofensiva | qué es un pentesting
+mc_ofensiva | qué hace un hacker ético
+mc_redes | qué son los sistemas distribuidos
+mc_redes | cómo funcionan las redes de computadoras
+mc_redes | qué es la seguridad en redes
+menciones | qué menciones tiene la carrera
+menciones | puedo especializarme en inteligencia artificial
+menciones | cuál es la mención de ciberseguridad
+proyectos_integradores | qué son los proyectos integradores
+proyectos_integradores | hacen proyectos desde el primer semestre
+practica_grado | cómo me titulo en sistemas
+practica_grado | hay práctica profesional
+practica_grado | qué modalidades de graduación hay
+donde_trabaja_sistemas | dónde trabaja un ingeniero de sistemas
+donde_trabaja_sistemas | hay trabajo en tecnología
+donde_trabaja_sistemas | cuál es el campo laboral de sistemas
+perfil_sistemas | qué voy a saber hacer al terminar la carrera
+perfil_sistemas | cuál es el perfil profesional de sistemas
+# --- Inteligencia artificial ---
+ia | qué es la inteligencia artificial
+ia | cómo funciona la ia
+ia | explícame la inteligencia artificial
+ia | para qué sirve la inteligencia artificial
+ia | ejemplos de inteligencia artificial
+machine_learning | qué es el machine learning
+machine_learning | cómo aprende una máquina
+machine_learning | qué es entrenar un modelo
+machine_learning | qué es el aprendizaje automático
+redes_neuronales | qué es una red neuronal
+redes_neuronales | qué es el deep learning
+redes_neuronales | cómo funciona el aprendizaje profundo
+ia_generativa | qué es chatgpt
+ia_generativa | cómo funciona chatgpt
+ia_generativa | qué es la ia generativa
+ia_generativa | qué es un modelo de lenguaje
+nlp | qué es el procesamiento del lenguaje natural
+nlp | cómo entiendes lo que te digo
+nlp | qué es el análisis de sentimientos
+vision | qué es la visión por computadora
+vision | cómo funciona el reconocimiento facial
+etica_ia | es peligrosa la inteligencia artificial
+etica_ia | la ia nos va a dominar
+etica_ia | qué son los sesgos en la ia
+etica_ia | qué es un deepfake
+ia_trabajo | la ia me va a quitar el trabajo
+ia_trabajo | la inteligencia artificial reemplazará a las personas
+aprender_ia | cómo aprendo inteligencia artificial
+aprender_ia | qué necesito para trabajar en ia
+# --- Ciencia de datos ---
+ciencia_datos | qué es la ciencia de datos
+ciencia_datos | qué hace un científico de datos
+ciencia_datos | para qué sirven los datos
+big_data | qué es big data
+big_data | qué son los datos masivos
+analitica | qué es la analítica predictiva
+analitica | qué es la minería de datos
+analitica | cómo se predice con datos
+analitica | qué es un dashboard
+herramientas_datos | qué es sql
+herramientas_datos | qué es python
+herramientas_datos | qué es una base de datos
+herramientas_datos | qué herramientas usa un analista de datos
+# --- Ciberseguridad ---
+ciberseguridad | qué es la ciberseguridad
+ciberseguridad | qué hace un experto en ciberseguridad
+ciberseguridad | me pueden hackear
+protegerme | cómo me protejo en internet
+protegerme | cómo evito que me hackeen
+protegerme | me hackearon la cuenta qué hago
+contrasenas | cómo hago una contraseña segura
+contrasenas | qué es la verificación en dos pasos
+phishing | qué es el phishing
+phishing | me llegó un mensaje sospechoso
+phishing | cómo reconozco una estafa por whatsapp
+malware | qué es un virus informático
+malware | qué es el ransomware
+forense | qué es la informática forense
+forense | qué hacer ante un ciberataque
+# --- Blockchain ---
+blockchain | qué es blockchain
+blockchain | cómo funciona la cadena de bloques
+blockchain | explícame blockchain fácil
+smart_contracts | qué es un smart contract
+smart_contracts | qué es un contrato inteligente
+cripto | qué es bitcoin
+cripto | conviene invertir en criptomonedas
+cripto | qué es un nft
+usos_blockchain | para qué sirve blockchain
+usos_blockchain | dónde se usa blockchain en la vida real
+# --- Computación en la nube ---
+nube | qué es la nube
+nube | qué es cloud computing
+nube | cómo funciona la computación en la nube
+tipos_nube | qué es saas
+tipos_nube | qué tipos de nube hay
+proveedores_nube | qué es aws
+proveedores_nube | qué es azure
+proveedores_nube | qué es google cloud
+seguridad_nube | es seguro guardar mis fotos en la nube
+# --- Más tecnología ---
+iot | qué es el internet de las cosas
+iot | qué es una casa inteligente
+realidad_aumentada | qué es la realidad aumentada
+realidad_aumentada | qué es la realidad virtual
+apps_web | cómo creo una app
+apps_web | cómo hago una página web
+aprender_programar | cómo aprendo a programar
+aprender_programar | qué lenguaje de programación aprendo primero
+aprender_programar | quiero ser programador
+testing | qué es el testing de software
+testing | qué es un bug
+computadora_cuantica | qué es una computadora cuántica
+tecnologia_alumi | con qué tecnología estás hecha
+tecnologia_alumi | eres un prototipo
+tecnologia_alumi | cómo te programaron
+risa_ia | cuéntame un chiste de programadores
+# --- Turing Lab: entrenamiento extra ---
+turing_lab | qué es lo que exhiben aquí
+turing_lab | qué tipo de evento es
+turing_lab | esto es una feria de tecnología
+turing_lab | qué significa engineering and computational innovation
+islas | qué áreas tiene la exposición
+islas | qué hay en cada isla
+islas | qué stands hay
+islas | cómo me muevo por la expo
+islas | qué temas tiene la expo
+demos | qué inventaron los estudiantes
+demos | qué crearon los alumnos
+demos | puedo ver cómo funcionan los proyectos
+demos | qué soluciones desarrollaron
+alan_turing | por qué la expo se llama así
+alan_turing | de dónde viene el nombre turing lab
+alan_turing | quién es el turing del nombre
+alan_turing | qué inventó alan turing
+test_turing | las computadoras pueden pensar
+test_turing | cómo saber si hablo con una máquina
+test_turing | una ia puede ser inteligente como una persona
+c_sistemas | qué carrera estudian los que exponen
+c_sistemas | de qué carrera son los proyectos
+c_sistemas | quiero estudiar algo de computación
+c_sistemas | me gusta la tecnología qué carrera sigo
+malla | qué cursos lleva la carrera de sistemas
+malla | qué asignaturas hay en sistemas
+menciones | en qué me especializo en sistemas
+menciones | qué especialidades tiene la carrera
+menciones | puedo elegir ciberseguridad o inteligencia artificial
+microcredenciales | qué son esas certificaciones de la carrera
+microcredenciales | te dan certificados mientras estudias
+machine_learning | cómo aprende sola una computadora
+machine_learning | cómo se entrena una inteligencia artificial
+machine_learning | cómo aprende la ia
+ia | qué significa ia
+ia | qué es eso de inteligencia artificial
+ia | cómo piensa una computadora
+etica_ia | la inteligencia artificial puede ser peligrosa
+etica_ia | es mala la inteligencia artificial
+etica_ia | la ia puede hacer daño
+etica_ia | los robots se van a rebelar
+ia_trabajo | la ia me dejará sin empleo
+ia_trabajo | los robots me van a quitar el trabajo
+ia_generativa | cómo responde chatgpt
+ia_generativa | cómo escribe textos la ia
+ia_generativa | cómo crea imágenes la ia
+nlp | cómo entiendes mi voz
+nlp | cómo sabes lo que te pregunto
+nlp | cómo procesas lo que digo
+nlp | cómo reconoces mi voz
+tecnologia_alumi | qué tecnología usas para funcionar
+tecnologia_alumi | qué programas usaron para hacerte
+tecnologia_alumi | cómo te construyeron
+tecnologia_alumi | qué hay detrás de ti
+mc_ofensiva | es legal hackear
+mc_ofensiva | se puede hackear con permiso
+mc_ofensiva | qué es un hacker bueno
+ciberseguridad | qué hacen los expertos en ciberseguridad
+ciberseguridad | para qué sirve la ciberseguridad
+protegerme | cómo protejo mis cuentas
+protegerme | cómo cuido mi celular de hackers
+phishing | me mandaron un enlace extraño
+phishing | recibí un correo raro de mi banco
+proveedores_nube | qué compañías ofrecen nube
+proveedores_nube | quiénes dan servicios en la nube
+nube | dónde se guardan mis fotos en internet
+nube | qué es guardar en la nube
+iot | qué son los dispositivos conectados
+iot | cómo funcionan los objetos inteligentes
+iot | qué son los sensores conectados a internet
+big_data | qué quiere decir big data
+ciencia_datos | para qué sirve estudiar datos
+ciencia_datos | qué se hace con los datos
+blockchain | cómo funcionan los bloques
+blockchain | qué es eso de los bloques encadenados
+cripto | vale la pena comprar criptomonedas
+cripto | qué es una criptomoneda
+aprender_programar | con qué lenguaje empiezo
+aprender_programar | dónde aprendo a programar gratis
+gustos | qué cosas te gustan
+gustos | qué te gusta a ti
+musica | qué canciones escuchas
+musica | te gusta la música
+motivacion | dame motivación
+motivacion | algo para animarme
+fecha | a qué fecha estamos
+hablar_publico | me da miedo hablar frente a la gente
+que_carrera_elegir | no sé qué carrera seguir
+que_carrera_elegir | no tengo idea de qué estudiar
+quien_eres | tú quién eres

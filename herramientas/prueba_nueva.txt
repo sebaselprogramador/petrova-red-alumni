@@ -30,35 +30,6 @@ color | cuál es tu color preferido
 aburrido | me estoy aburriendo
 gracias | muchísimas gracias por tu ayuda
 adios | bueno ya me tengo que ir chau
-sin_experiencia | nunca he trabajado cómo consigo mi primer trabajo
-no_trabajo | llevo meses buscando trabajo y nada
-rechazo | no me aceptaron en la entrevista
-pitch | cómo me presento ante una empresa
-debilidades | qué digo si me preguntan mis defectos
-ropa | qué me pongo para la entrevista
-salario | cuánto debería pedir de sueldo
-linkedin | sirve tener linkedin
-blandas | qué son las habilidades blandas
-ingles | necesito saber inglés para trabajar
-remoto | se puede trabajar desde la casa
-feria_tips | cómo saco provecho de esta feria
-que_es | qué es eso de la red alumni
-quienes | la red es solo para egresados
-soporte | en qué me ayudan ustedes
-trabajo | quiero conseguir trabajo
-garantia | me aseguran que voy a conseguir trabajo
-cv | cómo hago un buen currículum
-cv | ayúdame con mi hoja de vida
-coaching | qué es el career coaching
-entrevista | consejos para una entrevista de trabajo
-practicas | cómo consigo una pasantía
-pagadas | las pasantías tienen sueldo
-feria | qué hay en la feria de empleo
-beneficios | qué gano si me uno a la red
-estudiar_mas | quiero hacer una maestría
-emprendimiento | quiero emprender mi propio negocio
-unirme | cómo me registro en la red alumni
-mentor | tienen mentores
 mascota | tienes perrito o gatito
 comida_tipica | qué se come en cochabamba
 cochabamba | qué lugares bonitos hay en cochabamba
@@ -76,40 +47,11 @@ tiempo | no me alcanza el tiempo para nada
 hablar_publico | me da pánico exponer en clase
 autoestima | siento que no soy suficiente
 amigos | me cuesta hacer amigos
-tesis | estoy haciendo mi tesis
-trabajo_estudio | puedo trabajar mientras estudio
 no_se_que_hacer | no sé qué hacer con mi vida
 cambiar_carrera | creo que me equivoqué de carrera
 ahorro | cómo puedo ahorrar plata
 ia_trabajo | la inteligencia artificial me va a dejar sin trabajo
-freelance | cómo trabajo por mi cuenta
-carta_presentacion | cómo escribo una carta de presentación
-portafolio | necesito un portafolio
-primer_dia | mañana empiezo a trabajar qué hago
-renuncia | quiero dejar mi trabajo
-aumento | cómo le pido a mi jefe que me suba el sueldo
-jefe | mi jefe me trata mal
-burnout | estoy agotado del trabajo
-liderazgo | cómo ser un buen líder
-equipo | cómo trabajo mejor con mis compañeros
-reclutadores | qué miran los reclutadores
-entrevista_virtual | tengo una entrevista por zoom
-seguimiento | no me llamaron después de la entrevista
-foto_cv | pongo foto en el currículum
-marca_personal | cómo me hago conocido profesionalmente
-idea_negocio | qué negocio me recomiendas poner
-plan_negocio | cómo hago un plan de negocio
-financiamiento | dónde consigo plata para mi negocio
-registrar_empresa | cómo legalizo mi empresa
-marketing | cómo promociono mi negocio en redes
-ventas | cómo vendo más
-precio | cuánto le cobro a mis clientes
 startup | qué es una startup
-participar_feria | mi empresa quiere estar en la feria
-pasantes_empresa | quiero recibir practicantes en mi empresa
-empresa_contratar | quiero contratar gente para mi empresa
-otra_universidad | yo estudio en otra universidad puedo participar
-horario_feria | a qué hora cierra la feria
 unifranz | qué es unifranz
 franz_tamayo | quién era franz tamayo
 sedes | dónde queda la universidad
@@ -133,11 +75,6 @@ c_odontologia | quiero ser dentista
 c_enfermeria | quiero ser enfermera
 c_publicidad | quiero estudiar marketing
 que_carrera_elegir | no sé qué estudiar
-a_software | dónde trabaja un programador
-a_datos | qué hace un analista de datos
-a_banca | quiero trabajar en un banco
-a_salud | quiero trabajar en un hospital
-a_extranjero | quiero trabajar en otro país
 eres_robot | eres una persona de verdad
 privacidad_alumi | estás grabando lo que digo
 tecnologia_alumi | cómo te hicieron
@@ -170,3 +107,40 @@ nervioso | estoy nervioso por mi entrevista
 (IA) | qué animal es el más rápido
 (IA) | cómo se cura un resfrío
 (IA) | cuál es el río más largo del mundo
+# Turing Lab (preguntas nuevas que el motor no usa para aprender)
+turing_lab | oye y esto qué es exactamente
+turing_lab | qué se muestra en este evento
+islas | qué stands tiene la exposición
+islas | cómo recorro la expo
+demos | los estudiantes qué inventaron
+alan_turing | quién era turing y qué inventó
+alan_turing | por qué el evento lleva ese nombre
+test_turing | cómo se sabe si una máquina piensa
+c_sistemas | de qué carrera son estos chicos
+malla | qué cursos se llevan en esa carrera
+microcredenciales | qué son esas microcredenciales que mencionan
+menciones | en qué me puedo especializar al final
+donde_trabaja_sistemas | si estudio sistemas dónde puedo trabajar
+ia | qué es eso de la ia
+machine_learning | cómo hace una computadora para aprender sola
+redes_neuronales | cómo funciona una neurona artificial
+ia_generativa | cómo hace chatgpt para responder
+etica_ia | puede la inteligencia artificial ser mala
+nlp | cómo haces para entenderme cuando hablo
+ciencia_datos | para qué sirve analizar datos
+big_data | qué significa big data
+ciberseguridad | qué hacen los de ciberseguridad
+protegerme | qué hago para que no me roben mis cuentas
+contrasenas | qué contraseña debería usar
+phishing | me mandaron un link raro por mensaje
+mc_ofensiva | es legal hackear con permiso
+blockchain | cómo funcionan los bloques encadenados
+cripto | debería comprar bitcoin
+smart_contracts | qué son los contratos inteligentes en blockchain
+nube | dónde se guardan las cosas en la nube
+proveedores_nube | qué empresas dan servicios de nube
+iot | qué son los objetos conectados a internet
+aprender_programar | con qué lenguaje empiezo a programar
+tecnologia_alumi | qué tecnología usaste para funcionar
+(IA) | quién inventó el internet
+(IA) | cuánto pesa un elefante
