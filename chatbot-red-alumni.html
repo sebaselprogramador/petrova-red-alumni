@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Petrova · Turing Lab</title>
+<title>Petrova · UNIFRANZ</title>
 <style>
 /* ====== Colores: cámbialos aquí ====== */
 :root{
@@ -86,6 +86,17 @@ form{display:none;gap:8px;padding:calc(var(--u)*1) 3% calc(var(--u)*1.6 + env(sa
 .app.teclado form{display:flex}
 #entrada{flex:1;min-width:0;font-size:max(16px,calc(var(--u)*2));padding:.5em .8em;border-radius:12px;border:1px solid var(--borde);background:var(--fondo);color:var(--texto)}
 form button{background:var(--primario);color:#fff;border:0;border-radius:12px;padding:0 1em;font-weight:700;cursor:pointer}
+/* Foto de la malla en el chat y visor a pantalla completa */
+.malla-btn{display:block;width:100%;margin-top:.4em;padding:0;border:1px solid var(--borde);border-radius:12px;background:#fff;overflow:hidden;cursor:zoom-in;font:inherit;color:var(--texto)}
+.malla-img{display:block;width:100%;height:auto}
+.malla-btn span{display:block;padding:.35em;font-size:.85em;background:var(--tarjeta)}
+.visor-malla{position:fixed;inset:0;z-index:40;background:rgba(10,12,16,.92);display:flex;flex-direction:column}
+.visor-cab{display:flex;align-items:center;gap:1em;padding:12px 16px;color:#fff;font-size:clamp(16px,2.2vh,30px)}
+.visor-cab b{flex:1}
+.visor-cab button{background:#c8102e;color:#fff;border:0;border-radius:999px;width:2.2em;height:2.2em;font-size:1em;cursor:pointer}
+.visor-img{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:0 8px 16px}
+.visor-img img{max-width:100%;height:auto;background:#fff;border-radius:8px;cursor:zoom-in}
+.visor-img img.zoom{max-width:none;width:220%;cursor:zoom-out}
 /* Historial abierto en modo vertical */
 .app.ver-historial .panel{position:fixed;inset:10% 4% 4%;z-index:15;background:var(--fondo);border-radius:calc(var(--u)*2.4);box-shadow:0 20px 60px rgba(0,0,0,.35);overflow:hidden;border:1px solid var(--borde)}
 .app.ver-historial .panel .cab{display:flex}
@@ -311,7 +322,7 @@ dialog .fila button.pri{background:var(--primario);color:#fff;border:0}
 <div class="app" id="app">
   <div class="izq">
     <div class="barra">
-      <div class="marca">Turing Lab · UNIFRANZ<small>Engineering &amp; Computational Innovation</small></div>
+      <div class="marca">Petrova · UNIFRANZ<small>SIS Innovation Summit · Turing Lab · Nuevas mallas</small></div>
       <button id="btnHistorial" type="button" title="Ver la conversación">💬</button>
       <button id="btnTeclado" type="button" title="Escribir">⌨️</button>
       <button id="btnAjustes" type="button" title="Ajustes de voz">⚙️</button>
@@ -451,7 +462,8 @@ const CONFIG = {
   creador: "Sebastián Rocha",   // quien creó a Petrova
   expoNombre: "A. Turing Lab – Engineering & Computational Innovation",
   expoFecha: "el jueves 26 de noviembre de 2026",   // ej. "el jueves 27 de noviembre, de 9:00 a 18:00" (vacío si no está confirmado)
-  expoLugar: "",           // ej. "el campus de Cochabamba"
+  expoLugar: "",
+  summitHora: "a las seis de la tarde, en el quinto piso",  // SIS Innovation Summit (evento de la noche)           // ej. "el campus de Cochabamba"
   idiomaVoz: "es-BO",      // idioma para escuchar al visitante
   reinicioInactividadSeg: 90, // modo kiosco: reinicia tras X segundos sin uso (0 = nunca)
   // IA local gratuita (Ollama) para las preguntas que Petrova no tiene preparadas
@@ -976,7 +988,7 @@ const TEMAS = [
   r:["Elige una carrera que mezcle lo que te apasiona, en lo que eres bueno y lo que necesita el mundo. Habla con estudiantes de esa área: ¡aquí en el Turing Lab tienes a los de Sistemas para preguntarles cómo es!"]},
 ];
 
-const SUGERENCIAS_INICIO = ["¿Qué es el Turing Lab?","Las islas","Inteligencia artificial","Ciencia de datos","Ciberseguridad","Blockchain","La nube","Microcredenciales"];
+const SUGERENCIAS_INICIO = ["¿Qué es el SIS Innovation Summit?","Nuevas mallas","Malla de Sistemas","Malla de Derecho","Microcredenciales","Menciones","Todas las carreras","¿Qué es el Turing Lab?"];
 const SOCIAL = new Set(["saludo","como_estas","estoy_bien","estoy_mal","nervioso","quien_eres","eres_robot","edad","creador","gustos","donde_vives","chiste","motivacion","hora","fecha","clima","comida","bano","wifi","costo","cumplido","amor","insulto","canta","baila","otra_vez","musica","futbol","color","aburrido","gracias","adios","ok"]);
 const RELLENOS = ["Mmm, a ver…","¡Buena pregunta!","¡Ah, claro!","¡Te cuento!","¡Uy, me encanta esa pregunta!","Mira…","¡Claro que sí!"];
 const NO_ENTENDI = [
@@ -1401,6 +1413,214 @@ TEMAS.push(
  {id:"gracias_explicacion", g:"corazon", k:["que buena explicacion","entendi todo","muy clara tu explicacion","explicas muy bien","ahora si entendi","me quedo claro"],
   r:["¡Qué alegría! 😊 Me encanta cuando algo hace clic. Si quieres, pregúntame otro tema o pídeme que te lo explique más a fondo.","¡Gracias! Explicar es mi parte favorita. ¿Seguimos con otra isla del Turing Lab?"]}
 );
+/* ---------- Nuevas mallas curriculares 2026 de las 17 carreras (de las mallas oficiales de unifranz.edu.bo) ----------
+   Por cada carrera se arman tres temas: la carrera (con la foto de su malla), sus menciones y sus microcredenciales. */
+const CARRERAS={
+ sistemas:{nombre:"Ingeniería de Sistemas e Innovación Digital", fac:"Ingeniería", dur:"cuatro años y medio", sem:"nueve", pdf:"SIS",
+  claves:["ingenieria de sistemas","sistemas","innovacion digital","informatica"],
+  menc:[["Inteligencia Artificial y Ciencia de Datos",["Modelado Predictivo y Minería de Datos","Aprendizaje Profundo y Redes Neuronales","Visualización Avanzada y Analítica Predictiva","Procesamiento del Lenguaje Natural y Análisis de Sentimientos","Sistemas Distribuidos para Big Data e IA","Ética y Gobernanza en Ciencia de Datos"]],
+        ["Ciberseguridad y Blockchain",["Fundamentos Avanzados de Blockchain y Seguridad Digital","Smart Contracts para la Ciberseguridad","Evaluación y Regulación de Blockchain en Entornos Seguros","Integración de Soluciones Blockchain en Sistemas Legados","Innovación en Ciberseguridad a Través de Tecnologías Descentralizadas","Respuesta a Incidentes y Forense Digital"]]],
+  cuando:"Las materias de mención están en el octavo y noveno semestre: ahí eliges tu especialidad.",
+  mc:["Desarrollo de Software y Gestión de Datos","Liderazgo de Proyectos Tecnológicos con Metodologías Ágiles","Ética y Gobernanza en el Entorno Digital","Gestión de la Innovación y Proyectos de Vanguardia","Ciberseguridad Ofensiva y Detección de Vulnerabilidades","Arquitectura de Seguridad en Redes y Sistemas Distribuidos"],
+  areas:["Producción de Sistemas","Control de Calidad y Testeo de Software","Redes y Comunicaciones","Innovación Tecnológica","Inteligencia Numérica","Proyectos Transversales Integradores"],
+  trabajo:"empresas tecnológicas, entidades financieras digitales, telecomunicaciones, consultoras de transformación digital, organizaciones públicas o tu propia startup"},
+ derecho:{nombre:"Derecho", fac:"Ciencias Jurídicas y Sociales", dur:"cuatro años", sem:"ocho", pdf:"DER",
+  claves:["derecho","leyes","abogacia","abogado","abogada"],
+  menc:[["Legal Tech y Gobernanza Digital",["Gobierno Corporativo Digital","Compliance Corporativo y Regulaciones Financieras","Blockchain y Criptoactivos","Estrategias Contractuales Corporativas Digitales","Gestión de Riesgos y Seguridad Jurídica Digital","Seminario de Arbitraje Comercial y Resolución de Divergencias Corporativas"]],
+        ["Justicia Penal Digital",["Argumentación Jurídica en Sistemas de Justicia Penal Digital","Criminología Digital","Normas Anticorrupción y Prevención de Lavado de Activos","Práctica Forense Penal Digital","Ciencias Auxiliares y Evidencia Digital","Litigio Penal Internacional"]]],
+  cuando:"Las materias de mención están en el nivel avanzado de la malla, en sexto y séptimo semestre; la dirección de carrera te confirma cuándo eliges la tuya.",
+  mc:["Gestión y Evaluación de Impactos Ambientales","Métodos Alternativos de Solución de Controversias","Derecho de los Recursos Naturales","Compliance Corporativo","Derecho de la Propiedad Intelectual","Protección Jurídica de Grupos Vulnerables"],
+  areas:["Derecho Público y Gobernanza Global","Derecho Privado y Justicia Digital","Derecho Social y Justicia Restaurativa","Jurista Global: Comunicación, Liderazgo y Argumentación","Proyectos Transversales Integradores"],
+  trabajo:"empresas y multinacionales, startups, organismos internacionales, entidades financieras y reguladoras, despachos especializados, arbitraje corporativo, comercio exterior y proyectos de gobernanza digital"},
+ psicologia:{nombre:"Psicología", fac:"Ciencias Jurídicas y Sociales", dur:"cuatro años", sem:"ocho", pdf:"PSI",
+  claves:["psicologia","psicologo","psicologa"],
+  menc:[["Psicología del Bienestar y Desarrollo Transformacional",["Terapias de Tercera Generación y Mindfulness Aplicado","Psicología Positiva, del Bienestar y la Felicidad","Psicología Aplicada al Liderazgo Personal","Proyecto de Bienestar Psicológico","Programas de Bienestar y Salud Integral","Acompañamiento Psicológico al Cambio"]],
+        ["Innovación Integral en Psicología Clínica y Salud Mental",["Psicodiagnóstico y Evaluación Clínica","Tendencias Innovadoras en Psicología Clínica Digital","Modelos Terapéuticos Emergentes en Salud Mental","Taller de Práctica Clínica Supervisada","Terapias de Tercera Generación","Seminario Avanzado en Psicopatología y Tratamientos Innovadores"]]],
+  mc:["Evaluación Neurocognitiva en el Deporte","Estrategias en Psicogerontología","Intervenciones Psicosociales en el Ámbito Político","Inclusión y Tecnología en Psicología","Prácticas Avanzadas en Psicología Forense","Evaluación Neurocognitiva y del Consumidor"],
+  areas:["Procesos cognitivos, neurociencia y evaluación psicológica","Psicología clínica y de salud","Psicología social, organizacional y del bienestar","Psicología educativa, desarrollo humano y aprendizaje","Ciencia psicológica, tecnología e investigación aplicada"],
+  trabajo:"clínicas y centros de salud mental, instituciones educativas, consultoras de recursos humanos y bienestar, proyectos sociales y plataformas digitales de salud mental"},
+ comunicacion:{nombre:"Comunicación y Periodismo Digital", fac:"Ciencias Jurídicas y Sociales", dur:"cuatro años", sem:"ocho", pdf:"CPD",
+  claves:["comunicacion","periodismo","comunicacion y periodismo","periodismo digital"],
+  menc:[["Comunicación Estratégica y Narrativa Transmedia",["Comunicación Estratégica Digital y Relaciones Públicas","Storytelling Transmedia para Organizaciones","Branding Personal y Gestión de la Reputación","Taller de Proyectos de Comunicación Estratégica","Estrategias de Comunicación Persuasiva y Campañas de Alto Impacto","Producción de Contenidos Estratégicos"]],
+        ["Creador de Contenidos y Producción Multimedia Interactiva",["Estrategias de Creación de Contenidos en Redes Sociales","Storytelling Digital y Narrativas Virales","Producción Audiovisual para Plataformas","Analítica de Audiencias y Optimización de Engagement","Influencer Marketing y Monetización de Contenidos","Laboratorio de Creación de Contenidos Profesionales"]]],
+  mc:["Estrategias de Comunicación y Liderazgo","Producción Multimedia e Innovación","Fact Checking y Análisis Crítico","Gestión de Proyectos y Monetización Digital","Tecnología Digital y Narrativas Virales","Liderazgo Digital y Toma de Decisiones Estratégicas"],
+  areas:["Comunicación estratégica, reputación y liderazgo","Producción multimedia, transmedia e innovación","Investigación, fact checking y analítica de datos","Emprendimiento, gestión de proyectos y monetización","Tecnología digital avanzada y narrativas virales"],
+  trabajo:"medios de comunicación, agencias de marketing y relaciones públicas, comunicación corporativa, productoras audiovisuales, plataformas digitales o como creador de contenidos profesional"},
+ negocios:{nombre:"Negocios y Gestión Empresarial", fac:"Ciencias Económicas y Empresariales", dur:"cuatro años", sem:"ocho", pdf:"NGE",
+  claves:["negocios","gestion empresarial","administracion de empresas","negocios y gestion empresarial"],
+  menc:[["Transformación Digital y Analítica de Negocios",["Experiencia Cuantificada de Usuario y Neuromarketing","Ciberseguridad Estratégica y Resiliencia Digital","Business Intelligence y Análisis Prescriptivo","Inteligencia Artificial Aplicada a la Gestión Estratégica","Transformación Digital en Modelos de Negocio","Taller de Proyectos en Dashboards Interactivos"]],
+        ["Emprendimiento, Innovación y Desarrollo de Startups",["Gestión de Modelos de Negocio de Alto Impacto","Finanzas para Emprendedores","Innovación Abierta y Ecosistemas Emprendedores","Liderazgo Ético y Gestión del Talento en Startups","Growth Hacking y Estrategias de Escalabilidad Digital","Laboratorio de Emprendimientos de Alto Impacto"]]],
+  mc:["Transformación Digital en Negocios","Liderazgo Ético-Transformacional Avanzado","Metodologías para la Transformación de Negocios","Marketing Analytics","Modelos Analíticos Avanzados y Toma de Decisiones Financieras","Excelencia Operacional y Control de Calidad"],
+  areas:["Gestión empresarial","Gestión operacional ágil y cadenas de valor","Transformación digital y automatización empresarial","Emprendimiento e innovación","Marketing estratégico y experiencias digitales","Estrategia y liderazgo transformacional"],
+  trabajo:"empresas industriales, startups, instituciones financieras, consultoras de estrategia y datos, empresas de tecnología y entidades públicas"},
+ turismo:{nombre:"Turismo y Hotelería", fac:"Ciencias Económicas y Empresariales", dur:"cuatro años", sem:"ocho", pdf:"THO",
+  claves:["turismo","hoteleria","turismo y hoteleria"],
+  menc:[["Desarrollo Sostenible de Destinos",["Certificaciones y Estándares en Turismo Sostenible","Economía Circular en Turismo","Ordenamiento Turístico Territorial","Turismo Comunitario y Regenerativo","Destination Management Organization (DMO)","Gestión de Proyectos de Turismo Sostenible"]],
+        ["Hospitality y Experiencia Digital",["E-Commerce Hotelero","Diseño de Experiencias del Huésped","Storytelling y Comunicación Digital Hotelera","Revenue Management","Food & Beverage","Soluciones Digitales en Hotelería"]]],
+  mc:["Transformación Digital","Turismo Aventura y Áreas Protegidas","Guía de Turismo","Gestión de Sistemas de Distribución Global (GDS)","Gestión de Gobernanza Sostenible","Marketplaces y Redes Sociales para Hoteles"],
+  areas:["Inteligencia de destinos y planificación","Sostenibilidad y turismo regenerativo","E-Commerce y marketing","Hospitality y service excellence","Negocio, procesos y leadership","Data e insights para turismo"],
+  trabajo:"hoteles y cadenas internacionales, agencias de viajes y operadoras, turismo comunitario, promoción turística pública, aerolíneas y startups turísticas"},
+ gastronomia:{nombre:"Gastronomía y Artes Culinarias", fac:"Ciencias Económicas y Empresariales", dur:"cuatro años", sem:"ocho", pdf:"GAC",
+  claves:["gastronomia","artes culinarias","gastronomia y artes culinarias","chef","cocina"],
+  menc:[["Innovación Gastronómica",["Cocina Inteligente","Cocina Fusión","Pastelería y Repostería III","Ingeniería de Alimentos","Gastronomía Molecular","Laboratorio de Pruebas","Tradiciones y Costumbres"]],
+        ["Emprendimiento Gastronómico",["Análisis e Interpretación de Estados Financieros","Competencias Emprendedoras","Taller de Incubadora de Empresas","Emprendimiento e Innovación","Gestión de Mypes y Negocios Familiares","Modelo y Plan de Negocios","Inteligencia Artificial Aplicada"]]],
+  mc:[], extra:"Incluye inglés del primer al cuarto semestre, proyectos integradores intermedios y dos prácticas profesionales.",
+  areas:["Producción y elaboración culinaria","Gestión Empresarial","Cultura Gastronómica","Ciencia Aplicada","Sala, servicio y sumillería","Personas y gestión del cliente"],
+  trabajo:"restaurantes, hoteles, catering, emprendimientos propios, academias de cocina, industrias alimentarias y medios gastronómicos"},
+ auditoria:{nombre:"Auditoría Financiera y Control de Gestión", fac:"Ciencias Económicas y Empresariales", dur:"cuatro años", sem:"ocho", pdf:"AFC",
+  claves:["auditoria","auditoria financiera","contaduria","contabilidad","auditor","contador"],
+  menc:[["Auditoría Forense y Compliance",["Auditoría Forense y Técnicas de Investigación de Fraude","Normas Anticorrupción y Prevención de Lavado de Activos","Gobierno Corporativo y Ética Financiera","Gestión de Riesgos Corporativos (ERM)","Compliance Corporativo y Regulaciones Financieras","Taller de Casos Forenses y de Cumplimiento"]],
+        ["Finanzas Digitales y Analítica",["Sistemas ERP y Contabilidad en la Nube","Data Analytics Aplicado a la Contabilidad y Auditoría","Robotic Process Automation (RPA) en Procesos Contables","Blockchain y Criptoactivos","Auditoría de Sistemas y Seguridad Informática","Proyecto en Digital Accounting"]]],
+  mc:["Control Interno Digital Eficiente","Optimización de Análisis de Datos","Análisis y Gestión de Riesgos Financieros Digitales","Ética, Transparencia y Responsabilidad Laboral","Análisis y Regulación de Riesgos Financieros Globales","Detección y Prevención de Fraude en la Auditoría Integral"],
+  areas:["Auditoría preventiva y control interno","Gestión de riesgos y cumplimiento operativo","Innovación y transformación digital","Ética, integridad y transparencia financiera y tributaria","Análisis estratégico de datos y sostenibilidad organizacional"],
+  trabajo:"firmas de auditoría, empresas públicas y privadas, entidades financieras, aseguradoras, reguladoras y startups"},
+ comercial:{nombre:"Ingeniería Comercial", fac:"Ciencias Económicas y Empresariales", dur:"cuatro años", sem:"ocho", pdf:"ICO",
+  claves:["ingenieria comercial","ingeniero comercial","ingeniera comercial"],
+  menc:[["Comercio Internacional & Global Business",["Negociación Internacional y Estrategias de Exportación","Gestión Integral de Acuerdos Internacionales","Innovación en Logística y Supply Chain","Gestión de Riesgos y Resiliencia en Comercio","Finanzas y Criptoactivos en Comercio Internacional","Cross Cultural Marketing"]],
+        ["E-commerce y Plataformas Inteligentes",["Marketing Automation y Plataformas","Blockchain y Criptoactivos","Plataformas e Innovación Digital en E-commerce","User Experience Intelligence","Tecnologías Inteligentes para la Optimización de Procesos Digitales","Data Marketing Predictivo"]]],
+  mc:["Estrategias Comerciales Integrales","Marketing Digital y Narrativa Estratégica","Innovación y Transformación Digital","Finanzas Estratégicas y Experiencia Digital","Liderazgo y Gestión del Cambio","Ética, Sostenibilidad y Responsabilidad Estratégica"],
+  areas:["Estrategia comercial y marketing digital","Innovación y transformación digital","Gestión financiera estratégica","Comercio internacional","Liderazgo y coordinación de equipos","Ética, sostenibilidad y responsabilidad social"],
+  trabajo:"empresas industriales, retail, startups, agencias de marketing, entidades financieras, exportadoras e importadoras y organismos internacionales"},
+ economica:{nombre:"Ingeniería Económica y Financiera", fac:"Ciencias Económicas y Empresariales", dur:"cuatro años", sem:"ocho", pdf:"IEF",
+  claves:["ingenieria economica","ingenieria financiera","ingenieria economica y financiera","economia","economista","finanzas"],
+  menc:[["Finanzas Descentralizadas y Mercado de Valores",["Matemática Financiera Avanzada y Derivados","Ingeniería Financiera y Productos Estructurados","Teoría de Portafolios y Asset Allocation","Mercados de Capitales Globales y Regulación","Trading Algorítmico y Simulación de Mercados","Laboratorio de Inversiones"]],
+        ["Economía Aplicada y Políticas Públicas",["Econometría Avanzada y Modelos de Simulación","Políticas Públicas y Desarrollo Económico","Economía de la Energía y Recursos Naturales","Economía del Comportamiento","Evaluación Socioeconómica de Proyectos","Laboratorio de Políticas Públicas"]]],
+  mc:["Análisis de Volatilidad del Mercado","Medición de Riesgos Financieros","Inversión Sostenible","Políticas Económicas y Evaluación de Impacto","Inclusión Financiera Digital","Innovación y Tecnología Financiera (FinTech)"],
+  areas:["Gestión de riesgos financieros","Innovación e inversión sostenible","Políticas y transformación digital"],
+  trabajo:"fintech y mercado de valores, entidades financieras, gestoras de fondos, consultoras, organismos internacionales y multilaterales"},
+ arquitectura:{nombre:"Arquitectura", fac:"Diseño y Tecnologías Crossmedia", dur:"cuatro años y medio", sem:"nueve", pdf:"ARQ",
+  claves:["arquitectura","arquitecto","arquitecta"],
+  menc:[["Arquitectura Sostenible y Digital",["Diseño Bioclimático y Energías Renovables","Simulaciones de Desempeño Ambiental y Certificaciones Verdes","Materiales Regenerativos y Gestión de Residuos","Gestión Energética y Domótica Sustentable","Integración Digital Sostenible (BIM-Simulación-Eficiencia)","Taller de Síntesis Sostenible y Validación Digital"]],
+        ["Diseño Urbano, Smart Cities y Territorio Sostenible",["Diagnóstico Urbano y Evaluación Espacial","Innovación en Smart Cities y Territorio Digital","Participación Comunitaria y Estrategia Urbana","Gestión Integral de Proyectos Urbanos Sostenibles","Resiliencia y Densificación Sostenible","Seminario Avanzado en Urbanismo y Sostenibilidad"]]],
+  mc:["Fundamentos de Expresión Arquitectónica Digital","Introducción a Tecnologías Digitales en Arquitectura","Diseño Bioclimático y Sostenible en Proyectos","Gestión Integral en Procesos Constructivos e Instalaciones","Urbanismo Sostenible y Diseño de Ciudades Inteligentes","Arquitectura Sostenible y Digital: Integración Avanzada"],
+  areas:["Digitalización, expresión e innovación tecnológica","Historia, teoría y crítica de la arquitectura","Diseño bioclimático, sostenible e inclusivo","Estructuras","Procesos constructivos e instalaciones","Urbanismo y ciudades inteligentes","Taller de Proyecto Arquitectónico en cada semestre"],
+  trabajo:"estudios de arquitectura, constructoras e inmobiliarias, consultoras de sostenibilidad, planeamiento urbano, rehabilitación de patrimonio y startups"},
+ diseno:{nombre:"Diseño Digital y Producción Transmedia", fac:"Diseño y Tecnologías Crossmedia", dur:"cuatro años", sem:"ocho", pdf:"DDP",
+  claves:["diseno digital","produccion transmedia","diseno digital y produccion transmedia","diseno grafico","diseno"],
+  menc:[["Tecnologías Creativas y Experiencias Inmersivas",["Prototipado y Usabilidad para AR","Montaje de Instalaciones Publicitarias Experienciales","Producción y Tecnología de Realidades Extendidas e Inmersivas","Producción Digital con Inteligencia Artificial","Interacción y Usabilidad en Entornos Virtuales","Diseño de Experiencias AR/VR/MR Inmersivas Comerciales"]],
+        ["UX/UI y Diseño de Experiencias Digitales",["UX Research y Design Thinking","Experiencias Digitales Multiplataforma","UI Design y Sistemas de Interfaces Visuales","Ecosistemas Cross-platform Complejos","Prototipado Interactivo y Usabilidad (Figma, XD, Sketch)","Desarrollo UX/UI"]]],
+  mc:["Representación Visual y Creatividad Digital","Narrativas Transmedia y Storytelling Digital","Identidad Visual Digital y Actualización de Tendencias Emergentes","Gestión Ágil y Liderazgo Creativo","Diseño de Personajes y Mundos Interactivos","Ética, Impacto y Responsabilidad Digital"],
+  areas:["Diseño gráfico y branding","Narrativa audiovisual","UX/UI","Tecnologías emergentes","Investigación digital"],
+  trabajo:"agencias creativas, estudios de diseño, empresas de tecnología y videojuegos, productoras y streaming, startups y proyectos inmersivos"},
+ publicidad:{nombre:"Publicidad y Marketing", fac:"Diseño y Tecnologías Crossmedia", dur:"cuatro años", sem:"ocho", pdf:"PYM",
+  claves:["publicidad","marketing","publicidad y marketing","publicista"],
+  menc:[["Creatividad Publicitaria y Experiencias Inmersivas",["Creative Transmedia & Storyworlds","Montaje de Instalaciones Publicitarias Experienciales","Estrategias AdTech y Creatividad Publicitaria","Motion & Generative Media para Publicidad","Producción y Tecnología de Realidades Extendidas e Inmersivas","Touchpoints & Experiencia del Consumidor Inmersiva"]],
+        ["Marketing Analytics & Performance",["Analítica Predictiva para la Toma de Decisiones","Cross-Cultural Marketing","Gobernanza de Datos y ESG","Marketing Automation y Plataformas","Growth Hacking y Performance Marketing","Analítica de Marketing, Revenue & Conversiones"]]],
+  mc:["Innovación Digital Publicitaria","Experiencia de Usuario y UX/UI Creativo","Gestión Ágil de Proyectos Creativos","Estrategias Avanzadas de Publicidad y Marketing","Analítica Predictiva y Marketing Digital Avanzado","Organización de Eventos y Estrategias Integradas"],
+  areas:["Gobernanza de marca y estrategia competitiva global","Analítica de datos, innovación y futuros posibles","Experiencias inmersivas y tecnologías emergentes","Growth marketing digital, IA y automatización","Gestión de proyectos y liderazgo colaborativo","Smart data y ética universal"],
+  trabajo:"agencias de publicidad y branding, empresas de consumo masivo, startups tech, e-commerce, medios digitales y bancos"},
+ bioquimica:{nombre:"Bioquímica y Farmacia", fac:"Ciencias de la Salud", dur:"cinco años", sem:"diez", pdf:"BYF",
+  claves:["bioquimica","farmacia","bioquimica y farmacia","farmaceutico","bioquimico"],
+  menc:[["Innovación y Desarrollo de Biofármacos y Productos Cosmético-Farmacéuticos",["Gestión Avanzada de Control de Calidad en Industria Farmacéutica","Innovación y Automatización en Procesos Biotecnológicos","Estrategias de Producción y Escalabilidad de Biofármacos","Optimización de Procesos Cosmético-Farmacéuticos mediante Herramientas Digitales","Desarrollo de Proyectos de Innovación en Biofármacos","Normativas y Sistemas de Gestión en la Producción Farmacéutica"]],
+        ["Farmacia Clínica y Farmacovigilancia Genómica",["Aplicación de Farmacogenómica en la Detección de Reacciones Adversas","Farmacia Clínica Digital y Seguimiento Terapéutico","Análisis de Datos y Farmacovigilancia Digital","Diseño de Protocolos de Farmacovigilancia y Gestión de Incidencias","Innovación en Herramientas de Seguimiento Farmacéutico","Gestión Integral de Datos Clínicos en Farmacovigilancia"]]],
+  mc:["Educación Digital en Bioquímica y Farmacia","Aplicaciones de IA en Salud","Alimentos con Principio y Nutracéuticos","Industria de Alimentos y Control de Calidad","Hematología Clínica y Bancos de Sangre","Bioquímica Clínica"],
+  areas:["Laboratorio clínico, biotecnología aplicada y diagnóstico","Industria farmacéutica, farmacia clínica y gestión asistencial","Ciencia de alimentos, cosmética y gestión de la calidad regulatoria"],
+  trabajo:"laboratorios clínicos, industria farmacéutica y biotecnológica, hospitales, investigación y ensayos clínicos, agencias regulatorias y empresas de alimentos"},
+ enfermeria:{nombre:"Enfermería", fac:"Ciencias de la Salud", dur:"cuatro años", sem:"ocho", pdf:"ENF",
+  claves:["enfermeria","enfermero","enfermera"],
+  menc:[["Enfermería en Cuidados Especializados",["Enfermería Geriátrica","Enfermería Ginecológica","Enfermería Pediátrica","Enfermería en Terapia Intensiva","Enfermería Obstétrica","Enfermería Neonatal"]]],
+  extra:"En séptimo y octavo semestre hay internados rotatorios en cirugía y pediatría.",
+  mc:["Investigación en Cuidado Inicial","Aplicación de Protocolos Clínicos Avanzados","Cuidado Paliativo Ético y Humanizado","Seguridad Farmacoterapéutica Avanzada","Seguridad del Paciente en Entornos Quirúrgicos Digitales","Cuidado Integral en Salud Mental y Bienestar Psicosocial"],
+  areas:["Clínica","Comunitaria","Gestión y administración","Tecnología","Investigación y docencia"],
+  trabajo:"hospitales y clínicas, centros de salud y atención primaria, terapia intensiva y emergencias, salud pública, telesalud e investigación"},
+ medicina:{nombre:"Medicina", fac:"Ciencias de la Salud", dur:"seis años", sem:"doce", pdf:"MED",
+  claves:["medicina","medico","medica","doctor","doctora"],
+  menc:[["Investigación Biomédica y Salud Digital",["Metodología de Investigación Clínica Avanzada","Bioestadística Aplicada y Ciencia de Datos Clínicos","Gestión de Datos de Salud e Interoperabilidad","Salud Digital, Telemedicina y Sistemas de Apoyo a Decisiones","IA Aplicada a la Medicina: del Prototipo a la Validación","Medicina Legal, Forense y Ciberseguridad en Salud Digital"]]],
+  extra:"Los últimos semestres incluyen el internado rotatorio y un curso preparatorio para el examen de grado.",
+  mc:["Atención Integral y Emergencias Prehospitalarias","Neurociencia y Conducta Humana","Diagnóstico Digital e Inteligencia Clínica","Neurobiología de los Trastornos Mentales","Gestión Clínica del Paciente Complejo","Liderazgo Ético-Transformacional Avanzado"],
+  areas:["Ciencias Biomédicas y Morfofisiología","Transformación Digital","Gestión en Salud Pública, Prevención y Seguridad del Paciente","Investigación Clínica y Medicina Basada en Datos","Especialidades Médicas Clínicas"],
+  trabajo:"hospitales y clínicas, atención primaria, emergencias y terapia intensiva, investigación, salud pública, telemedicina y salud digital"},
+ odontologia:{nombre:"Odontología", fac:"Ciencias de la Salud", dur:"cinco años", sem:"diez", pdf:"ODO",
+  claves:["odontologia","odontologo","odontologa","dentista"],
+  menc:[["Estética Odontológica Digital y Biomateriales Avanzados",["Odontología Restauradora y Terapia Pulpar","Prostodoncia Fija y Biomateriales Avanzados","Odontología Estética y Terapia Pulpar","Prostodoncia Digital Integrada y Biofuncional","Innovación en Tecnología Odontológica (CAD/CAM e Impresión 3D)"]]],
+  mc:["Ciencias de Datos y Evidencia","Diagnóstico Avanzado y Oclusión Funcional","Rehabilitación Temporal con Prótesis Inmediatas","Gestión Integral y Posicionamiento de la Clínica Odontológica","Comunicación Efectiva en la Práctica Odontológica","Prostodoncia Digital y Restauración Biofuncional"],
+  areas:["Fundamentos Biológicos y Diagnóstico Clínico","Clínica Integral y Rehabilitación Avanzada","Tecnología Digital e Innovación","Gestión, Liderazgo y Responsabilidad Social"],
+  trabajo:"clínicas y consultorios, centros de rehabilitación oral, hospitales, laboratorios dentales, tecnología dental CAD/CAM y teleodontología"}
+};
+const lista=a=>(a.length<2?a.join(""):a.slice(0,-1).join(", ")+" y "+a[a.length-1]).replace(/ & /g," y ");
+// Foto de la malla en el chat (se toca para verla en grande) y enlace al PDF oficial
+const fotoMalla=(slug,c)=>`\n\n<button type="button" class="malla-btn" onclick="verMalla('mallas/${slug}.webp','Malla de ${c.nombre}')"><img class="malla-img" src="mallas/${slug}.webp" alt="Malla curricular de ${c.nombre}" loading="lazy"><span>🔍 Toca para ver la malla en grande</span></button>\n<a href="https://unifranz.edu.bo/wp-content/uploads/2026/10/MALLA-${c.pdf}-2026-Lectura-digital.pdf" target="_blank" rel="noopener">📄 Descargar la malla en PDF</a>`;
+for(const [slug,c] of Object.entries(CARRERAS)){
+  const nm=c.menc.length, mencNombres=c.menc.map(m=>m[0]);
+  const txtMenc = nm===1 ? `una mención, ${mencNombres[0]}` : `dos menciones: ${lista(mencNombres)}`;
+  const txtMc = c.mc.length ? `, y ${c.mc.length===6?"seis":c.mc.length} microcredenciales que vas ganando mientras estudias` : "";
+  const id = slug==="sistemas" ? "c_sistemas" : "c_"+({comunicacion:"comunicacion",negocios:"negocios",turismo:"turismo",gastronomia:"gastronomia",auditoria:"auditoria",comercial:"comercial",economica:"economica",arquitectura:"arquitectura",diseno:"diseno",publicidad:"publicidad",bioquimica:"bioquimica",enfermeria:"enfermeria",medicina:"medicina",odontologia:"odontologia",derecho:"derecho",psicologia:"psicologia"}[slug]);
+  const base = TEMAS.find(t=>t.id===id);
+  const resumen = `${c.nombre} está en la Facultad de ${c.fac}. Su nueva malla dura ${c.dur}, en ${c.sem} semestres, con proyectos integradores en cada semestre. Tiene ${txtMenc}${txtMc}. ¡Te muestro la malla en pantalla!`;
+  const detalle = [`⏱️ Duración: ${c.dur} (${c.sem} semestres)`, `🏛️ Facultad de ${c.fac}`, `🎯 Menciones: ${mencNombres.join(" · ")}`, ...(c.mc.length?[`🏅 Microcredenciales: ${c.mc.join(" · ")}`]:[]), `📚 Áreas: ${c.areas.join(" · ")}`, ...(c.extra?[`ℹ️ ${c.extra}`]:[]), "📍 Sedes: Cochabamba, El Alto, La Paz y Santa Cruz"];
+  const tema = base || {id, g:"senalar", k:c.claves.slice()};
+  if(slug!=="sistemas"){ tema.r=[resumen]; }
+  else tema.r.unshift(resumen);
+  tema.d=detalle; tema.x=()=>fotoMalla(slug,c); tema.verPanel=true; tema.p=tema.p||"cv";
+  tema.t=[`Al egresar de ${c.nombre} podrás trabajar en ${c.trabajo}. La malla se organiza en áreas como ${lista(c.areas.slice(0,4).map(a=>a.toLowerCase()))}, y en el nivel avanzado profundizas con tu mención.`];
+  tema.f=[`${c.nombre} dura ${c.dur}. Aprendes haciendo proyectos desde el primer semestre y al final eliges tu especialidad.`];
+  tema.of = c.mc.length ? {t:`¿Te cuento sus microcredenciales?`, id:"mcs_"+slug} : {t:`¿Te cuento sus menciones?`, id:"men_"+slug};
+  if(!base) TEMAS.push(tema);
+  const claves=c.claves;
+  // Menciones de la carrera
+  TEMAS.push({id:"men_"+slug, g:"birrete", p:"trofeo", verPanel:true,
+    k:claves.flatMap(x=>[`menciones de ${x}`,`mencion de ${x}`,`mencion en ${x}`,`especialidad de ${x}`,`especialidades de ${x}`,`especializacion en ${x}`,`que menciones tiene ${x}`,`en que me especializo en ${x}`]).concat(claves.map(x=>x+":2"),["menciones:3","mencion:3","especializacion:3","especialidad:3","especialidades:3","especializarme:3"]),
+    r:[`En ${c.nombre} ${nm===1?"te especializas con la mención":"eliges entre dos menciones"}: ${nm===1?mencNombres[0]:lista(mencNombres)}. ${c.cuando||"Las materias de mención están en el nivel avanzado de la malla."}`],
+    t:[c.menc.map(([n,m])=>`La mención ${n} incluye materias como ${lista(m.slice(0,4))}.`).join(" ")],
+    d:c.menc.map(([n,m])=>`🎯 ${n}: ${m.join(" · ")}`), x:()=>fotoMalla(slug,c),
+    of:{t:"¿Te cuento para qué te sirve elegir una mención?", id:"beneficios_menciones"}});
+  // Microcredenciales de la carrera
+  if(c.mc.length) TEMAS.push({id:"mcs_"+slug, g:"estrella", p:"trofeo", verPanel:true,
+    k:claves.flatMap(x=>[`microcredenciales de ${x}`,`microcredencial de ${x}`,`microcredenciales en ${x}`,`certificaciones de ${x}`,`que microcredenciales tiene ${x}`,`certificados de ${x}`]).concat(claves.map(x=>x+":2"),["microcredenciales:3","microcredencial:3"]),
+    r:[`${c.nombre} tiene seis microcredenciales: ${lista(c.mc)}. Cada una certifica un conjunto de competencias al aprobar un grupo de materias de la malla.`],
+    d:c.mc.map((m,i)=>`🏅 ${i+1}. ${m}`), x:()=>fotoMalla(slug,c),
+    of:{t:"¿Te cuento para qué te sirven las microcredenciales?", id:"beneficios_microcredenciales"}});
+  // La malla de la carrera
+  TEMAS.push({id:"malla_"+slug, g:"senalar", p:"lupa", verPanel:true,
+    k:claves.flatMap(x=>[`malla de ${x}`,`malla ${x}`,`malla curricular de ${x}`,`plan de estudios de ${x}`,`materias de ${x}`,`que materias tiene ${x}`,`que se estudia en ${x}`,`asignaturas de ${x}`,`cuanto dura ${x}`,`cuantos semestres tiene ${x}`,`nueva malla de ${x}`]).concat(claves.map(x=>x+":2"),["malla:3","materias:2","semestres:2","asignaturas:2"]),
+    r:[`¡Aquí tienes la nueva malla de ${c.nombre}! Son ${c.sem} semestres, ${c.dur}, organizados en nivel básico, intermedio y avanzado, con estas áreas: ${lista(c.areas.map(a=>a.toLowerCase()))}. Tócala en la pantalla para verla en grande.`],
+    d:detalle, x:()=>fotoMalla(slug,c),
+    of: c.mc.length ? {t:"¿Te cuento sus microcredenciales?", id:"mcs_"+slug} : {t:"¿Te cuento sus menciones?", id:"men_"+slug}});
+}
+// La malla de Sistemas ya tenía su propio tema: ahora muestra la foto
+{ const m=TEMAS.find(t=>t.id==="malla"); if(m){ m.x=()=>fotoMalla("sistemas",CARRERAS.sistemas); m.verPanel=true; m.k=["malla de sistemas","malla curricular de sistemas","materias de sistemas","que se estudia en sistemas","plan de estudios de sistemas","semestres de sistemas"]; } }
+
+TEMAS.push(
+ {id:"mallas_general", g:"senalar", p:"lupa", k:["malla","mallas","nueva malla","nuevas mallas","malla curricular","mallas curriculares","plan de estudios","planes de estudio","rediseno curricular","nueva malla curricular","las mallas nuevas","mallas 2026"],
+  r:["¡Todas las carreras de Unifranz estrenan malla rediseñada! Las nuevas mallas se organizan en nivel básico, intermedio y avanzado, con proyectos integradores en cada semestre, microcredenciales que certifican competencias mientras estudias y menciones de especialidad en el tramo final. ¿De qué carrera quieres ver la malla?"],
+  t:["Un rediseño curricular actualiza qué y cómo se aprende para responder a los desafíos actuales. En las mallas 2026 se repite una estructura: áreas de formación por competencias, proyectos transversales integradores, inteligencia artificial aplicada como materia común, microcredenciales apilables y dos menciones para especializarse."],
+  sig:["Malla de Sistemas","Malla de Derecho","Malla de Psicología","Malla de Medicina","Malla de Arquitectura","Malla de Negocios","Malla de Publicidad","Todas las carreras"]},
+ {id:"beneficios_microcredenciales", g:"estrella", p:"trofeo", k:["para que sirven las microcredenciales","beneficios de las microcredenciales","de que me sirve una microcredencial","ventajas de las microcredenciales","para que me sirve la microcredencial","que gano con las microcredenciales","sirven las microcredenciales para trabajar"],
+  r:["Las microcredenciales te sirven para demostrar lo que ya sabes hacer antes de titularte. Las puedes poner en tu currículum y en LinkedIn, te ayudan a conseguir prácticas o un primer trabajo, y muestran a las empresas competencias concretas, como ciberseguridad ofensiva o compliance corporativo."],
+  t:["Una microcredencial certifica un conjunto acotado de competencias, evaluadas al aprobar un grupo de materias relacionadas. Son apilables: se acumulan a lo largo de la carrera y complementan al título. Para las empresas son una señal verificable de habilidades específicas, y para ti, una ruta de aprendizaje con logros intermedios."],
+  f:["Son como medallas que ganas en el camino: aunque todavía no termines la carrera, ya puedes mostrar que dominas algo."]},
+ {id:"beneficios_menciones", g:"birrete", p:"trofeo", k:["para que sirve la mencion","beneficios de la mencion","beneficios de elegir una mencion","de que me sirve la mencion","por que elegir una mencion","ventajas de la mencion","como elijo mi mencion","que mencion elijo"],
+  r:["Elegir una mención te especializa en un área con mucha demanda, te diferencia de otros profesionales y profundiza tus competencias justo antes de salir al mundo laboral. Para elegirla, piensa en lo que más te apasiona, revisa qué materias tiene cada una y conversa con tus docentes."],
+  t:["La mención es un trayecto de especialización dentro de la malla: un bloque de materias del nivel avanzado alineado con un campo profesional emergente, como la inteligencia artificial, la ciberseguridad, el legal tech o la justicia penal digital. Orienta tu práctica profesional y tu trabajo de grado hacia ese campo."],
+  f:["Es como elegir tu superpoder al final de la carrera: sigues siendo profesional de tu área, pero experto en algo especial."]},
+ {id:"cuando_mencion", g:"reloj", p:"reloj", k:["cuando se elige la mencion","cuando elijo la mencion","en que semestre se elige la mencion","cuando me especializo","en que semestre elijo mi especialidad","cuando escojo la mencion"],
+  r:["La mención se elige en el tramo avanzado de la carrera. En Ingeniería de Sistemas e Innovación Digital, las materias de mención están en el octavo y noveno semestre. En Derecho aparecen en el nivel avanzado de la malla. Para tu caso exacto, la dirección de carrera te confirma el momento de elegirla."]},
+ {id:"sis_summit", g:"unifranz", p:"foco", k:["sis innovation summit","innovation summit","sis summit","evento de la noche","este evento","acto oficial","presentacion de los redisenos","que se presenta hoy","que evento es este","de que trata el evento","summit"],
+  r:[()=>`¡Bienvenido al SIS Innovation Summit! Es el encuentro de Unifranz, organizado por las carreras de Ingeniería de Sistemas e Innovación Digital y Derecho de la sede Cochabamba, que promueve el talento, la innovación y la vinculación entre la academia, el sector público y la industria. ${CONFIG.summitHora?"Empieza "+CONFIG.summitHora+". ":""}En el acto se presentan oficialmente los rediseños curriculares de ambas carreras.`],
+  t:["La nueva Ingeniería de Sistemas e Innovación Digital incorpora áreas estratégicas como inteligencia artificial, ciencia de datos, ciberseguridad, blockchain y computación en la nube. Derecho fortalece su enfoque hacia los nuevos escenarios jurídicos con ámbitos como legal tech, gobernanza digital y justicia penal digital. Las dos mallas incluyen microcredenciales y menciones de especialidad."],
+  d:["🎉 SIS Innovation Summit · Unifranz Cochabamba","👩‍💻 Ingeniería de Sistemas e Innovación Digital: IA, Ciencia de Datos, Ciberseguridad, Blockchain y Nube","⚖️ Derecho: Legal Tech, Gobernanza Digital y Justicia Penal Digital","🕕 Desde las 18:00, aproximadamente hasta las 19:30","📍 Quinto piso"],
+  of:{t:"¿Quieres ver la nueva malla de Sistemas o la de Derecho?", id:"mallas_general"}},
+ {id:"summit_horario", g:"reloj", p:"reloj", k:["a que hora es el summit","a que hora empieza el evento","hasta que hora es el evento","donde es el evento","en que piso es","horario del summit","a que hora termina el evento"],
+  r:["El SIS Innovation Summit empieza a las seis de la tarde y dura aproximadamente hasta las siete y media, en el quinto piso. ¡Estás en el lugar correcto!"]},
+ {id:"legal_tech", g:"idea", p:"foco", k:["legal tech","legaltech","que es legal tech","tecnologia legal","derecho y tecnologia","abogados y tecnologia","ia en el derecho"],
+  r:["Legal tech es el uso de la tecnología en el mundo jurídico: contratos inteligentes, firma digital, inteligencia artificial que revisa documentos, plataformas de resolución de conflictos en línea y gestión digital de casos. ¡Es una de las menciones de la nueva malla de Derecho!"],
+  t:["Incluye automatización documental, análisis de jurisprudencia con procesamiento de lenguaje natural, smart contracts sobre blockchain, compliance automatizado y resolución de disputas en línea. Plantea retos jurídicos nuevos: la validez de la firma y la prueba electrónica, la protección de datos y la responsabilidad por decisiones automatizadas."],
+  f:["Es cuando los abogados usan la tecnología como su súper asistente: para revisar contratos, buscar leyes y resolver casos más rápido."]},
+ {id:"gobernanza_digital", g:"asentir", k:["gobernanza digital","que es gobernanza digital","gobierno corporativo digital","compliance","que es el compliance","cumplimiento normativo"],
+  r:["La gobernanza digital es el conjunto de reglas y buenas prácticas para que empresas y gobiernos usen la tecnología de forma responsable, segura y legal. Incluye el compliance, que es asegurarse de cumplir las normas y prevenir riesgos."],
+  t:["Abarca la protección de datos personales, la ciberseguridad como obligación legal, la regulación de la inteligencia artificial y de los criptoactivos, la transparencia algorítmica y los sistemas de compliance corporativo con gestión de riesgos. En la malla de Derecho se trabaja en la mención Legal Tech y Gobernanza Digital."],
+  f:["Son las reglas del juego para que la tecnología se use bien, como las reglas de tránsito pero para internet y los datos."]},
+ {id:"justicia_penal_digital", g:"mirar", p:"lupa", k:["justicia penal digital","que es la justicia penal digital","delitos informaticos","criminologia digital","evidencia digital","ciberdelitos","delitos digitales"],
+  r:["La justicia penal digital estudia los delitos que ocurren con tecnología, como fraudes en línea o robo de datos, y cómo se investigan y juzgan usando evidencia digital. Es una de las menciones de la nueva malla de Derecho."],
+  t:["Incluye la tipificación de delitos informáticos, la cadena de custodia de la evidencia digital, la informática forense, la criminología digital, la prevención del lavado de activos y la cooperación penal internacional. El reto es garantizar el debido proceso y los derechos humanos en entornos digitales."],
+  f:["Es como ser detective y abogado a la vez, pero de los delitos que pasan en internet."]},
+ {id:"todas_carreras", g:"senalar", p:"cv", k:["todas las carreras","lista de carreras","que carreras hay en unifranz","cuales son todas las carreras","carreras de unifranz con malla nueva"],
+  r:["Unifranz tiene diecisiete carreras, todas con malla nueva: Ingeniería de Sistemas e Innovación Digital; Derecho, Psicología y Comunicación y Periodismo Digital; Negocios, Turismo, Gastronomía, Auditoría, Ingeniería Comercial e Ingeniería Económica; Arquitectura, Diseño Digital y Publicidad; y Bioquímica, Enfermería, Medicina y Odontología. ¡Pregúntame por la malla de la que quieras!"],
+  sig:["Malla de Sistemas","Malla de Derecho","Malla de Psicología","Malla de Comunicación","Malla de Negocios","Malla de Medicina","Malla de Odontología","Malla de Arquitectura"]}
+);
+// Las microcredenciales y menciones de Sistemas también responden a «microcredenciales» y «menciones» en general
+{ const m=TEMAS.find(t=>t.id==="microcredenciales"); if(m){ m.r=["Las microcredenciales son certificaciones que vas ganando durante la carrera al aprobar un grupo de materias de un área. En las nuevas mallas de Unifranz, cada carrera tiene seis. Así sales con habilidades certificadas antes de titularte. ¿De qué carrera quieres conocer las microcredenciales?"]; m.d=null; m.of={t:"¿Te cuento para qué te sirven?", id:"beneficios_microcredenciales"}; m.sig=null; } }
+{ const m=TEMAS.find(t=>t.id==="menciones"); if(m){ m.r=["Las menciones son las especialidades que eliges en el tramo final de la carrera. En las nuevas mallas, cada carrera ofrece dos, salvo Enfermería, Medicina y Odontología, que tienen una. Por ejemplo, en Sistemas puedes elegir Inteligencia Artificial y Ciencia de Datos, o Ciberseguridad y Blockchain; y en Derecho, Legal Tech y Gobernanza Digital, o Justicia Penal Digital."]; m.d=null; m.of={t:"¿Te cuento para qué sirve elegir una mención?", id:"beneficios_menciones"}; } }
 // Carreras: también entiende "tienen medicina", "quiero estudiar medicina", "carrera de medicina", "ser médico"
 TEMAS.filter(t=>t.id.startsWith("c_")).forEach(t=>{ const e=[]; t.k.filter(k=>!k.includes(" ")&&!k.includes(":")).forEach(k=>e.push("tienen "+k,"estudiar "+k,"carrera de "+k,"ser "+k,"hay "+k)); t.k.push(...e); });
 // Precalcula las claves normalizadas con su peso
@@ -1533,7 +1753,7 @@ function construir(t, nivel){
   // botones para pedir la explicación a otro nivel
   const niveles=[t.t&&nivel!=="t"?"Más a fondo":null, t.f&&nivel!=="f"?"Más fácil":null].filter(Boolean);
   const base=t.sig||(t.of && t.of.id!=="_nombre" && !nivel?["Sí, cuéntame","No, gracias"]:SUGERENCIAS_INICIO);
-  return {texto, textoSin, html, g:nivel==="t"?"idea":t.g, p:t.p, relleno, sig:niveles.length?[...niveles,...base].slice(0,8):base, id:t.id};
+  return {texto, textoSin, html, g:nivel==="t"?"idea":t.g, p:t.p, relleno, sig:niveles.length?[...niveles,...base].slice(0,8):base, id:t.id, verPanel:t.verPanel};
 }
 const simple = (texto,g,sig) => ({texto, textoSin:texto, html:esc(texto), g, sig:sig||SUGERENCIAS_INICIO});
 
@@ -1633,7 +1853,7 @@ function procesar(original){
 
 const SALUDOS_NOMBRE=["¡Mucho gusto, {N}! 😊 Qué lindo nombre. ¿En qué te puedo ayudar?","¡Encantada, {N}! 🎉 Ahora sí somos amigos. ¿Qué te gustaría saber?","¡Hola, {N}! Me alegra conocerte 💛. Pregúntame lo que quieras."];
 const SALUDOS_NOMBRE_SIN=["¡Mucho gusto! 😊 Qué lindo nombre. ¿En qué te puedo ayudar?","¡Encantada! 🎉 Ahora sí somos amigos. ¿Qué te gustaría saber?","¡Me alegra conocerte! 💛 Pregúntame lo que quieras."];
-const SALUDO_INICIAL=`¡Hola! Soy ${CONFIG.nombreBot}, la asistente virtual del Turing Lab de Unifranz. Sé de inteligencia artificial, datos, ciberseguridad, blockchain y la nube. Puedes hablarme tocando el micrófono, o elegir un tema de abajo. Pero primero… ¿cómo te llamas?`;
+const SALUDO_INICIAL=`¡Hola! Soy ${CONFIG.nombreBot}, la asistente virtual de Unifranz. Te cuento de las nuevas mallas de todas las carreras, sus microcredenciales y menciones, del SIS Innovation Summit y del Turing Lab. Puedes hablarme tocando el micrófono, o elegir un tema de abajo. Pero primero… ¿cómo te llamas?`;
 function textoParaVoz(t){
   return t.replace(/<[^>]+>/g," ").replace(/[\p{Extended_Pictographic}\u{1F3FB}-\u{1F3FF}\uFE0F\u200D]/gu,"")
    .replace(/\bUNIFRANZ\b/gi,"Unifranz").replace(/\bCV\b/g,"currículum").replace(/\bATS\b/g,"A T S").replace(/\bRAU\b/g,"R A U")
@@ -2084,6 +2304,14 @@ async function preguntarIA(texto, respaldo){
 conectarIA();
 
 const chat=document.getElementById("chat"), chips=document.getElementById("chips"), entrada=document.getElementById("entrada");
+// Visor de mallas a pantalla completa (se cierra tocando)
+function verMalla(src, titulo){
+  const v=document.createElement("div"); v.className="visor-malla";
+  v.innerHTML=`<div class="visor-cab"><b>${esc(titulo)}</b><button type="button" aria-label="Cerrar">✕</button></div><div class="visor-img"><img src="${src}" alt="${esc(titulo)}"></div>`;
+  v.querySelector("button").onclick=()=>v.remove();
+  v.querySelector(".visor-img img").onclick=e=>e.currentTarget.classList.toggle("zoom");
+  document.body.appendChild(v);
+}
 function agregar(html, quien){
   const d=document.createElement("div"); d.className="msg "+quien;
   if(quien==="user") d.textContent=html; else d.innerHTML=html;
@@ -2095,7 +2323,8 @@ function ponerChips(lista){
 }
 function responderYa(r, sinEscuchar){
   estado(null);
-  agregar(r.html,"bot"); ponerChips(r.sig||SUGERENCIAS_INICIO);
+  const burbuja=agregar(r.html,"bot"); ponerChips(r.sig||SUGERENCIAS_INICIO);
+  if(r.verPanel){ app.classList.add("ver-historial"); burbuja.querySelectorAll("img").forEach(i=>i.addEventListener("load",()=>{ chat.scrollTop=chat.scrollHeight; })); }
   if(!r.mudo) mem.ultimo=r;
   // primero el gesto; luego saca el objeto (currículum, trofeo…) para no mezclar movimientos del brazo
   gesto(r.g); mostrarProp(null);
@@ -2135,7 +2364,7 @@ const FRASES_ESPERA=["¡Hola! 👋 Toca el micrófono y háblame","¿Buscas trab
 function entrarEspera(){
   modoEspera=true; turnoIA++; historialIA=[]; callar(); estado(null); mostrarProp(null);
   if(escuchando){ cancelado=true; rec.abort(); }
-  chat.innerHTML=""; ponerChips(SUGERENCIAS_INICIO); app.classList.remove("ver-historial","teclado");
+  chat.innerHTML=""; ponerChips(SUGERENCIAS_INICIO); app.classList.remove("ver-historial","teclado"); document.querySelectorAll(".visor-malla").forEach(v=>v.remove());
   Object.assign(mem,{nombre:null,ofrece:null,ultimo:null,fallos:0,usados:{}});
   subtituloFijo(FRASES_ESPERA[0]);
 }
@@ -2145,7 +2374,7 @@ function saludoInicial(){
   P.classList.add("entrar"); setTimeout(()=>P.classList.remove("entrar"),1150);
   setTimeout(()=>{
     responderYa({texto:SALUDO_INICIAL, textoSin:SALUDO_INICIAL,
-      html:esc(`¡Hola! 👋 Soy ${CONFIG.nombreBot}, la asistente virtual del Turing Lab de UNIFRANZ.\n\nPuedes hablarme tocando el micrófono 🎤 o elegir un tema. Pero primero… ¿cómo te llamas?`), g:"saludar", sig:SUGERENCIAS_INICIO});
+      html:esc(`¡Hola! 👋 Soy ${CONFIG.nombreBot}, la asistente virtual de UNIFRANZ: nuevas mallas, microcredenciales, menciones, SIS Innovation Summit y Turing Lab.\n\nPuedes hablarme tocando el micrófono 🎤 o elegir un tema. Pero primero… ¿cómo te llamas?`), g:"saludar", sig:SUGERENCIAS_INICIO});
     mem.ofrece="_nombre";
   },700);
   reiniciarTemporizador();
@@ -2177,7 +2406,7 @@ document.getElementById("titulo").textContent=`Conversación con ${CONFIG.nombre
 entrarEspera();
 </script>
 <!-- Petrova 3D: si no carga (sin internet o sin WebGL) se queda la Petrova 2D -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="alumi3d.js?v=6"></script>
+<script src="lib/three.min.js"></script>
+<script src="alumi3d.js?v=7"></script>
 </body>
 </html>

@@ -170,3 +170,61 @@ frustracion_programar | me desespero cuando mi programa no funciona
 malo_matematicas | las matemáticas no son lo mío puedo ser ingeniero
 compu_lenta | mi laptop anda lentísima
 que_laptop | qué compu me recomiendas para la u
+
+# Nuevas mallas (preguntas que el motor no usa para aprender)
+malla_sistemas | me enseñas cómo está armada la malla de ingeniería de sistemas
+men_sistemas | qué especialización hay en la carrera de ingeniería de sistemas
+mcs_sistemas | qué microcredenciales voy a ganar si estudio ingeniería de sistemas
+malla_derecho | me enseñas cómo está armada la malla de derecho
+men_derecho | qué especialización hay en la carrera de derecho
+mcs_derecho | qué microcredenciales voy a ganar si estudio derecho
+malla_psicologia | me enseñas cómo está armada la malla de psicología
+men_psicologia | qué especialización hay en la carrera de psicología
+mcs_psicologia | qué microcredenciales voy a ganar si estudio psicología
+malla_comunicacion | me enseñas cómo está armada la malla de comunicación y periodismo digital
+men_comunicacion | qué especialización hay en la carrera de comunicación y periodismo digital
+mcs_comunicacion | qué microcredenciales voy a ganar si estudio comunicación y periodismo digital
+malla_negocios | me enseñas cómo está armada la malla de negocios y gestión empresarial
+men_negocios | qué especialización hay en la carrera de negocios y gestión empresarial
+mcs_negocios | qué microcredenciales voy a ganar si estudio negocios y gestión empresarial
+malla_turismo | me enseñas cómo está armada la malla de turismo y hotelería
+men_turismo | qué especialización hay en la carrera de turismo y hotelería
+mcs_turismo | qué microcredenciales voy a ganar si estudio turismo y hotelería
+malla_gastronomia | me enseñas cómo está armada la malla de gastronomía
+men_gastronomia | qué especialización hay en la carrera de gastronomía
+malla_auditoria | me enseñas cómo está armada la malla de auditoría financiera
+men_auditoria | qué especialización hay en la carrera de auditoría financiera
+mcs_auditoria | qué microcredenciales voy a ganar si estudio auditoría financiera
+malla_comercial | me enseñas cómo está armada la malla de ingeniería comercial
+men_comercial | qué especialización hay en la carrera de ingeniería comercial
+mcs_comercial | qué microcredenciales voy a ganar si estudio ingeniería comercial
+malla_economica | me enseñas cómo está armada la malla de ingeniería económica y financiera
+men_economica | qué especialización hay en la carrera de ingeniería económica y financiera
+mcs_economica | qué microcredenciales voy a ganar si estudio ingeniería económica y financiera
+malla_arquitectura | me enseñas cómo está armada la malla de arquitectura
+men_arquitectura | qué especialización hay en la carrera de arquitectura
+mcs_arquitectura | qué microcredenciales voy a ganar si estudio arquitectura
+malla_diseno | me enseñas cómo está armada la malla de diseño digital
+men_diseno | qué especialización hay en la carrera de diseño digital
+mcs_diseno | qué microcredenciales voy a ganar si estudio diseño digital
+malla_publicidad | me enseñas cómo está armada la malla de publicidad y marketing
+men_publicidad | qué especialización hay en la carrera de publicidad y marketing
+mcs_publicidad | qué microcredenciales voy a ganar si estudio publicidad y marketing
+malla_bioquimica | me enseñas cómo está armada la malla de bioquímica y farmacia
+men_bioquimica | qué especialización hay en la carrera de bioquímica y farmacia
+mcs_bioquimica | qué microcredenciales voy a ganar si estudio bioquímica y farmacia
+malla_enfermeria | me enseñas cómo está armada la malla de enfermería
+men_enfermeria | qué especialización hay en la carrera de enfermería
+mcs_enfermeria | qué microcredenciales voy a ganar si estudio enfermería
+malla_medicina | me enseñas cómo está armada la malla de medicina
+men_medicina | qué especialización hay en la carrera de medicina
+mcs_medicina | qué microcredenciales voy a ganar si estudio medicina
+malla_odontologia | me enseñas cómo está armada la malla de odontología
+men_odontologia | qué especialización hay en la carrera de odontología
+mcs_odontologia | qué microcredenciales voy a ganar si estudio odontología
+sis_summit | oye y qué celebran hoy aquí
+beneficios_microcredenciales | de qué me sirve tener microcredenciales
+beneficios_menciones | por qué debería elegir una mención
+legal_tech | qué tiene que ver la tecnología con los abogados
+justicia_penal_digital | cómo se juzgan los delitos por internet
+mallas_general | qué es eso de las nuevas mallas

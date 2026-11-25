@@ -4,7 +4,7 @@ const fs = require("fs");
 const html = fs.readFileSync("chatbot-red-alumni.html", "utf8");
 const js = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].pop()[1];
 const motor = js.slice(0, js.search(/\/\* =+\s*\n\s*PERSONAJE/));
-const M = new Function("prefs", "guardarPrefs", fs.readFileSync("entrenamiento.js", "utf8") + motor + ";return {procesar,mem,TEMAS};")({vel: 1}, () => {});
+const M = new Function("prefs", "guardarPrefs", "var esc=s=>s;" + fs.readFileSync("entrenamiento.js", "utf8") + motor + ";return {procesar,mem,TEMAS};")({vel: 1}, () => {});
 
 const SI = ["sí", "si", "claro", "claro que sí", "dale", "sí dale", "dale pues", "ok", "okey", "bueno", "ya", "sí claro", "obvio", "por supuesto",
   "de una", "va", "vale", "listo", "perfecto", "me parece bien", "está bien", "de acuerdo", "cuéntame", "sí cuéntame", "dime", "quiero", "sí quiero",

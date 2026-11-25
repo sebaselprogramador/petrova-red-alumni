@@ -821,7 +821,7 @@ c_sistemas | quiero estudiar algo de computación
 c_sistemas | me gusta la tecnología qué carrera sigo
 malla | qué cursos lleva la carrera de sistemas
 malla | qué asignaturas hay en sistemas
-menciones | en qué me especializo en sistemas
+men_sistemas | en qué me especializo en sistemas
 menciones | qué especialidades tiene la carrera
 menciones | puedo elegir ciberseguridad o inteligencia artificial
 microcredenciales | qué son esas certificaciones de la carrera
@@ -935,12 +935,12 @@ c_sistemas | vale la pena estudiar sistemas
 c_sistemas | qué es innovación digital
 c_sistemas | dónde puedo estudiar sistemas en unifranz
 c_sistemas | ingeniería de sistemas
-malla | cuántos semestres tiene sistemas
+malla_sistemas | cuántos semestres tiene sistemas
 malla | qué aprendo en cada semestre
 malla | qué ven en el primer año
 malla | qué materias son difíciles
 microcredenciales | qué es una microcredencial
-microcredenciales | para qué sirven las microcredenciales
+beneficios_microcredenciales | para qué sirven las microcredenciales
 microcredenciales | las microcredenciales son certificados
 microcredenciales | cuándo te dan las microcredenciales
 mc_software | qué materias tiene la microcredencial de software
@@ -950,7 +950,6 @@ mc_agiles | qué es trabajar ágil
 mc_agiles | qué es un sprint
 mc_agiles | qué significa metodología ágil
 mc_etica | por qué la tecnología necesita ética
-mc_etica | qué es la gobernanza digital
 mc_etica | qué es una auditoría informática
 mc_innovacion | qué es la programación inmersiva
 mc_innovacion | qué es un modelo de negocio
@@ -1258,7 +1257,7 @@ requisitos_inscripcion | qué necesito para inscribirme
 requisitos_inscripcion | qué papeles piden
 costos_u | cuánto cuesta estudiar sistemas
 horarios_u | hay clases en la noche
-duracion_carrera | cuánto dura sistemas
+malla_sistemas | cuánto dura sistemas
 modalidad | puedo estudiar online
 posgrado_u | hay maestrías
 posgrado_u | tienen posgrados
@@ -1513,3 +1512,333 @@ binario | qué significa binario
 contenedores | para qué se usa kubernetes
 algoritmo | qué significa el algoritmo de las redes sociales
 algoritmo | cómo decide youtube qué me muestra
+
+# ===== Nuevas mallas: todas las carreras =====
+malla_sistemas | quiero ver la malla de ingeniería de sistemas
+malla_sistemas | muéstrame la malla de sistemas
+malla_sistemas | cómo es la nueva malla de ingeniería de sistemas
+malla_sistemas | qué materias se llevan en sistemas
+malla_sistemas | enséñame el plan de estudios de ingeniería de sistemas
+malla_sistemas | cuántos semestres dura sistemas
+men_sistemas | qué menciones tiene ingeniería de sistemas
+men_sistemas | en qué me puedo especializar en sistemas
+men_sistemas | cuáles son las especialidades de ingeniería de sistemas
+men_sistemas | qué mención puedo elegir en sistemas
+mcs_sistemas | cuáles son las microcredenciales de ingeniería de sistemas
+mcs_sistemas | qué microcredenciales tiene sistemas
+mcs_sistemas | qué certificaciones te dan en ingeniería de sistemas
+malla_derecho | quiero ver la malla de derecho
+malla_derecho | muéstrame la malla de la carrera de derecho
+malla_derecho | cómo es la nueva malla de derecho
+malla_derecho | qué materias se llevan en la carrera de derecho
+malla_derecho | enséñame el plan de estudios de derecho
+malla_derecho | cuántos semestres dura la carrera de derecho
+men_derecho | qué menciones tiene derecho
+men_derecho | en qué me puedo especializar en la carrera de derecho
+men_derecho | cuáles son las especialidades de derecho
+men_derecho | qué mención puedo elegir en la carrera de derecho
+mcs_derecho | cuáles son las microcredenciales de derecho
+mcs_derecho | qué microcredenciales tiene la carrera de derecho
+mcs_derecho | qué certificaciones te dan en derecho
+malla_psicologia | quiero ver la malla de psicología
+malla_psicologia | muéstrame la malla de psicología
+malla_psicologia | cómo es la nueva malla de psicología
+malla_psicologia | qué materias se llevan en psicología
+malla_psicologia | enséñame el plan de estudios de psicología
+malla_psicologia | cuántos semestres dura psicología
+men_psicologia | qué menciones tiene psicología
+men_psicologia | en qué me puedo especializar en psicología
+men_psicologia | cuáles son las especialidades de psicología
+men_psicologia | qué mención puedo elegir en psicología
+mcs_psicologia | cuáles son las microcredenciales de psicología
+mcs_psicologia | qué microcredenciales tiene psicología
+mcs_psicologia | qué certificaciones te dan en psicología
+malla_comunicacion | quiero ver la malla de comunicación y periodismo digital
+malla_comunicacion | muéstrame la malla de periodismo
+malla_comunicacion | cómo es la nueva malla de comunicación y periodismo digital
+malla_comunicacion | qué materias se llevan en periodismo
+malla_comunicacion | enséñame el plan de estudios de comunicación y periodismo digital
+malla_comunicacion | cuántos semestres dura periodismo
+men_comunicacion | qué menciones tiene comunicación y periodismo digital
+men_comunicacion | en qué me puedo especializar en periodismo
+men_comunicacion | cuáles son las especialidades de comunicación y periodismo digital
+men_comunicacion | qué mención puedo elegir en periodismo
+mcs_comunicacion | cuáles son las microcredenciales de comunicación y periodismo digital
+mcs_comunicacion | qué microcredenciales tiene periodismo
+mcs_comunicacion | qué certificaciones te dan en comunicación y periodismo digital
+malla_negocios | quiero ver la malla de negocios y gestión empresarial
+malla_negocios | muéstrame la malla de negocios
+malla_negocios | cómo es la nueva malla de negocios y gestión empresarial
+malla_negocios | qué materias se llevan en negocios
+malla_negocios | enséñame el plan de estudios de negocios y gestión empresarial
+malla_negocios | cuántos semestres dura negocios
+men_negocios | qué menciones tiene negocios y gestión empresarial
+men_negocios | en qué me puedo especializar en negocios
+men_negocios | cuáles son las especialidades de negocios y gestión empresarial
+men_negocios | qué mención puedo elegir en negocios
+mcs_negocios | cuáles son las microcredenciales de negocios y gestión empresarial
+mcs_negocios | qué microcredenciales tiene negocios
+mcs_negocios | qué certificaciones te dan en negocios y gestión empresarial
+malla_turismo | quiero ver la malla de turismo y hotelería
+malla_turismo | muéstrame la malla de turismo
+malla_turismo | cómo es la nueva malla de turismo y hotelería
+malla_turismo | qué materias se llevan en turismo
+malla_turismo | enséñame el plan de estudios de turismo y hotelería
+malla_turismo | cuántos semestres dura turismo
+men_turismo | qué menciones tiene turismo y hotelería
+men_turismo | en qué me puedo especializar en turismo
+men_turismo | cuáles son las especialidades de turismo y hotelería
+men_turismo | qué mención puedo elegir en turismo
+mcs_turismo | cuáles son las microcredenciales de turismo y hotelería
+mcs_turismo | qué microcredenciales tiene turismo
+mcs_turismo | qué certificaciones te dan en turismo y hotelería
+malla_gastronomia | quiero ver la malla de gastronomía
+malla_gastronomia | muéstrame la malla de gastronomía
+malla_gastronomia | cómo es la nueva malla de gastronomía
+malla_gastronomia | qué materias se llevan en gastronomía
+malla_gastronomia | enséñame el plan de estudios de gastronomía
+malla_gastronomia | cuántos semestres dura gastronomía
+men_gastronomia | qué menciones tiene gastronomía
+men_gastronomia | en qué me puedo especializar en gastronomía
+men_gastronomia | cuáles son las especialidades de gastronomía
+men_gastronomia | qué mención puedo elegir en gastronomía
+malla_auditoria | quiero ver la malla de auditoría financiera
+malla_auditoria | muéstrame la malla de auditoría
+malla_auditoria | cómo es la nueva malla de auditoría financiera
+malla_auditoria | qué materias se llevan en auditoría
+malla_auditoria | enséñame el plan de estudios de auditoría financiera
+malla_auditoria | cuántos semestres dura auditoría
+men_auditoria | qué menciones tiene auditoría financiera
+men_auditoria | en qué me puedo especializar en auditoría
+men_auditoria | cuáles son las especialidades de auditoría financiera
+men_auditoria | qué mención puedo elegir en auditoría
+mcs_auditoria | cuáles son las microcredenciales de auditoría financiera
+mcs_auditoria | qué microcredenciales tiene auditoría
+mcs_auditoria | qué certificaciones te dan en auditoría financiera
+malla_comercial | quiero ver la malla de ingeniería comercial
+malla_comercial | muéstrame la malla de ingeniería comercial
+malla_comercial | cómo es la nueva malla de ingeniería comercial
+malla_comercial | qué materias se llevan en ingeniería comercial
+malla_comercial | enséñame el plan de estudios de ingeniería comercial
+malla_comercial | cuántos semestres dura ingeniería comercial
+men_comercial | qué menciones tiene ingeniería comercial
+men_comercial | en qué me puedo especializar en ingeniería comercial
+men_comercial | cuáles son las especialidades de ingeniería comercial
+men_comercial | qué mención puedo elegir en ingeniería comercial
+mcs_comercial | cuáles son las microcredenciales de ingeniería comercial
+mcs_comercial | qué microcredenciales tiene ingeniería comercial
+mcs_comercial | qué certificaciones te dan en ingeniería comercial
+malla_economica | quiero ver la malla de ingeniería económica y financiera
+malla_economica | muéstrame la malla de ingeniería económica
+malla_economica | cómo es la nueva malla de ingeniería económica y financiera
+malla_economica | qué materias se llevan en ingeniería económica
+malla_economica | enséñame el plan de estudios de ingeniería económica y financiera
+malla_economica | cuántos semestres dura ingeniería económica
+men_economica | qué menciones tiene ingeniería económica y financiera
+men_economica | en qué me puedo especializar en ingeniería económica
+men_economica | cuáles son las especialidades de ingeniería económica y financiera
+men_economica | qué mención puedo elegir en ingeniería económica
+mcs_economica | cuáles son las microcredenciales de ingeniería económica y financiera
+mcs_economica | qué microcredenciales tiene ingeniería económica
+mcs_economica | qué certificaciones te dan en ingeniería económica y financiera
+malla_arquitectura | quiero ver la malla de arquitectura
+malla_arquitectura | muéstrame la malla de arquitectura
+malla_arquitectura | cómo es la nueva malla de arquitectura
+malla_arquitectura | qué materias se llevan en arquitectura
+malla_arquitectura | enséñame el plan de estudios de arquitectura
+malla_arquitectura | cuántos semestres dura arquitectura
+men_arquitectura | qué menciones tiene arquitectura
+men_arquitectura | en qué me puedo especializar en arquitectura
+men_arquitectura | cuáles son las especialidades de arquitectura
+men_arquitectura | qué mención puedo elegir en arquitectura
+mcs_arquitectura | cuáles son las microcredenciales de arquitectura
+mcs_arquitectura | qué microcredenciales tiene arquitectura
+mcs_arquitectura | qué certificaciones te dan en arquitectura
+malla_diseno | quiero ver la malla de diseño digital
+malla_diseno | muéstrame la malla de diseño digital y producción transmedia
+malla_diseno | cómo es la nueva malla de diseño digital
+malla_diseno | qué materias se llevan en diseño digital y producción transmedia
+malla_diseno | enséñame el plan de estudios de diseño digital
+malla_diseno | cuántos semestres dura diseño digital y producción transmedia
+men_diseno | qué menciones tiene diseño digital
+men_diseno | en qué me puedo especializar en diseño digital y producción transmedia
+men_diseno | cuáles son las especialidades de diseño digital
+men_diseno | qué mención puedo elegir en diseño digital y producción transmedia
+mcs_diseno | cuáles son las microcredenciales de diseño digital
+mcs_diseno | qué microcredenciales tiene diseño digital y producción transmedia
+mcs_diseno | qué certificaciones te dan en diseño digital
+malla_publicidad | quiero ver la malla de publicidad y marketing
+malla_publicidad | muéstrame la malla de publicidad
+malla_publicidad | cómo es la nueva malla de publicidad y marketing
+malla_publicidad | qué materias se llevan en publicidad
+malla_publicidad | enséñame el plan de estudios de publicidad y marketing
+malla_publicidad | cuántos semestres dura publicidad
+men_publicidad | qué menciones tiene publicidad y marketing
+men_publicidad | en qué me puedo especializar en publicidad
+men_publicidad | cuáles son las especialidades de publicidad y marketing
+men_publicidad | qué mención puedo elegir en publicidad
+mcs_publicidad | cuáles son las microcredenciales de publicidad y marketing
+mcs_publicidad | qué microcredenciales tiene publicidad
+mcs_publicidad | qué certificaciones te dan en publicidad y marketing
+malla_bioquimica | quiero ver la malla de bioquímica y farmacia
+malla_bioquimica | muéstrame la malla de bioquímica
+malla_bioquimica | cómo es la nueva malla de bioquímica y farmacia
+malla_bioquimica | qué materias se llevan en bioquímica
+malla_bioquimica | enséñame el plan de estudios de bioquímica y farmacia
+malla_bioquimica | cuántos semestres dura bioquímica
+men_bioquimica | qué menciones tiene bioquímica y farmacia
+men_bioquimica | en qué me puedo especializar en bioquímica
+men_bioquimica | cuáles son las especialidades de bioquímica y farmacia
+men_bioquimica | qué mención puedo elegir en bioquímica
+mcs_bioquimica | cuáles son las microcredenciales de bioquímica y farmacia
+mcs_bioquimica | qué microcredenciales tiene bioquímica
+mcs_bioquimica | qué certificaciones te dan en bioquímica y farmacia
+malla_enfermeria | quiero ver la malla de enfermería
+malla_enfermeria | muéstrame la malla de enfermería
+malla_enfermeria | cómo es la nueva malla de enfermería
+malla_enfermeria | qué materias se llevan en enfermería
+malla_enfermeria | enséñame el plan de estudios de enfermería
+malla_enfermeria | cuántos semestres dura enfermería
+men_enfermeria | qué menciones tiene enfermería
+men_enfermeria | en qué me puedo especializar en enfermería
+men_enfermeria | cuáles son las especialidades de enfermería
+men_enfermeria | qué mención puedo elegir en enfermería
+mcs_enfermeria | cuáles son las microcredenciales de enfermería
+mcs_enfermeria | qué microcredenciales tiene enfermería
+mcs_enfermeria | qué certificaciones te dan en enfermería
+malla_medicina | quiero ver la malla de medicina
+malla_medicina | muéstrame la malla de medicina
+malla_medicina | cómo es la nueva malla de medicina
+malla_medicina | qué materias se llevan en medicina
+malla_medicina | enséñame el plan de estudios de medicina
+malla_medicina | cuántos semestres dura medicina
+men_medicina | qué menciones tiene medicina
+men_medicina | en qué me puedo especializar en medicina
+men_medicina | cuáles son las especialidades de medicina
+men_medicina | qué mención puedo elegir en medicina
+mcs_medicina | cuáles son las microcredenciales de medicina
+mcs_medicina | qué microcredenciales tiene medicina
+mcs_medicina | qué certificaciones te dan en medicina
+malla_odontologia | quiero ver la malla de odontología
+malla_odontologia | muéstrame la malla de odontología
+malla_odontologia | cómo es la nueva malla de odontología
+malla_odontologia | qué materias se llevan en odontología
+malla_odontologia | enséñame el plan de estudios de odontología
+malla_odontologia | cuántos semestres dura odontología
+men_odontologia | qué menciones tiene odontología
+men_odontologia | en qué me puedo especializar en odontología
+men_odontologia | cuáles son las especialidades de odontología
+men_odontologia | qué mención puedo elegir en odontología
+mcs_odontologia | cuáles son las microcredenciales de odontología
+mcs_odontologia | qué microcredenciales tiene odontología
+mcs_odontologia | qué certificaciones te dan en odontología
+mallas_general | cuáles son las nuevas mallas
+mallas_general | qué es el rediseño curricular
+mallas_general | qué cambió en las mallas
+mallas_general | quiero ver una malla
+mallas_general | muéstrame las mallas nuevas
+mallas_general | cómo son las nuevas mallas de unifranz
+todas_carreras | dime todas las carreras
+todas_carreras | qué carreras tienen malla nueva
+todas_carreras | lista de todas las carreras de unifranz
+microcredenciales | qué es una microcredencial en unifranz
+microcredenciales | todas las carreras tienen microcredenciales
+menciones | qué son las menciones de especialidad
+menciones | qué significa mención en la carrera
+beneficios_microcredenciales | para qué me sirven las microcredenciales
+beneficios_microcredenciales | qué beneficios tienen las microcredenciales
+beneficios_microcredenciales | las microcredenciales sirven para conseguir trabajo
+beneficios_microcredenciales | qué gano con una microcredencial
+beneficios_menciones | para qué sirve elegir una mención
+beneficios_menciones | qué beneficios tiene la mención
+beneficios_menciones | cómo elijo mi mención
+beneficios_menciones | qué mención me conviene
+cuando_mencion | cuándo se elige la mención
+cuando_mencion | en qué semestre elijo la especialidad
+cuando_mencion | cuándo escojo mi mención
+sis_summit | qué es el sis innovation summit
+sis_summit | de qué se trata este evento
+sis_summit | qué se presenta esta noche
+sis_summit | qué es este acto
+sis_summit | para qué es el summit
+summit_horario | a qué hora empieza el evento
+summit_horario | hasta qué hora dura el evento
+summit_horario | en qué piso es el evento
+legal_tech | qué es legal tech
+legal_tech | cómo se usa la tecnología en el derecho
+legal_tech | la inteligencia artificial en el derecho
+gobernanza_digital | qué es la gobernanza digital
+gobernanza_digital | qué es el compliance
+justicia_penal_digital | qué es la justicia penal digital
+justicia_penal_digital | qué son los delitos informáticos
+justicia_penal_digital | qué es la evidencia digital
+malla_sistemas | cómo está organizada la malla de sistemas
+men_sistemas | si estudio sistemas en qué me especializo
+mcs_sistemas | qué microcredenciales obtengo al estudiar sistemas
+mcs_sistemas | si estudio sistemas qué certificaciones gano
+malla_derecho | cómo está organizada la malla de derecho
+men_derecho | si estudio derecho en qué me especializo
+mcs_derecho | qué microcredenciales obtengo al estudiar derecho
+mcs_derecho | si estudio derecho qué certificaciones gano
+malla_psicologia | cómo está organizada la malla de psicología
+men_psicologia | si estudio psicología en qué me especializo
+mcs_psicologia | qué microcredenciales obtengo al estudiar psicología
+mcs_psicologia | si estudio psicología qué certificaciones gano
+malla_comunicacion | cómo está organizada la malla de comunicación y periodismo digital
+men_comunicacion | si estudio comunicación y periodismo digital en qué me especializo
+mcs_comunicacion | qué microcredenciales obtengo al estudiar comunicación y periodismo digital
+mcs_comunicacion | si estudio comunicación y periodismo digital qué certificaciones gano
+malla_negocios | cómo está organizada la malla de negocios
+men_negocios | si estudio negocios en qué me especializo
+mcs_negocios | qué microcredenciales obtengo al estudiar negocios
+mcs_negocios | si estudio negocios qué certificaciones gano
+malla_turismo | cómo está organizada la malla de turismo y hotelería
+men_turismo | si estudio turismo y hotelería en qué me especializo
+mcs_turismo | qué microcredenciales obtengo al estudiar turismo y hotelería
+mcs_turismo | si estudio turismo y hotelería qué certificaciones gano
+malla_gastronomia | cómo está organizada la malla de gastronomía
+men_gastronomia | si estudio gastronomía en qué me especializo
+malla_auditoria | cómo está organizada la malla de auditoría financiera
+men_auditoria | si estudio auditoría financiera en qué me especializo
+mcs_auditoria | qué microcredenciales obtengo al estudiar auditoría financiera
+mcs_auditoria | si estudio auditoría financiera qué certificaciones gano
+malla_comercial | cómo está organizada la malla de ingeniería comercial
+men_comercial | si estudio ingeniería comercial en qué me especializo
+mcs_comercial | qué microcredenciales obtengo al estudiar ingeniería comercial
+mcs_comercial | si estudio ingeniería comercial qué certificaciones gano
+malla_economica | cómo está organizada la malla de ingeniería económica
+men_economica | si estudio ingeniería económica en qué me especializo
+mcs_economica | qué microcredenciales obtengo al estudiar ingeniería económica
+mcs_economica | si estudio ingeniería económica qué certificaciones gano
+malla_arquitectura | cómo está organizada la malla de arquitectura
+men_arquitectura | si estudio arquitectura en qué me especializo
+mcs_arquitectura | qué microcredenciales obtengo al estudiar arquitectura
+mcs_arquitectura | si estudio arquitectura qué certificaciones gano
+malla_diseno | cómo está organizada la malla de diseño digital
+men_diseno | si estudio diseño digital en qué me especializo
+mcs_diseno | qué microcredenciales obtengo al estudiar diseño digital
+mcs_diseno | si estudio diseño digital qué certificaciones gano
+malla_publicidad | cómo está organizada la malla de publicidad y marketing
+men_publicidad | si estudio publicidad y marketing en qué me especializo
+mcs_publicidad | qué microcredenciales obtengo al estudiar publicidad y marketing
+mcs_publicidad | si estudio publicidad y marketing qué certificaciones gano
+malla_bioquimica | cómo está organizada la malla de bioquímica y farmacia
+men_bioquimica | si estudio bioquímica y farmacia en qué me especializo
+mcs_bioquimica | qué microcredenciales obtengo al estudiar bioquímica y farmacia
+mcs_bioquimica | si estudio bioquímica y farmacia qué certificaciones gano
+malla_enfermeria | cómo está organizada la malla de enfermería
+men_enfermeria | si estudio enfermería en qué me especializo
+mcs_enfermeria | qué microcredenciales obtengo al estudiar enfermería
+mcs_enfermeria | si estudio enfermería qué certificaciones gano
+malla_medicina | cómo está organizada la malla de medicina
+men_medicina | si estudio medicina en qué me especializo
+mcs_medicina | qué microcredenciales obtengo al estudiar medicina
+mcs_medicina | si estudio medicina qué certificaciones gano
+malla_odontologia | cómo está organizada la malla de odontología
+men_odontologia | si estudio odontología en qué me especializo
+mcs_odontologia | qué microcredenciales obtengo al estudiar odontología
+mcs_odontologia | si estudio odontología qué certificaciones gano
+sis_summit | qué evento hay hoy
+sis_summit | qué se celebra esta noche
+beneficios_menciones | por qué elegir una especialidad
+beneficios_menciones | vale la pena elegir una mención

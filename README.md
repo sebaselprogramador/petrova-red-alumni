@@ -1,4 +1,4 @@
-# Petrova · Asistente virtual del Turing Lab (UNIFRANZ)
+# Petrova · Asistente virtual de UNIFRANZ (SIS Innovation Summit y Turing Lab)
 
 Chatbot por voz con un personaje 3D animado, hecho con **cero presupuesto** para **A. Turing Lab – Engineering & Computational Innovation**, la Tech Expo de Ingeniería de Sistemas e Innovación Digital de UNIFRANZ.
 
@@ -7,6 +7,10 @@ Chatbot por voz con un personaje 3D animado, hecho con **cero presupuesto** para
 👉 **Pruébalo aquí:** https://sebaselprogramador.github.io/petrova-red-alumni/
 
 ## Qué hace
+
+- **Nuevas mallas 2026 de las 17 carreras de UNIFRANZ:** duración, semestres, áreas, menciones (con sus materias) y microcredenciales, leídas de las mallas oficiales. Al preguntar por una carrera, Petrova muestra la **foto de la malla** en el chat (se toca para verla en grande) y el enlace al PDF oficial.
+- **SIS Innovation Summit:** presentación de los rediseños curriculares de Ingeniería de Sistemas e Innovación Digital y Derecho (Legal Tech, Gobernanza Digital, Justicia Penal Digital).
+- Qué es una microcredencial, para qué sirve, qué beneficios tiene elegir una mención y cuándo se elige.
 
 - Conversa por voz (micrófono) o por texto, con la voz neuronal «Elena» pregrabada y subtítulos palabra por palabra.
 - Es experta en las áreas del Turing Lab: **Inteligencia Artificial, Ciencia de Datos, Ciberseguridad, Blockchain y Computación en la Nube**. Explica el formato de la expo por islas temáticas, quién fue Alan Turing y el test de Turing.
@@ -21,7 +25,7 @@ Chatbot por voz con un personaje 3D animado, hecho con **cero presupuesto** para
 ## Petrova también es una demo de IA
 
 - **Voz a texto:** Web Speech API del navegador.
-- **Entendimiento (procesamiento de lenguaje natural):** palabras clave + comparación con más de 1.400 frases de ejemplo (TF-IDF y similitud coseno), con sinónimos, recorte de terminaciones y corrección fonética.
+- **Entendimiento (procesamiento de lenguaje natural):** palabras clave + comparación con más de 1.800 frases de ejemplo (TF-IDF y similitud coseno), con sinónimos, recorte de terminaciones y corrección fonética.
 - **Voz:** síntesis neuronal pregrabada con los tiempos de cada palabra para mover la boca.
 - **IA opcional:** si en la computadora corre [Ollama](https://ollama.com) con `qwen2.5:3b`, responde lo que no está preparado. En la versión publicada en internet esa parte no está disponible.
 
@@ -36,4 +40,4 @@ node herramientas/probar_jergas.js        # cada pregunta con rodeos y jergas de
 
 ## Recomendaciones
 
-Usar **Google Chrome** y permitir el micrófono. El personaje 3D necesita internet para cargar Three.js; sin internet aparece la versión 2D.
+Usar **Google Chrome** y permitir el micrófono. El personaje 3D, las voces y las mallas funcionan sin internet (Three.js va incluido en `lib/`); el reconocimiento de voz del navegador sí necesita internet, y sin él se puede escribir o tocar los temas.

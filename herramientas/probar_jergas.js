@@ -8,7 +8,7 @@ require("./entrenar.js");
 const html = fs.readFileSync("chatbot-red-alumni.html", "utf8");
 const js = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].pop()[1];
 const motor = js.slice(0, js.search(/\/\* =+\s*\n\s*PERSONAJE/));
-const M = new Function("prefs", "guardarPrefs", fs.readFileSync("entrenamiento.js", "utf8") + motor + ";return {procesar,mem};")({vel: 1}, () => {});
+const M = new Function("prefs", "guardarPrefs", "var esc=s=>s;" + fs.readFileSync("entrenamiento.js", "utf8") + motor + ";return {procesar,mem};")({vel: 1}, () => {});
 
 const leer = f => fs.readFileSync(f, "utf8").split("\n").filter(l => l.trim() && !l.startsWith("#"))
   .map(l => { const [id, ...q] = l.split("|"); return {id: id.trim(), q: q.join("|").trim()}; });

@@ -8,7 +8,7 @@ const js = scripts[scripts.length - 1];
 // Evalúa solo la parte de configuración, temas y motor (no necesita navegador)
 const fin = js.search(/\/\* =+\s*\n\s*PERSONAJE/);
 const motor = js.slice(0, fin);
-const M = new Function("prefs", "guardarPrefs", motor +
+const M = new Function("prefs", "guardarPrefs", "var esc=s=>s;" + motor +
   ";return {TEMAS,RELLENOS,NO_ENTENDI,SALUDO_INICIAL,SALUDOS_NOMBRE_SIN,textoParaVoz,claveAudio};")({vel: 1}, () => {});
 
 const frases = new Set();
