@@ -19,6 +19,8 @@ Chatbot por voz con un personaje 3D animado, hecho con **cero presupuesto** para
 - Entiende rodeos, jergas, afirmaciones y negaciones de Bolivia y de otros países («oye cumpa, una consulta…», «¿…, pues?», «che, decime», «órale», «ni de vainas», «ya pues ya») y corrige errores típicos del micrófono («touring lab», «block chain», «siber seguridad»…).
 - Cada tema técnico tiene tres niveles: la respuesta normal, **«Más a fondo»** (explicación científica y técnica) y **«Más fácil»** (con analogías de la vida diaria), con respuestas en distintos tonos: amistosos, comprensivos y típicos.
 - Más de 250 temas: IA (tipos de aprendizaje, transformers, agentes, prompts, alucinaciones), datos (estadística, protección de datos), ciberseguridad (ingeniería social, VPN, cifrado, DDoS), blockchain (hash, consenso, wallets, NFT), nube (contenedores, serverless, DevOps) y fundamentos (algoritmos, binario, internet, APIs, Git).
+- Corrige errores de tipeo y, cuando no está segura, pregunta «¿te refieres a…?» en lugar de rendirse.
+- **Trivia** de tecnología y de Unifranz con puntaje, modo espera que llama la atención (gestos, invitaciones en voz alta, datos curiosos) y retoma la charla si el visitante se queda callado.
 - Personaje 3D (Three.js) con más de 30 animaciones; algunas se activan con palabras.
 - Modo kiosco para pantalla vertical de 1080×1920.
 
@@ -36,6 +38,7 @@ node herramientas/probar_banco.js         # banco de preguntas con variantes de 
 node herramientas/probar_nuevas.js        # preguntas nuevas que el motor nunca vio
 node herramientas/probar_afirmaciones.js  # respuestas «sí» / «no» a las preguntas de seguimiento
 node herramientas/probar_jergas.js        # cada pregunta con rodeos y jergas de 10 estilos regionales
+node herramientas/probar_tipeo.js         # cada pregunta con un error de tipeo («habalame», «unibersidad»)
 ```
 
 ## Recomendaciones

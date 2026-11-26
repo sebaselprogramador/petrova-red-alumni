@@ -182,6 +182,9 @@ function animar(){
     case "senalar": T.dX=-.4*e; T.dZ=(1.45+ola(tGesto,2)*.08)*e; T.cY+=.4*e; ojoX=.04*e; abrir=Math.max(abrir,.35*e); break;
     case "rascar": T.dX=-.3*e; T.dZ=(2.5+ola(tGesto,4)*.12)*e; T.cZ-=.15*e; cejaD=.06*e; ojoY=.04*e; oh=Math.max(oh,.3*e); break;
     case "estrella": { const s=Math.sin(k*Math.PI); py=s*.7; T.iZ=-2.3*s; T.dZ=2.3*s; T.iX=T.dX=0; cuerpo.scale.x=1+.08*s; abrir=.8; break; }
+    // «¡Hey, ven!»: agita los dos brazos sobre la cabeza para llamar la atención
+    case "llamar": { const w=ola(tGesto,2.4); T.dZ=(2.4+w*.35)*e; T.iZ=(-2.4+w*.35)*e; T.dX=T.iX=-.15*e; py=Math.abs(ola(tGesto,1.2))*.15*e;
+      giroY+=w*.12*e; abrir=Math.max(abrir,.8*e); cejaY=.05*e; emoteQuiere=["👋",e]; break; }
     // Bailes: robot, disco, caporal, macarena, twist y moonwalk
     case "robot": { const paso=Math.floor(tGesto*3.2)%4, P=[[-1.55,0,0,-.2],[0,1.55,-1.55,0],[-1.55,1.55,0,-1.55],[0,.2,-1.55,-1.55]][paso];
       T.dX=P[0]*e; T.dZ=(P[1]||.2)*e; T.iX=P[2]*e; T.iZ=(P[3]||-.2)*e; T.cY=[.45,-.45,.45,0][paso]*e; T.cX=0; T.cZ=0;

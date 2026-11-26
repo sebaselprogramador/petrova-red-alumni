@@ -583,6 +583,10 @@ const TEMAS = [
  {id:"ok", g:"pulgar", k:["genial","excelente","perfecto","buenisimo","chevere","que bueno","increible","wow","super","bacan","ya entendi","entiendo","de acuerdo","okey","ok","vale","listo"],
   r:["¡Siii! 🙌 ¿Algo más que quieras saber?","¡Genial! 😄 Si quieres, sigue preguntándome.","¡Así me gusta! ¿Te cuento algo más?"]},
 
+ /* ---------- Juegos ---------- */
+ {id:"trivia", g:"rascar", k:["trivia","jugar","juguemos","un juego","jugamos","quiz","hazme una pregunta","preguntame algo","retame","un reto","otra pregunta","juego de preguntas","quiero jugar","jugar trivia"],
+  r:["¡Vamos a jugar!"]},
+
  /* ---------- Turing Lab: la expo ---------- */
  {id:"turing_lab", g:"unifranz", p:"foco", k:["turing lab","que es el turing lab","que es turing lab","esta expo","que es esta expo","de que se trata","que es esto","que hay aqui","engineering and computational innovation","engineering computational innovation","tech expo","expo tecnologica","esta feria","que es esta feria","que evento es este"],
   r:[()=>`¡El Turing Lab es la Tech Expo de Ingeniería e Innovación Computacional de Unifranz! ${CONFIG.expoFecha?"Se realiza "+CONFIG.expoFecha+". ":""}Es una exhibición interactiva por islas temáticas, donde los estudiantes muestran en vivo los prototipos y soluciones que desarrollaron en las áreas estratégicas de la nueva malla: inteligencia artificial, ciencia de datos, ciberseguridad, blockchain y computación en la nube.`],
@@ -885,7 +889,7 @@ const TEMAS = [
   r:["¿Cuántos programadores hacen falta para cambiar un foco? ¡Ninguno, es un problema de hardware! 💡😂"]},
 
  /* ---------- UNIFRANZ, la universidad (información del sitio oficial) ---------- */
- {id:"unifranz", g:"unifranz", p:"corazon", k:["hablame de la unifranz","cuentame de la unifranz","hablame de unifranz","cuentame de unifranz","que es unifranz","que es la unifranz","sobre unifranz","la unifranz","unifranz:2"],
+ {id:"unifranz", g:"unifranz", p:"corazon", k:["hablame de la unifranz","cuentame de la unifranz","hablame de unifranz","cuentame de unifranz","que es unifranz","que es la unifranz","sobre unifranz","la unifranz","unifranz:2","hablame de la universidad","cuentame de la universidad","sobre la universidad","esta universidad","informacion de la universidad","que es esta universidad","como es la universidad"],
   r:["¡Unifranz es mi casa! Es la Universidad Privada Franz Tamayo, con campus en Cochabamba, El Alto, La Paz y Santa Cruz, y diecisiete carreras en cinco facultades. Su modelo es aprender haciendo, y el Turing Lab es un ejemplo perfecto."],
   of:{t:"¿Quieres saber qué es el Turing Lab?", id:"turing_lab"}},
  {id:"franz_tamayo", g:"asentir", k:["quien es franz tamayo","quien fue franz tamayo","franz tamayo","por que se llama unifranz","que significa unifranz","nombre de la universidad"],
@@ -988,7 +992,7 @@ const TEMAS = [
   r:["Elige una carrera que mezcle lo que te apasiona, en lo que eres bueno y lo que necesita el mundo. Habla con estudiantes de esa área: ¡aquí en el Turing Lab tienes a los de Sistemas para preguntarles cómo es!"]},
 ];
 
-const SUGERENCIAS_INICIO = ["¿Qué es el SIS Innovation Summit?","Carreras por facultad","Nuevas mallas","Microcredenciales","Menciones","¿Qué es el Turing Lab?","Inteligencia artificial","¡Baila!"];
+const SUGERENCIAS_INICIO = ["¿Qué es el SIS Innovation Summit?","Carreras por facultad","Nuevas mallas","Microcredenciales","Menciones","¡Juguemos trivia!","¿Qué es el Turing Lab?","¡Baila!"];
 const SOCIAL = new Set(["saludo","como_estas","estoy_bien","estoy_mal","nervioso","quien_eres","eres_robot","edad","creador","gustos","donde_vives","chiste","motivacion","hora","fecha","clima","comida","bano","wifi","costo","cumplido","amor","insulto","canta","baila","otra_vez","musica","futbol","color","aburrido","gracias","adios","ok"]);
 const RELLENOS = ["Mmm, a ver…","¡Buena pregunta!","¡Ah, claro!","¡Te cuento!","¡Uy, me encanta esa pregunta!","Mira…","¡Claro que sí!"];
 const NO_ENTENDI = [
@@ -1705,14 +1709,51 @@ const MODELO=(()=>{
   return {idf,indice};
 })();
 // Parecido (0 a 1) entre lo que dijo el visitante y el ejemplo más cercano de cada tema
+// Errores de tipeo: una palabra que no está en el vocabulario se cambia por la más parecida
+// («habalame» → «hablame», «unibersidad» → «universidad»). Si no se parece a ninguna, pesa menos,
+// para que una sola palabra rara no arruine el resto de la frase.
+const VOCABULARIO=Object.keys(MODELO.indice), cacheTipeo=new Map();
+function corregirTipeo(w){
+  if(MODELO.indice[w]||w.length<6) return w;
+  if(cacheTipeo.has(w)) return cacheTipeo.get(w);
+  const tope=w.length>=8?2:1; let mejor=null, dmin=tope+1, frecuencia=0;
+  for(const c of VOCABULARIO){ if(Math.abs(c.length-w.length)>tope) continue; const d=distancia(w,c);
+    if(d<dmin || (d===dmin && MODELO.indice[c].length>frecuencia)){ dmin=d; mejor=c; frecuencia=MODELO.indice[c].length; } }
+  const r=dmin<=tope?mejor:null; cacheTipeo.set(w,r); return r;
+}
+// Corrección de la frase completa: cada palabra que Petrova no conoce se cambia por la conocida más parecida
+// (una letra de diferencia en palabras cortas, dos en las largas), prefiriendo la misma inicial y la más usada.
+// (se arma la primera vez que hace falta, cuando ya están cargadas todas las listas)
+let PALABRAS_CONOCIDAS=null, LISTA_CONOCIDAS=null;
+const armarConocidas=()=>{ const m=new Map(); const sumar=t=>norm(t).split(" ").forEach(w=>{ if(w){ const f=fon(w); m.set(f,(m.get(f)||0)+1); } });
+  TEMAS.forEach(t=>t.k.forEach(k=>sumar(k.replace(/^=/,"").split(":")[0]))); (typeof EJEMPLOS!=="undefined"?EJEMPLOS:[]).forEach(e=>sumar(e[1]));
+  AFIRMACIONES.split("|").concat(NEGACIONES.split("|"),MULETILLAS_SI.split("|"),RODEOS_INICIO,COLETILLAS_FIN,[...VACIAS],Object.keys(SINONIMOS)).forEach(x=>sumar(x.replace(/[+]/g,""))); PALABRAS_CONOCIDAS=m; LISTA_CONOCIDAS=[...m.keys()]; };
+const cacheFrase=new Map();
+function corregirPalabra(w){
+  if(!PALABRAS_CONOCIDAS) armarConocidas();
+  const f=fon(w);
+  if(w.length<5 || PALABRAS_CONOCIDAS.has(f) || /\d/.test(w)) return w;
+  if(cacheFrase.has(w)) return cacheFrase.get(w);
+  const tope=f.length>=8?2:1; let mejor=w, pmejor=-1;
+  for(const c of LISTA_CONOCIDAS){ if(Math.abs(c.length-f.length)>tope) continue; const d=distancia(f,c); if(d>tope) continue;
+    const p=(tope-d)*1000+(c[0]===f[0]?500:0)+Math.min(PALABRAS_CONOCIDAS.get(c),400); if(p>pmejor){ pmejor=p; mejor=c; } }
+  cacheFrase.set(w,mejor); return mejor;
+}
+const corregirFrase=n=>n.split(" ").map(corregirPalabra).join(" ");
 function parecidoPorTema(n){
-  const v={}; fichas(n).forEach(w=>v[w]=(v[w]||0)+1); let s=0; for(const w in v){ v[w]*=MODELO.idf(w); s+=v[w]**2; } const nq=Math.sqrt(s)||1;
+  const v={}, desconocidas=new Set();
+  fichas(n).forEach(w0=>{ const w=corregirTipeo(w0); if(w===null){ desconocidas.add(w0); v[w0]=(v[w0]||0)+1; } else v[w]=(v[w]||0)+1; });
+  let s=0; for(const w in v){ v[w]*=MODELO.idf(w)*(desconocidas.has(w)?.7:1); s+=v[w]**2; } const nq=Math.sqrt(s)||1;
   const dot=new Map();
   for(const w in v) for(const d of (MODELO.indice[w]||[])) dot.set(d,(dot.get(d)||0)+v[w]*d.v[w]);
   const mejor={}; for(const [d,x] of dot){ const c=x/(nq*d.norma); if(!(mejor[d.id]>=c)) mejor[d.id]=c; }
   return mejor;
 }
-const PESO_EJEMPLOS=12, UMBRAL_TEMA=5, TOPE_CLAVES=5;
+const PESO_EJEMPLOS=12, UMBRAL_TEMA=5, TOPE_CLAVES=5, UMBRAL_DUDA=3;
+const TE_REFIERES=["Mmm, creo que te refieres a esto. ¿Es lo que buscas?","No estoy segura de haberte entendido. ¿Me preguntas por esto?","¡Casi te entiendo! ¿Te refieres a esto?"];
+// Nombre amigable de un tema: su primera pregunta de ejemplo o su primera palabra clave
+const etiquetaTema=t=>{ const e=(typeof EJEMPLOS!=="undefined"?EJEMPLOS:[]).find(x=>x[0]===t.id); const k=(t.k.find(c=>!c.startsWith("="))||t.k[0]).replace(/^=/,"").split(":")[0];
+  const txt=e?e[1]:k; return txt.charAt(0).toUpperCase()+txt.slice(1); };
 // Puntaje de un tema: palabras clave (con tope, para que una sola palabra no mande) + parecido con los ejemplos.
 // Si la frase es casi igual a un ejemplo del tema, ese tema gana con claridad.
 const puntajeTema=(n,t,par)=>{ const c=par[t.id]||0; return Math.min(puntuar(n,t),TOPE_CLAVES)+PESO_EJEMPLOS*c+(c>=.97?4:0); };
@@ -1764,6 +1805,7 @@ function variante(t){
   mem.usados[t.id]=i; const v=t.r[i]; return typeof v==="function"?v():v;
 }
 function construir(t, nivel){
+  if(t.id==="trivia") return nuevaPregunta();
   mem.ultimoId=t.id; mem.ultimoTema=t.id;
   const v = nivel && t[nivel] ? pick(t[nivel]) : variante(t);
   let texto=personalizar(v), textoSin=v.replace(/\{n\}/g,""), relleno=null;
@@ -1783,8 +1825,8 @@ const simple = (texto,g,sig) => ({texto, textoSin:texto, html:esc(texto), g, sig
 
 // Formas de decir «sí» y «no» (también como las transcribe el micrófono). Una frase cuenta como «sí» o «no»
 // solo si está hecha de estas palabras y muletillas, así «sí, quiero saber de becas» sigue yendo al tema de becas.
-const AFIRMACIONES="si+|sip|sep|zi|claro|clarin|dale|ok|okey|okay|oki|okis|bueno|buenisimo|ya|simon|obvio|obviamente|por supuesto|desde luego|de una|de ley|va|vale|venga|listo|lista|perfecto|genial|excelente|super|chevere|bacan|me parece bien|me parece|esta bien|de acuerdo|afirmativo|adelante|cuentame|cuenta|dime|dimelo|explicame|muestrame|ensename|quiero saber|quiero|si quiero|me gustaria|me encantaria|me interesa|con gusto|seguro|exacto|andale|sale|a ver|aver|hazlo|sigue|continua|porfa|porfavor|por favor|me late|suena bien|me sirve|sirve|de veras|bien|sipo|si po|sipi|sipis|sisi|ajam|aja|aha|mhm|uhum|ujum|orale|sale y vale|va que va|vamos|vamo|vamos alla|hecho|trato hecho|me apunto|cuenta conmigo|de ley|joya|re si|ya pe|si pe|ya pues|bueno pues|claro pues|pues si|pues claro|chido|fino|a la orden|yes|yeah|of course|sure|hagamosle|hagamoslo|si senor|si senora|desde luego que si|faltaba mas|naturalmente|totalmente|absolutamente|correcto|asi es|exactamente|eso mismo|tal cual|oki doki|okidoki|clarisimo|claro que claro|ya ya|ya dale|ta bien|tabien|sta bien|ok dale|ya esta|ya fue|de pelos|chevere pues|ya ps|si ps|sip ps|ya pues ya|dale nomas|ya nomas|claro nomas|asi nomas es|ta bueno|ta weno|weno|wenas|buenaza|buenazo|de lujo|a full|joya joya|piola|vale vale|venga va|venga vale|obvio pues|claro que si pues|simon que si|uju|anja|positivo|afirmativo|diez cuatro|sale pues|va pues|chi|shi|sip sip|si si si|claro claro|por supuesto que si|of course yes|yes yes|okey dokey|cuando quieras|adelante nomas|metele|dale que va|a nomas|de una pues|de una vez nomas|listo pues|bueno ya pues|ya dale pues|ya listo|hagale|hagale pues|eso es|exacto pues|fijo|seguro que si"
-const NEGACIONES="no+|nop|nope|nel|nones|no gracias|no quiero|ahora no|ahorita no|despues|luego|mas tarde|otro dia|en otro momento|mejor no|paso|asi esta bien|asi nomas|no hace falta|no es necesario|para nada|tal vez despues|quizas despues|nada|todavia no|aun no|por ahora no|no por ahora|no todavia|no te preocupes|olvidalo|dejalo|nel pastel|nelson|ni modo|nanay|na|nah|nopi|ni loco|ni loca|ni de broma|ni de chiste|ni hablar|que va|ni ahi|no da|no po|no pe|no pues|ya no|olvidate|despuesito|al rato|otro rato|en otra ocasion|tal vez luego|quizas otro dia|no me interesa|no estoy interesado|no estoy interesada|mejor otro dia|estoy bien asi|dejalo asi|no tanto|no mucho|negativo|no way|no thanks|nunca|jamas|de ninguna manera|nada que ver|no pues|no ps|ya no pues|nada pues|ni de vainas|ni de coña|ni de cona|ni a palos|ni por asomo|ni de chiste|ni mucho menos|jamas de los jamases|otro ratito|en otra|paso pues|mejor no nomas|todavia no pues|ahorita no pues|despues nomas|luego nomas|no gracias pues|no por ahora pues|nada nada|para nada pues|no me interesa pues|no hace falta pues|tranqui no|estoy bien gracias|asi nomas esta bien|olvidalo nomas"
+const AFIRMACIONES="si eso|eso mismo|exacto eso|eso era|eso es|si era eso|si+|sip|sep|zi|claro|clarin|dale|ok|okey|okay|oki|okis|bueno|buenisimo|ya|simon|obvio|obviamente|por supuesto|desde luego|de una|de ley|va|vale|venga|listo|lista|perfecto|genial|excelente|super|chevere|bacan|me parece bien|me parece|esta bien|de acuerdo|afirmativo|adelante|cuentame|cuenta|dime|dimelo|explicame|muestrame|ensename|quiero saber|quiero|si quiero|me gustaria|me encantaria|me interesa|con gusto|seguro|exacto|andale|sale|a ver|aver|hazlo|sigue|continua|porfa|porfavor|por favor|me late|suena bien|me sirve|sirve|de veras|bien|sipo|si po|sipi|sipis|sisi|ajam|aja|aha|mhm|uhum|ujum|orale|sale y vale|va que va|vamos|vamo|vamos alla|hecho|trato hecho|me apunto|cuenta conmigo|de ley|joya|re si|ya pe|si pe|ya pues|bueno pues|claro pues|pues si|pues claro|chido|fino|a la orden|yes|yeah|of course|sure|hagamosle|hagamoslo|si senor|si senora|desde luego que si|faltaba mas|naturalmente|totalmente|absolutamente|correcto|asi es|exactamente|eso mismo|tal cual|oki doki|okidoki|clarisimo|claro que claro|ya ya|ya dale|ta bien|tabien|sta bien|ok dale|ya esta|ya fue|de pelos|chevere pues|ya ps|si ps|sip ps|ya pues ya|dale nomas|ya nomas|claro nomas|asi nomas es|ta bueno|ta weno|weno|wenas|buenaza|buenazo|de lujo|a full|joya joya|piola|vale vale|venga va|venga vale|obvio pues|claro que si pues|simon que si|uju|anja|positivo|afirmativo|diez cuatro|sale pues|va pues|chi|shi|sip sip|si si si|claro claro|por supuesto que si|of course yes|yes yes|okey dokey|cuando quieras|adelante nomas|metele|dale que va|a nomas|de una pues|de una vez nomas|listo pues|bueno ya pues|ya dale pues|ya listo|hagale|hagale pues|eso es|exacto pues|fijo|seguro que si"
+const NEGACIONES="no otra cosa|otra cosa|no eso no|no era eso|no es eso|no+|nop|nope|nel|nones|no gracias|no quiero|ahora no|ahorita no|despues|luego|mas tarde|otro dia|en otro momento|mejor no|paso|asi esta bien|asi nomas|no hace falta|no es necesario|para nada|tal vez despues|quizas despues|nada|todavia no|aun no|por ahora no|no por ahora|no todavia|no te preocupes|olvidalo|dejalo|nel pastel|nelson|ni modo|nanay|na|nah|nopi|ni loco|ni loca|ni de broma|ni de chiste|ni hablar|que va|ni ahi|no da|no po|no pe|no pues|ya no|olvidate|despuesito|al rato|otro rato|en otra ocasion|tal vez luego|quizas otro dia|no me interesa|no estoy interesado|no estoy interesada|mejor otro dia|estoy bien asi|dejalo asi|no tanto|no mucho|negativo|no way|no thanks|nunca|jamas|de ninguna manera|nada que ver|no pues|no ps|ya no pues|nada pues|ni de vainas|ni de coña|ni de cona|ni a palos|ni por asomo|ni de chiste|ni mucho menos|jamas de los jamases|otro ratito|en otra|paso pues|mejor no nomas|todavia no pues|ahorita no pues|despues nomas|luego nomas|no gracias pues|no por ahora pues|nada nada|para nada pues|no me interesa pues|no hace falta pues|tranqui no|estoy bien gracias|asi nomas esta bien|olvidalo nomas"
 const MULETILLAS_SI="petrova|gracias|pues|entonces|mas|eso|po|nomas|que|si|claro|tambien|me|a|la|lo|un|una|poco|poquito|todo|bien|oye|mira|ah|eh|mmm|este|bueno|ya|por|favor|amiga|porfa|parce|parcero|che|wey|guey|mano|hermano|hermana|amigo|pana|compa|joven|senorita|la|verdad|creo|supongo|osea|o|sea|pe|pa|sii|noo|tio|tia|chamo|chama|causa|cuate|carnal|bro|broder|primo|prima|mija|mijo|vecina|vecino|jefe|jefa|profe|ps|cumpa|cumpita|chango|changa|imilla|llokalla|nano|nana|men|loco|loca|compadre|comadre|don|dona|seno|senora|caballero|ombe|hombre|mujer|uy|ay|pucha|puchica|anda|vamos|venga|igual|asi|entonces|osea|tipo|literal|obvio|re|bien bien|ya ya|si si|claro claro"
 const reSi=new RegExp(`^(?:(?:${AFIRMACIONES}|${MULETILLAS_SI})(?: |$))+$`), reSiNucleo=new RegExp(`(?:^| )(?:${AFIRMACIONES})(?: |$)`);
 const reNo=new RegExp(`^(?:(?:${NEGACIONES}|${MULETILLAS_SI})(?: |$))+$`), reNoNucleo=new RegExp(`(?:^| )(?:${NEGACIONES})(?: |$)`);
@@ -1816,8 +1858,52 @@ const CORRECCIONES_MIC=[
 const corregirMic=n=>CORRECCIONES_MIC.reduce((t,[re,b])=>t.replace(re,b),n);
 const MAS_FONDO=/^(?:(?:mas a fondo|a fondo|explicame mas|explicamelo mas|explicame mejor|explicamelo mejor|mas detalles|dame mas detalles|mas detallado|con mas detalle|profundiza|profundizame|profundizalo|profundizar|mas profundo|mas tecnico|mas tecnica|en terminos tecnicos|tecnicamente|cientificamente|explicacion cientifica|version tecnica|version cientifica|cuentame mas|dime mas|quiero saber mas|mas informacion|mas info|y que mas|algo mas sobre eso|como funciona por dentro|explicacion completa|detallame|amplia|ampliame|amplialo|desarrolla|desarrollalo|y como funciona|pero como funciona|y por que)(?: |$))+$/;
 const MAS_FACIL=/^(?:(?:mas facil|explicamelo facil|explicamelo simple|explicamelo sencillo|mas simple|mas sencillo|en palabras simples|en palabras sencillas|no entendi nada|no entiendo nada|no le entendi|como para un nino|como a un nino|explicamelo como a un nino|como si tuviera cinco anos|para tontos|para dummies|en resumen|resumido|resumelo|mas corto|mas cortito|con un ejemplo|dame un ejemplo|un ejemplo|ponme un ejemplo|explicame facil|facilito|en criollo|en cristiano|sin tecnicismos)(?: |$))+$/;
+/* ---------- Trivia: Petrova le hace preguntas al público ---------- */
+const TRIVIA=[
+ {p:"¿En qué año imaginó Alan Turing su famosa máquina? ¿A, mil novecientos treinta y seis; B, mil novecientos sesenta y nueve; o C, dos mil uno?", o:["1936","1969","2001"], c:0,
+  e:"Fue en mil novecientos treinta y seis, ¡antes de que existieran las computadoras! ¿Jugamos otra?"},
+ {p:"¿Cuántas carreras tiene Unifranz? ¿A, doce; B, diecisiete; o C, veinticinco?", o:["12","17","25"], c:1,
+  e:"Son diecisiete carreras en cinco facultades, ¡y todas estrenan malla! ¿Jugamos otra?"},
+ {p:"¿Qué significa la letra I en IA? ¿A, internet; B, inteligencia; o C, imagen?", o:["Internet","Inteligencia","Imagen"], c:1,
+  e:"IA significa inteligencia artificial, ¡como yo! ¿Jugamos otra?"},
+ {p:"¿Cuántas microcredenciales tiene la nueva malla de Ingeniería de Sistemas? ¿A, dos; B, seis; o C, diez?", o:["Dos","Seis","Diez"], c:1,
+  e:"Son seis microcredenciales, que vas ganando mientras estudias. ¿Jugamos otra?"},
+ {p:"¿Cuál de estas es una mención de la carrera de Derecho? ¿A, justicia penal digital; B, cocina fusión; o C, big data?", o:["Justicia Penal Digital","Cocina Fusión","Big Data"], c:0,
+  e:"¡Justicia Penal Digital! La otra mención de Derecho es Legal Tech y Gobernanza Digital. ¿Jugamos otra?"},
+ {p:"¿Qué tecnología guarda la información en bloques encadenados? ¿A, blockchain; B, wifi; o C, bluetooth?", o:["Blockchain","Wifi","Bluetooth"], c:0,
+  e:"¡Blockchain! Por eso es tan difícil de falsificar. ¿Jugamos otra?"},
+ {p:"¿Cuántos años dura la carrera de Medicina en Unifranz? ¿A, cuatro; B, cinco; o C, seis?", o:["Cuatro","Cinco","Seis"], c:2,
+  e:"Medicina dura seis años, con internado rotatorio al final. ¿Jugamos otra?"},
+ {p:"¿Qué es el phishing? ¿A, un deporte acuático; B, un engaño para robar tus datos; o C, un lenguaje de programación?", o:["Un deporte","Un engaño para robar datos","Un lenguaje de programación"], c:1,
+  e:"Es un engaño: mensajes falsos que se hacen pasar por tu banco. ¡Nunca compartas tus claves! ¿Jugamos otra?"},
+ {p:"¿En qué ciudades tiene campus Unifranz? ¿A, solo en La Paz; B, en Cochabamba, El Alto, La Paz y Santa Cruz; o C, solo en Santa Cruz?", o:["Solo La Paz","Cochabamba, El Alto, La Paz y Santa Cruz","Solo Santa Cruz"], c:1,
+  e:"¡En las cuatro ciudades! Cochabamba, El Alto, La Paz y Santa Cruz. ¿Jugamos otra?"},
+ {p:"¿Cuál es la unidad mínima de información en una computadora? ¿A, el bit; B, el kilo; o C, el píxel?", o:["El bit","El kilo","El píxel"], c:0,
+  e:"¡El bit! Un cero o un uno. Ocho bits forman un byte. ¿Jugamos otra?"},
+ {p:"¿Qué carrera tiene la mención Diseño Urbano, Smart Cities y Territorio Sostenible? ¿A, Arquitectura; B, Enfermería; o C, Turismo?", o:["Arquitectura","Enfermería","Turismo"], c:0,
+  e:"¡Arquitectura! Su otra mención es Arquitectura Sostenible y Digital. ¿Jugamos otra?"},
+ {p:"¿Qué famoso test propuso Alan Turing para saber si una máquina puede pensar? ¿A, el test de Turing; B, el test de embarazo; o C, el test vocacional?", o:["El test de Turing","El test de embarazo","El test vocacional"], c:0,
+  e:"¡El test de Turing! ¿Tú crees que yo lo pasaría? ¿Jugamos otra?"}
+];
+const TRIVIA_BIEN=["¡Correcto! 🎉 ¡Eres un genio!","¡Siii, muy bien! 🙌","¡Exacto! 🧠 ¡Qué crack!","¡Respuesta correcta! 🏆"];
+const TRIVIA_MAL=["¡Uy, casi! 😅","¡Ay, no era esa! 🙈","¡Buen intento! 💪"];
+const TRIVIA_ELEGIR="Elige una opción: A, B o C. ¡Tú puedes! 🤞";
+function nuevaPregunta(){
+  mem.triviaHechas=mem.triviaHechas||[]; if(mem.triviaHechas.length>=TRIVIA.length) mem.triviaHechas=[];
+  const libres=TRIVIA.map((_,i)=>i).filter(i=>!mem.triviaHechas.includes(i)), i=pick(libres); mem.triviaHechas.push(i);
+  mem.trivia=i; mem.ofrece=null; mem.ultimoId="trivia"; const q=TRIVIA[i];
+  return {texto:q.p, textoSin:q.p, html:esc(q.p.replace(/\s*¿A,.*$/,""))+"\n\n"+q.o.map((o,j)=>"ABC"[j]+") "+esc(o)).join("\n"), g:"rascar", p:"foco", id:"trivia", sig:q.o.map((o,j)=>"ABC"[j]+") "+o)};
+}
+// Reconoce la respuesta: «a», «la b», «opción c», «la primera», o el texto de la opción
+function respuestaTrivia(n){
+  const q=TRIVIA[mem.trivia]; if(!q) return -1;
+  const m=/^(?:(?:la|opcion|letra|es la|creo que la|creo que es la|respuesta)\s+)*([abc])(?:\s|\)|$)/.exec(n); if(m) return "abc".indexOf(m[1]);
+  const ord=[/primer/,/segund/,/tercer/].findIndex(r=>r.test(n)); if(ord>=0 && n.split(" ").length<=4) return ord;
+  const i=q.o.findIndex(o=>{ const t=norm(o); return n===t || (t.length>2 && n.includes(t)) || t.split(" ").filter(w=>w.length>3).some(w=>n.split(" ").includes(w)); });
+  return i;
+}
 function procesar(original){
-  const nCompleta=corregirMic(norm(original)), n=limpiarPregunta(nCompleta), palabras=n.split(" ");
+  const nCompleta=corregirFrase(corregirMic(norm(original))), n=limpiarPregunta(nCompleta), palabras=n.split(" ");
   const previo=mem.ultimoId; mem.ultimoId=null;
   const temaPorId = id => TEMAS.find(t=>t.id===id);
   // 1) Comandos de voz
@@ -1825,6 +1911,20 @@ function procesar(original){
   if(/^(puedes |podrias )?(habla |hablar )?(mas despacio|mas lento|lento|despacio)( por favor)?$/.test(n)){ prefs.vel=Math.max(.7,prefs.vel-.15); guardarPrefs(); return simple("¡Claro! Voy a hablar más despacito 🐢.","asentir"); }
   if(/^(puedes |podrias )?(habla |hablar )?(mas rapido|mas rapida|rapido)( por favor)?$/.test(n)){ prefs.vel=Math.min(1.4,prefs.vel+.15); guardarPrefs(); return simple("¡Okey! Acelero un poquito ⚡.","saltar"); }
   if(/^(callate|silencio|shh+|basta|detente|para ya)/.test(n)){ return {...simple("Okey, me quedo calladita 🤐. Cuando quieras, me hablas.","encoger"), mudo:true}; }
+
+  // 1a) Respuesta a la trivia
+  if(mem.trivia!=null){
+    const elegida=respuestaTrivia(n), q=TRIVIA[mem.trivia];
+    if(elegida>=0){
+      const bien=elegida===q.c; mem.trivia=null; mem.triviaAciertos=(mem.triviaAciertos||0)+(bien?1:0); mem.triviaJugadas=(mem.triviaJugadas||0)+1;
+      const dicho=pick(bien?TRIVIA_BIEN:TRIVIA_MAL); mem.ofrece="trivia";
+      return {texto:q.e, textoSin:q.e, relleno:dicho, html:esc(dicho+" "+q.e)+`
+
+🏅 Llevas ${mem.triviaAciertos} de ${mem.triviaJugadas}`, g:bien?pick(["celebrar","estrella","aplaudir"]):"empatia", sig:["¡Otra pregunta!","No, gracias","Carreras por facultad"]};
+    }
+    if(mejorTema(n).puntos<3 && !esNegacion(nCompleta)) return {...simple(TRIVIA_ELEGIR,"guino",q.o.map((o,j)=>"ABC"[j]+") "+o))};
+    mem.trivia=null;
+  }
 
   // 1b) Más a fondo o más fácil sobre el último tema («explícame más a fondo», «en términos científicos», «más fácil», «como a un niño»)
   const temaAnterior=mem.ultimoTema&&temaPorId(mem.ultimoTema);
@@ -1866,9 +1966,19 @@ function procesar(original){
   if(neg && sinTema) return simple(pick(["¡Okey! Si cambias de opinión, aquí estoy. 😊","¡Está bien! Aquí sigo para lo que necesites. 😉"]),"asentir");
 
   // 4) Buscar el tema
-  const {tema,puntos}=elegirTema(n);
+  let {tema,puntos}=elegirTema(n);
+  // Si la corrección de tipeo cambió el sentido (sin corregir no había tema), mejor preguntar «¿te refieres a…?»
+  let porCorreccion=false;
+  if(tema && puntos<9){ const crudo=limpiarPregunta(corregirMic(norm(original))); if(crudo!==n){ const sc=elegirTema(crudo); if(sc.tema!==tema && sc.puntos<UMBRAL_TEMA) porCorreccion=true; } }
   // frases cortas («hola petrova», «qué bueno») se deciden por sus palabras clave aunque no se parezcan a un ejemplo
-  if(tema && (puntos>=UMBRAL_TEMA || (palabras.length<=3 && puntuar(n,tema)>=3))){ mem.fallos=0; return construir(tema); }
+  if(tema && !porCorreccion && (puntos>=UMBRAL_TEMA || (palabras.length<=3 && puntuar(n,tema)>=3))){ mem.fallos=0; return construir(tema); }
+  // Si hay un tema probable pero no seguro, lo propone y el visitante solo tiene que decir «sí»
+  // (si la IA local está conectada y la duda es grande, mejor que responda la IA)
+  const iaLista = typeof iaEstado!=="undefined" && iaEstado==="ok" && CONFIG.ia.activa;
+  if(tema && puntos>=UMBRAL_DUDA && !(iaLista && puntos<4)){
+    mem.ofrece=tema.id; const etiqueta=etiquetaTema(tema), dicho=pick(TE_REFIERES);
+    return {texto:dicho, textoSin:dicho, html:esc(dicho)+"\n\n👉 «"+esc(etiqueta)+"»", g:"rascar", sig:["Sí, eso","No, otra cosa",...cercanos(n).filter(x=>x.toLowerCase()!=="¿"+etiqueta.toLowerCase()+"?")].slice(0,6), duda:true};
+  }
   mem.fallos++; mem.ofrece=null;
   let t=pick(NO_ENTENDI);
   if(mem.fallos>=2) t+=" Si prefieres, una persona del equipo te puede ayudar aquí en el stand. 🙂";
@@ -1919,7 +2029,7 @@ const VISEMAS={
   u:"M193 250 Q200 244 207 250 Q209 263 200 265 Q191 263 193 250Z"
 };
 const DURACION={saludar:1800,saltar:1200,celebrar:1900,bailar:3150,asentir:900,asentirMini:450,encoger:1500,pulgar:1600,reir:1550,
-  corazon:1900,sorpresa:650,girar:1200,voltereta:1300,aplaudir:1650,guino:900,empatia:2400,estirar:2200,peinar:1800,tararear:2900,mirar:2600,reloj:2000,birrete:2000,senalar:1800,carcajada:1800,timida:2000,rascar:2000,estrella:1300,unifranz:2300,idea:1700,fuerza:1600,abrazo:2100,robot:3200,disco:3200,caporal:3000,macarena:3600,twist:3000,moonwalk:3000};
+  corazon:1900,sorpresa:650,girar:1200,voltereta:1300,aplaudir:1650,guino:900,empatia:2400,estirar:2200,peinar:1800,tararear:2900,mirar:2600,reloj:2000,birrete:2000,senalar:1800,carcajada:1800,timida:2000,rascar:2000,estrella:1300,unifranz:2300,idea:1700,fuerza:1600,abrazo:2100,robot:3200,disco:3200,caporal:3000,macarena:3600,twist:3000,moonwalk:3000,llamar:2400};
 const PROPS=["cv","lupa","maletin","trofeo","foco","reloj","corazon","regalo"];
 let gestoHasta=0;
 function estado(e){ P.classList.remove("escuchando","pensando","hablando","pregunta","enfasis"); if(e) P.classList.add(e); }
@@ -1983,6 +2093,11 @@ setInterval(()=>{
   if(hablandoAhora) return mirar(...pick([[0,1],[0,1],[0,2],[-2,1],[2,1]]));
   mirar(...pick([[0,0],[0,0],[-6,1],[6,1],[3,-4],[-3,3]]));
 },1500);
+// Si el visitante se queda callado un rato, Petrova retoma la charla una vez (con botones para seguir)
+let ultimaActividad=Date.now(), empujado=false;
+const EMPUJONES=[["¿Sigues ahí? 😊 Pregúntame por tu carrera, o juguemos trivia.",["Carreras por facultad","¡Juguemos trivia!","¡Baila!"]],
+  ["¿Te muestro las carreras por facultad? Solo toca un botón.",["Carreras por facultad","Nuevas mallas","Microcredenciales"]],
+  ["Si quieres, te cuento un dato curioso o un chiste. ¡Tú elige!",["Dato curioso","Cuéntame un chiste","¡Juguemos trivia!"]]];
 // Comportamientos espontáneos cuando está desocupada
 function ocupada(){ return hablandoAhora||escuchando||P.classList.contains("pensando")||Date.now()<gestoHasta+600; }
 setInterval(()=>{
@@ -1990,8 +2105,12 @@ setInterval(()=>{
   if(modoEspera){
     // cada siete segundos un gesto llamativo; cada tres vueltas, una invitación en voz alta
     turnoEspera++; const frase=pick(FRASES_ESPERA);
-    gesto(pick(["saludar","saludar","senalar","bailar","robot","disco","caporal","macarena","twist","moonwalk","saltar","girar","voltereta","estrella","celebrar","guino","unifranz"]));
-    if(CONFIG.invitarConVoz && sonidoListo && turnoEspera%3===0) decir(frase); else subtituloFijo(frase);
+    gesto(pick(["llamar","llamar","saludar","senalar","bailar","robot","disco","caporal","macarena","twist","moonwalk","saltar","girar","voltereta","estrella","celebrar","guino","unifranz","idea"]));
+    if(CONFIG.invitarConVoz && sonidoListo && turnoEspera%6===0){ const t=TEMAS.find(x=>x.id===pick(ESPERA_TEMAS)); const v=t&&pick(t.r); if(typeof v==="string") decir(v); else decir(frase); }
+    else if(CONFIG.invitarConVoz && sonidoListo && turnoEspera%3===0) decir(frase); else subtituloFijo(frase);
+  }
+  else if(sonidoListo && !empujado && Date.now()-ultimaActividad>22000){
+    empujado=true; const r=pick(EMPUJONES); gesto(pick(["llamar","saludar","senalar"])); decir(r[0]); ponerChips(r[1]);
   }
   else gesto(pick(["mirar","tararear","peinar","estirar","reloj","guino","asentirMini","mirar","rascar","senalar"]));
 },7000);
@@ -2351,7 +2470,7 @@ function ponerChips(lista){
   lista.forEach((s,i)=>{ const b=document.createElement("button"); b.className="chip"; b.type="button"; b.textContent=s; b.style.animationDelay=i*.05+"s"; b.onclick=()=>enviar(s); chips.appendChild(b); });
 }
 function responderYa(r, sinEscuchar){
-  estado(null);
+  estado(null); ultimaActividad=Date.now(); empujado=false;
   const burbuja=agregar(r.html,"bot"); ponerChips(r.sig||SUGERENCIAS_INICIO);
   if(r.verPanel){ app.classList.add("ver-historial"); burbuja.querySelectorAll("img").forEach(i=>i.addEventListener("load",()=>{ chat.scrollTop=chat.scrollHeight; })); }
   if(!r.mudo) mem.ultimo=r;
@@ -2395,7 +2514,12 @@ const FRASES_ESPERA=["¡Hola! 👋 Acércate y pregúntame lo que quieras","¡He
   "Soy Petrova, ¡una inteligencia artificial! Ven a probarme 🤖","¿Inteligencia artificial, blockchain o ciberseguridad? ¡Pregúntame! 🔐",
   "Toca el micrófono y háblame, ¡no muerdo! 😄","Te reto: hazme la pregunta más difícil que se te ocurra 😎","Psst… ¿quieres ver cómo bailo? Ven y pídemelo 💃",
   "¿Quieres conocer las carreras de cada facultad? ¡Pregúntame! 📄","¡Estoy aburrida sin ti! Ven a conversar un ratito 🥺",
-  "Puedes hablarme con tus propias palabras, ¡hasta con jerga! 😉","Elige una facultad y te muestro la nueva malla de tus carreras favoritas 🎯"];
+  "Puedes hablarme con tus propias palabras, ¡hasta con jerga! 😉","Elige una facultad y te muestro la nueva malla de tus carreras favoritas 🎯",
+  "¿Jugamos trivia? ¡Acércate y te hago una pregunta! 🧠","Si me ganas en la trivia, ¡bailo para ti! 💃","¡Pídeme un baile! Sé hacer el robot, la macarena y el moonwalk 🕺",
+  "¿Te cuento un chiste de programadores? 😂","¿Sabías que soy un prototipo hecho por estudiantes? ¡Ven a conocerme! 🤖","Tengo un dato curioso para ti… ¡acércate! 💡",
+  "¿Ya conoces el Turing Lab? ¡Pregúntame! 🔬","¡No te vayas sin hacerme una pregunta! 🙏","¿Tímido? Solo toca la pantalla y yo empiezo 😊","Hoy estoy con ganas de conversar… ¿y tú? 💬"];
+// En voz alta, cada tanto, Petrova también cuenta algo para que la gente se acerque
+const ESPERA_TEMAS=["dato_curioso","chiste","risa_ia","adivinanza"];
 let turnoEspera=0, sonidoListo=false;
 function entrarEspera(){
   modoEspera=true; turnoIA++; historialIA=[]; callar(); estado(null); mostrarProp(null);
@@ -2444,6 +2568,6 @@ entrarEspera();
 </script>
 <!-- Petrova 3D: si no carga (sin internet o sin WebGL) se queda la Petrova 2D -->
 <script src="lib/three.min.js"></script>
-<script src="alumi3d.js?v=8"></script>
+<script src="alumi3d.js?v=9"></script>
 </body>
 </html>

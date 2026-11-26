@@ -1869,3 +1869,11 @@ fac_ingenieria | qué carreras hay en la facultad de ingeniería
 fac_juridicas | qué carreras hay en ciencias jurídicas y sociales
 fac_economicas | qué carreras hay en ciencias económicas y empresariales
 fac_diseno | qué carreras hay en diseño y tecnologías crossmedia
+# --- Juegos ---
+trivia | juguemos trivia
+trivia | quiero jugar
+trivia | hazme una pregunta
+trivia | jugamos algo
+trivia | ponme a prueba
+trivia | hagamos un quiz
+trivia | rétame con una pregunta

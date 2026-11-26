@@ -17,7 +17,7 @@ let ok = 0, okIA = 0, nIA = 0; const fallas = [];
 for (const c of casos) {
   Object.assign(M.mem, {nombre: null, ofrece: null, ultimo: null, fallos: 0, ultimoId: null});
   const r = M.procesar(c.q);
-  const got = r.id || (r.sinRespuesta ? "(IA)" : "(comando)");
+  const got = r.id || (r.sinRespuesta || r.duda ? "(IA)" : "(comando)");   // «¿te refieres a…?» tampoco inventa: cuenta como no adivinar
   if (c.id === "(IA)") nIA++;
   if (got === c.id) { ok++; if (c.id === "(IA)") okIA++; } else fallas.push(`✗ "${c.q}" → ${got} (esperado ${c.id})`);
 }
