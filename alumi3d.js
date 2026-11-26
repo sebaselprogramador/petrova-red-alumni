@@ -182,6 +182,23 @@ function animar(){
     case "senalar": T.dX=-.4*e; T.dZ=(1.45+ola(tGesto,2)*.08)*e; T.cY+=.4*e; ojoX=.04*e; abrir=Math.max(abrir,.35*e); break;
     case "rascar": T.dX=-.3*e; T.dZ=(2.5+ola(tGesto,4)*.12)*e; T.cZ-=.15*e; cejaD=.06*e; ojoY=.04*e; oh=Math.max(oh,.3*e); break;
     case "estrella": { const s=Math.sin(k*Math.PI); py=s*.7; T.iZ=-2.3*s; T.dZ=2.3*s; T.iX=T.dX=0; cuerpo.scale.x=1+.08*s; abrir=.8; break; }
+    // Bailes: robot, disco, caporal, macarena, twist y moonwalk
+    case "robot": { const paso=Math.floor(tGesto*3.2)%4, P=[[-1.55,0,0,-.2],[0,1.55,-1.55,0],[-1.55,1.55,0,-1.55],[0,.2,-1.55,-1.55]][paso];
+      T.dX=P[0]*e; T.dZ=(P[1]||.2)*e; T.iX=P[2]*e; T.iZ=(P[3]||-.2)*e; T.cY=[.45,-.45,.45,0][paso]*e; T.cX=0; T.cZ=0;
+      py=(paso%2?.04:0)*e; ojoI=ojoD=1.15; abrir=0; oh=.25*e; break; }
+    case "disco": { const arriba=Math.floor(tGesto*1.6)%2===0;
+      T.dX=(arriba?-.3:-.8)*e; T.dZ=(arriba?2.6:-.5)*e; T.iX=-.4*e; T.iZ=-.55*e; px=ola(tGesto,.8)*.18*e; giroY+=ola(tGesto,.8)*.35*e;
+      T.cZ+=(arriba?.18:-.12)*e; py=Math.abs(ola(tGesto,1.6))*.08*e; abrir=Math.max(abrir,.6*e); break; }
+    case "caporal": { const s=ola(tGesto,1.5); py=Math.abs(ola(tGesto,3))*.35*e;
+      T.dX=s*1.1*e; T.iX=-s*1.1*e; T.dZ=(.6+Math.abs(s)*.6)*e; T.iZ=-(.6+Math.abs(s)*.6)*e; giroY+=s*.3*e; T.cZ+=s*.12*e; abrir=Math.max(abrir,.7*e); break; }
+    case "macarena": { const paso=Math.floor(tGesto*2.6)%8;
+      const D=[[-1.5,.1],[-1.5,.1],[-1.5,-.2],[-1.5,-.2],[-.4,2.6],[-.4,2.6],[-.9,-.5],[-.3,-.3]][paso], I=[[0,-.2],[-1.5,-.1],[-1.5,-.1],[-1.5,.2],[-1.5,.2],[-.4,-2.6],[-.4,-2.6],[-.9,.5]][paso];
+      T.dX=D[0]*e; T.dZ=D[1]*e; T.iX=I[0]*e; T.iZ=I[1]*e; if(paso>=6){ px=ola(tGesto,1.3)*.12*e; giroY+=ola(tGesto,1.3)*.25*e; }
+      if(paso===7) giroY+=Math.PI*.5*suave((tGesto*2.6%1))*e; abrir=Math.max(abrir,.55*e); break; }
+    case "twist": { const s=ola(tGesto,1.8); giroY+=s*.55*e; cuerpo.scale.y*=1-.05*e; py=-.04*e+Math.abs(ola(tGesto,3.6))*.05*e;
+      T.dZ=(.9+s*.4)*e; T.iZ=(-.9+s*.4)*e; T.dX=T.iX=-.5*e; T.cZ-=s*.12*e; abrir=Math.max(abrir,.6*e); ojoI=ojoD=1-.5*e; break; }
+    case "moonwalk": { const s=ola(tGesto,.5); px=s*.45*e; giroY+=-.5*e; py=Math.abs(ola(tGesto,2))*.04*e;
+      T.dX=ola(tGesto,2)*.6*e; T.iX=-ola(tGesto,2)*.6*e; T.dZ=.4*e; T.iZ=-.4*e; T.cY+=.4*e; abrir=Math.max(abrir,.35*e); oh=0; break; }
     // ¡Unifranz! sube las dos manos y aparece el logo sobre su cabeza
     case "unifranz": T.iZ=-(2.55+ola(tGesto,1.6)*.12)*e; T.dZ=(2.55+ola(tGesto,1.6)*.12)*e; T.iX=T.dX=-.15*e;
       py=Math.abs(ola(tGesto,1.6))*.12*e; abrir=Math.max(abrir,.85*e); oh=0; ojoI=ojoD=1-.8*e; T.cX-=.12*e; emoteQuiere=["logo",e]; break;

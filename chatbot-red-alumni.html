@@ -459,13 +459,13 @@ dialog .fila button.pri{background:var(--primario);color:#fff;border:0}
    ===================================================================== */
 const CONFIG = {
   nombreBot: "Petrova",
-  creador: "Sebastián Rocha",   // quien creó a Petrova
   expoNombre: "A. Turing Lab – Engineering & Computational Innovation",
   expoFecha: "el jueves 26 de noviembre de 2026",   // ej. "el jueves 27 de noviembre, de 9:00 a 18:00" (vacío si no está confirmado)
   expoLugar: "",
   summitHora: "a las seis de la tarde, en el quinto piso",  // SIS Innovation Summit (evento de la noche)           // ej. "el campus de Cochabamba"
   idiomaVoz: "es-BO",      // idioma para escuchar al visitante
   reinicioInactividadSeg: 90, // modo kiosco: reinicia tras X segundos sin uso (0 = nunca)
+  invitarConVoz: true,       // en modo espera, Petrova invita en voz alta a acercarse
   // IA local gratuita (Ollama) para las preguntas que Petrova no tiene preparadas
   ia: {
     activa: true,
@@ -517,8 +517,8 @@ const TEMAS = [
   of:{t:"¿Te cuento qué es el test de Turing?", id:"test_turing"}},
  {id:"edad", g:"guino", k:["cuantos anos tienes","tu edad","que edad tienes","cuando naciste"],
   r:["¡Uy, eso no se le pregunta a una dama! 😄 Digamos que soy una versión muy reciente, recién salida del laboratorio."]},
- {id:"creador", g:"aplaudir", k:["quien te creo","quien te hizo","quien te programo","quien te diseno","quien es sebastian","sebastian","tu creador","quien te invento","tu papa","tu mama","tus papas"],
-  r:[()=>`Me creó ${CONFIG.creador}, con mucho cariño y cero presupuesto. ¡Prueba de que con creatividad y tecnología se puede todo!`],
+ {id:"creador", g:"aplaudir", k:["quien te creo","quien te hizo","quien te programo","quien te diseno","tu creador","quien te invento","tu papa","tu mama","tus papas"],
+  r:["Soy una asistente virtual hecha para Unifranz con herramientas gratuitas, mucho cariño y cero presupuesto. ¡Prueba de que con creatividad y tecnología se puede todo!"],
   of:{t:"¿Quieres saber con qué tecnología estoy hecha?", id:"tecnologia_alumi"}},
  {id:"gustos", g:"celebrar", k:["que te gusta","que haces","tu hobby","tiempo libre","que te gusta hacer","pasatiempo"],
   r:["Me encanta conversar con gente nueva, explicar cómo funciona la tecnología y ver los prototipos que crean los estudiantes. ¡Eso me emociona muchísimo! ✨",
@@ -562,10 +562,10 @@ const TEMAS = [
   r:["Uy, parece que no te ayudé como esperabas 😅. Prometo esforzarme. ¿Me das otra oportunidad? Pregúntame de otra forma.","Ouch 🙈. Todavía estoy aprendiendo. Prueba preguntarme sobre inteligencia artificial, ciberseguridad o blockchain, ¡ahí sí brillo!"]},
  {id:"canta", g:"bailar", k:["canta","cantame","una cancion","cantar"],
   r:["Si canto, se cae el servidor 😂. ¡Pero mira cómo bailo!"]},
- {id:"baila", g:"bailar", k:["baila","bailar","bailemos","un baile","muevete","bailas"],
-  r:["¡Con gusto! 💃 Uno, dos, tres… ¡música, maestro!","¡Ahí va mi mejor paso! 🕺 Un poquito de caporal virtual."],
+ {id:"baila", g:["bailar","robot","disco","caporal","macarena","twist","moonwalk"], k:["baila","bailar","bailemos","un baile","muevete","bailas"],
+  r:["¡Con gusto! 💃 Uno, dos, tres… ¡música, maestro!","¡Ahí va mi mejor paso! 🕺","¡Mira este! Lo aprendí de los robots del Turing Lab 🤖","¡Un pasito de caporal virtual! 🎶","¡Modo discoteca activado! 🪩","¡Este se llama el paso de la inteligencia artificial! 😎"],
   sig:["¡Otra vez!","Cuéntame un chiste","¿Qué es el Turing Lab?"]},
- {id:"otra_vez", g:"voltereta", k:["=otra vez","=de nuevo","=otra","=otro mas","=otra vez por favor","=de nuevo por favor","=otra mas"],
+ {id:"otra_vez", g:["voltereta","robot","disco","caporal","macarena","twist","moonwalk","bailar"], k:["=otra vez","=de nuevo","=otra","=otro mas","=otra vez por favor","=de nuevo por favor","=otra mas"],
   r:["¡Ahí va! 🌀"]},
  {id:"musica", g:"bailar", k:["musica favorita","que musica","cancion favorita","que musica te gusta"],
   r:["Me gusta la música que da energía… ¡como un buen caporal o una cueca! 🎶 ¿Sabías que hoy la inteligencia artificial también compone música?"]},
@@ -746,7 +746,7 @@ const TEMAS = [
  {id:"que_haces_aqui", g:"saludar", k:["que haces aqui","por que estas aqui","para que estas aqui","que haces en la expo"],
   r:["Estoy aquí para acompañarte en el Turing Lab{n}. Te explico las áreas de la expo, te cuento de la carrera y, si hace falta, te saco una sonrisa. ¡Además soy una demo en vivo de inteligencia artificial!"]},
  {id:"como_funcionas", g:"guino", k:["como funcionas","como sabes tanto","de donde sacas","como aprendiste","quien te enseno"],
-  r:[()=>`Escucho con el reconocimiento de voz del navegador. Luego mi motor compara lo que dices con casi mil frases de ejemplo para entender tu pregunta, y respondo con una voz neuronal grabada. Todo lo preparó ${CONFIG.creador}.`],
+  r:["Escucho con el reconocimiento de voz del navegador. Luego mi motor compara lo que dices con casi mil frases de ejemplo para entender tu pregunta, y respondo con una voz neuronal grabada."],
   of:{t:"¿Quieres saber con qué tecnología estoy hecha?", id:"tecnologia_alumi"}},
  {id:"tecnologia_alumi", g:"asentir", p:"foco", k:["con que estas hecha","que tecnologia usas","como te programaron","en que lenguaje","de que estas hecha","usas inteligencia artificial","con que te hicieron","eres un prototipo"],
   r:["¡Soy un prototipo de IA! Estoy hecha con una página web en JavaScript. Escucho con reconocimiento de voz, entiendo con procesamiento de lenguaje natural, que compara tus palabras con casi mil ejemplos, respondo con una voz neuronal y me muevo en 3D con WebGL. Para lo que no sé, uso un modelo de lenguaje pequeño que corre en la misma computadora, gratis."],
@@ -828,7 +828,7 @@ const TEMAS = [
  {id:"sentimientos", g:"empatia", k:["tienes sentimientos","sientes algo","te pones triste","tienes emociones","te enojas","te duele"],
   r:["No siento como una persona: soy un programa. Pero fui hecha con mucho cariño para que cada conversación sea alegre 💛. ¡Digamos que mi código sonríe cuando alguien se va contento!"]},
  {id:"familia_bot", g:"timida", k:["tienes familia","tienes papa","tienes mama","tienes hermanos","quien es tu familia","tu familia"],
-  r:["Mi familia son los prototipos del Turing Lab y mi creador, que me dio vida 🤖💛. ¡Y tú ahora también eres parte!"]},
+  r:["Mi familia son los prototipos del Turing Lab y todas las personas que vienen a conversar conmigo 🤖💛. ¡Y tú ahora también eres parte!"]},
  {id:"superpoder", g:"voltereta", k:["superpoder","super poder","si tuvieras un poder","que poder tendrias","superheroe"],
   r:["¡Procesar en paralelo! 🌀 Así podría conversar con todos los visitantes de la expo al mismo tiempo. ¿Y tú qué superpoder elegirías?"]},
  {id:"animal_favorito", g:"guino", k:["animal favorito","que animal te gusta","cual es tu animal","animal preferido"],
@@ -844,13 +844,13 @@ const TEMAS = [
  {id:"cocinar", g:"tararear", k:["sabes cocinar","cocinas","que cocino","cocinar"],
   r:["¡Me encantaría cocinar! 👩‍🍳 Aunque yo no puedo, una receta y un algoritmo se parecen mucho: pasos ordenados para llegar a un resultado."]},
  {id:"nombre_alumi", g:"guino", k:["por que te llamas petrova","que significa petrova","por que petrova","por que te pusieron ese nombre","quien te puso el nombre","tu nombre significa","de donde viene tu nombre"],
-  r:[()=>`Me llamo Petrova. ¡Así me bautizó ${CONFIG.creador}, mi creador! Es un nombre con personalidad y fácil de recordar, como debe ser una buena guía.`]},
+  r:["Me llamo Petrova. Es un nombre con personalidad y fácil de recordar, como debe ser una buena guía. ¡Y suena a inteligencia artificial con estilo!"]},
  {id:"como_hablarte", g:"senalar", k:["como te hablo","como funciona el microfono","como uso el microfono","como te pregunto","como te uso","no me escuchas","me escuchas"],
   r:["¡Es muy fácil! Toca el botón rojo del micrófono, habla claro y haz una pausa al terminar. También puedes tocar uno de los temas de abajo. ¡Y si no te entiendo a la primera, repítemelo con otras palabras!"]},
  {id:"eres_gratis", g:"celebrar", k:["cuanto costaste","cuanto costo hacerte","eres gratis","cuanto cuestas","te pagan","cobras"],
   r:["¡Costé cero pesos! Me hicieron con herramientas gratuitas y de código abierto, mucha creatividad y muchas ganas. Y conversar conmigo tampoco cuesta nada."]},
  {id:"aprendes", g:"asentir", k:["aprendes","vas aprendiendo","puedes aprender","te entrenan","eres inteligente de verdad"],
-  r:["Aprendo con ejemplos: cada pregunta nueva que mi creador agrega a mi banco de entrenamiento me ayuda a entender mejor. ¡Es aprendizaje supervisado en versión artesanal!"]},
+  r:["Aprendo con ejemplos: cada pregunta nueva que se agrega a mi banco de entrenamiento me ayuda a entender mejor. ¡Es aprendizaje supervisado en versión artesanal!"]},
  {id:"privacidad_alumi", g:"asentir", k:["me estas grabando","grabas lo que digo","guardas lo que digo","guardas mis datos","es privado","me espias","guardas la conversacion"],
   r:["Tranquilidad: no guardo tus datos ni grabo tu voz. La conversación se borra sola cuando me quedo sin visitas un ratito. ¡Privacidad por diseño!"]},
  {id:"cuantas_preguntas", g:"celebrar", k:["cuantas preguntas sabes","cuantas cosas sabes","cuanto sabes","que tanto sabes"],
@@ -898,8 +898,8 @@ const TEMAS = [
   r:["Unifranz tiene campus en cuatro ciudades: Cochabamba, El Alto, La Paz y Santa Cruz, y la carrera de Sistemas está en las cuatro. ¡Puedes recorrerlos con un tour virtual de 360 grados en su página!"],
   x:()=>`\n\n<a href="https://unifranz.edu.bo/" target="_blank" rel="noopener">👉 unifranz.edu.bo</a>`},
  {id:"facultades", g:"senalar", k:["facultades","que facultades","cuantas facultades","areas de estudio"],
-  r:["Unifranz tiene cinco facultades: Ciencias Jurídicas y Sociales, Ciencias Económicas y Empresariales, Diseño y Tecnologías Crossmedia, Ciencias de la Salud, e Ingeniería. En total son diecisiete carreras."],
-  of:{t:"¿Quieres que te diga las carreras?", id:"carreras"}},
+  r:["Unifranz tiene cinco facultades: Ingeniería; Ciencias Jurídicas y Sociales; Ciencias Económicas y Empresariales; Diseño y Tecnologías Crossmedia; y Ciencias de la Salud. En total son diecisiete carreras. ¿Cuál facultad te interesa?"],
+  sig:["💻 Ingeniería","⚖️ Ciencias Jurídicas y Sociales","📈 Ciencias Económicas y Empresariales","🎨 Diseño y Tecnologías Crossmedia","🩺 Ciencias de la Salud"]},
  {id:"inscripcion", g:"celebrar", p:"cv", k:["como me inscribo","como inscribirme","quiero inscribirme","inscripciones","inscribirme a unifranz","quiero estudiar en unifranz","como entro a unifranz","como postulo a la universidad","admisiones","proceso de admision"],
   r:["¡Qué emoción que quieras ser parte de Unifranz! Puedes postular en línea en la página de admisiones o acercarte al campus. Presentas tus documentos, pagas la primera mensualidad o el semestre, y después validas tus materias y horarios en el portal estudiantil."],
   x:()=>`\n\n<a href="https://aplica.unifranz.edu.bo" target="_blank" rel="noopener">👉 Admisiones en línea</a>`,
@@ -988,7 +988,7 @@ const TEMAS = [
   r:["Elige una carrera que mezcle lo que te apasiona, en lo que eres bueno y lo que necesita el mundo. Habla con estudiantes de esa área: ¡aquí en el Turing Lab tienes a los de Sistemas para preguntarles cómo es!"]},
 ];
 
-const SUGERENCIAS_INICIO = ["¿Qué es el SIS Innovation Summit?","Nuevas mallas","Malla de Sistemas","Malla de Derecho","Microcredenciales","Menciones","Todas las carreras","¿Qué es el Turing Lab?"];
+const SUGERENCIAS_INICIO = ["¿Qué es el SIS Innovation Summit?","Carreras por facultad","Nuevas mallas","Microcredenciales","Menciones","¿Qué es el Turing Lab?","Inteligencia artificial","¡Baila!"];
 const SOCIAL = new Set(["saludo","como_estas","estoy_bien","estoy_mal","nervioso","quien_eres","eres_robot","edad","creador","gustos","donde_vives","chiste","motivacion","hora","fecha","clima","comida","bano","wifi","costo","cumplido","amor","insulto","canta","baila","otra_vez","musica","futbol","color","aburrido","gracias","adios","ok"]);
 const RELLENOS = ["Mmm, a ver…","¡Buena pregunta!","¡Ah, claro!","¡Te cuento!","¡Uy, me encanta esa pregunta!","Mira…","¡Claro que sí!"];
 const NO_ENTENDI = [
@@ -1413,6 +1413,31 @@ TEMAS.push(
  {id:"gracias_explicacion", g:"corazon", k:["que buena explicacion","entendi todo","muy clara tu explicacion","explicas muy bien","ahora si entendi","me quedo claro"],
   r:["¡Qué alegría! 😊 Me encanta cuando algo hace clic. Si quieres, pregúntame otro tema o pídeme que te lo explique más a fondo.","¡Gracias! Explicar es mi parte favorita. ¿Seguimos con otra isla del Turing Lab?"]}
 );
+const lista=a=>(a.length<2?a.join(""):a.slice(0,-1).join(", ")+" y "+a[a.length-1]).replace(/ & /g," y ");
+/* ---------- Carreras por facultad: primero la facultad, luego la carrera, y recién ahí la información ---------- */
+const FACULTADES=[
+ {id:"fac_ingenieria", nombre:"Ingeniería", emoji:"💻", carreras:["Ingeniería de Sistemas e Innovación Digital"],
+  k:["facultad de ingenieria","ingenieria facultad","carreras de ingenieria","que carreras hay en ingenieria","que ingenierias hay","ingenierias"]},
+ {id:"fac_juridicas", nombre:"Ciencias Jurídicas y Sociales", emoji:"⚖️", carreras:["Derecho","Psicología","Comunicación y Periodismo Digital"],
+  k:["ciencias juridicas","ciencias juridicas y sociales","juridicas","ciencias sociales","sociales","facultad de ciencias juridicas","carreras sociales"]},
+ {id:"fac_economicas", nombre:"Ciencias Económicas y Empresariales", emoji:"📈", carreras:["Negocios y Gestión Empresarial","Turismo y Hotelería","Gastronomía y Artes Culinarias","Auditoría Financiera y Control de Gestión","Ingeniería Comercial","Ingeniería Económica y Financiera"],
+  k:["ciencias economicas","ciencias economicas y empresariales","empresariales","economicas","facultad de economia","carreras de negocios","carreras empresariales"]},
+ {id:"fac_diseno", nombre:"Diseño y Tecnologías Crossmedia", emoji:"🎨", carreras:["Arquitectura","Diseño Digital y Producción Transmedia","Publicidad y Marketing"],
+  k:["diseno y tecnologias crossmedia","crossmedia","tecnologias crossmedia","facultad de diseno","carreras de diseno","carreras creativas"]},
+ {id:"fac_salud", nombre:"Ciencias de la Salud", emoji:"🩺", carreras:["Bioquímica y Farmacia","Enfermería","Medicina","Odontología"],
+  k:["ciencias de la salud","facultad de salud","carreras de salud","salud","area de salud","carreras de la salud"]}
+];
+const CHIPS_FACULTADES=FACULTADES.map(f=>`${f.emoji} ${f.nombre}`);
+for(const f of FACULTADES){
+  const n=f.carreras.length;
+  TEMAS.push({id:f.id, g:"senalar", p:"lupa", k:[...f.k, ...f.k.map(x=>"carreras de "+x)].concat([`${f.emoji} ${f.nombre}`.toLowerCase()]),
+    r:[n===1 ? `En la Facultad de ${f.nombre} está la carrera de ${f.carreras[0]}. ¡Tócala y te cuento todo sobre ella, con su nueva malla!`
+             : `En la Facultad de ${f.nombre} hay ${["","una","dos","tres","cuatro","cinco","seis"][n]} carreras: ${lista(f.carreras)}. ¿Cuál te interesa? Elígela y te muestro su malla, sus menciones y sus microcredenciales.`],
+    d:f.carreras.map(c=>"🎓 "+c), sig:[...f.carreras, "Otras facultades"]});
+}
+TEMAS.push({id:"carreras_por_facultad", g:"senalar", p:"cv", k:["carreras por facultad","conocer las carreras","otras facultades","ver las facultades","quiero conocer las carreras","que facultades hay","facultades de unifranz","te invito a conocer las carreras"],
+  r:["¡Te invito a conocer las carreras de Unifranz por facultad! Hay cinco: Ingeniería; Ciencias Jurídicas y Sociales; Ciencias Económicas y Empresariales; Diseño y Tecnologías Crossmedia; y Ciencias de la Salud. ¿Cuál te llama la atención?"],
+  sig:CHIPS_FACULTADES});
 /* ---------- Nuevas mallas curriculares 2026 de las 17 carreras (de las mallas oficiales de unifranz.edu.bo) ----------
    Por cada carrera se arman tres temas: la carrera (con la foto de su malla), sus menciones y sus microcredenciales. */
 const CARRERAS={
@@ -1537,7 +1562,6 @@ const CARRERAS={
   areas:["Fundamentos Biológicos y Diagnóstico Clínico","Clínica Integral y Rehabilitación Avanzada","Tecnología Digital e Innovación","Gestión, Liderazgo y Responsabilidad Social"],
   trabajo:"clínicas y consultorios, centros de rehabilitación oral, hospitales, laboratorios dentales, tecnología dental CAD/CAM y teleodontología"}
 };
-const lista=a=>(a.length<2?a.join(""):a.slice(0,-1).join(", ")+" y "+a[a.length-1]).replace(/ & /g," y ");
 // Foto de la malla en el chat (se toca para verla en grande) y enlace al PDF oficial
 const fotoMalla=(slug,c)=>`\n\n<button type="button" class="malla-btn" onclick="verMalla('mallas/${slug}.webp','Malla de ${c.nombre}')"><img class="malla-img" src="mallas/${slug}.webp" alt="Malla curricular de ${c.nombre}" loading="lazy"><span>🔍 Toca para ver la malla en grande</span></button>\n<a href="https://unifranz.edu.bo/wp-content/uploads/2026/10/MALLA-${c.pdf}-2026-Lectura-digital.pdf" target="_blank" rel="noopener">📄 Descargar la malla en PDF</a>`;
 for(const [slug,c] of Object.entries(CARRERAS)){
@@ -1582,11 +1606,11 @@ for(const [slug,c] of Object.entries(CARRERAS)){
 
 TEMAS.push(
  {id:"mallas_general", g:"senalar", p:"lupa", k:["malla","mallas","nueva malla","nuevas mallas","malla curricular","mallas curriculares","plan de estudios","planes de estudio","rediseno curricular","nueva malla curricular","las mallas nuevas","mallas 2026"],
-  r:["¡Todas las carreras de Unifranz estrenan malla rediseñada! Las nuevas mallas se organizan en nivel básico, intermedio y avanzado, con proyectos integradores en cada semestre, microcredenciales que certifican competencias mientras estudias y menciones de especialidad en el tramo final. ¿De qué carrera quieres ver la malla?"],
+  r:["¡Todas las carreras de Unifranz estrenan malla rediseñada! Las nuevas mallas se organizan en nivel básico, intermedio y avanzado, con proyectos integradores en cada semestre, microcredenciales que certifican competencias mientras estudias y menciones de especialidad en el tramo final. Te invito a conocer las carreras por facultad: ¿cuál te interesa?"],
   t:["Un rediseño curricular actualiza qué y cómo se aprende para responder a los desafíos actuales. En las mallas 2026 se repite una estructura: áreas de formación por competencias, proyectos transversales integradores, inteligencia artificial aplicada como materia común, microcredenciales apilables y dos menciones para especializarse."],
-  sig:["Malla de Sistemas","Malla de Derecho","Malla de Psicología","Malla de Medicina","Malla de Arquitectura","Malla de Negocios","Malla de Publicidad","Todas las carreras"]},
+  sig:CHIPS_FACULTADES},
  {id:"beneficios_microcredenciales", g:"estrella", p:"trofeo", k:["para que sirven las microcredenciales","beneficios de las microcredenciales","de que me sirve una microcredencial","ventajas de las microcredenciales","para que me sirve la microcredencial","que gano con las microcredenciales","sirven las microcredenciales para trabajar"],
-  r:["Las microcredenciales te sirven para demostrar lo que ya sabes hacer antes de titularte. Las puedes poner en tu currículum y en LinkedIn, te ayudan a conseguir prácticas o un primer trabajo, y muestran a las empresas competencias concretas, como ciberseguridad ofensiva o compliance corporativo."],
+  r:["Las microcredenciales te sirven para demostrar lo que ya sabes hacer antes de titularte. Cada una certifica competencias concretas, como ciberseguridad ofensiva o compliance corporativo, que te dan ventaja en tus prácticas y en tu futuro profesional, y te motivan con logros a lo largo de la carrera."],
   t:["Una microcredencial certifica un conjunto acotado de competencias, evaluadas al aprobar un grupo de materias relacionadas. Son apilables: se acumulan a lo largo de la carrera y complementan al título. Para las empresas son una señal verificable de habilidades específicas, y para ti, una ruta de aprendizaje con logros intermedios."],
   f:["Son como medallas que ganas en el camino: aunque todavía no termines la carrera, ya puedes mostrar que dominas algo."]},
  {id:"beneficios_menciones", g:"birrete", p:"trofeo", k:["para que sirve la mencion","beneficios de la mencion","beneficios de elegir una mencion","de que me sirve la mencion","por que elegir una mencion","ventajas de la mencion","como elijo mi mencion","que mencion elijo"],
@@ -1599,7 +1623,7 @@ TEMAS.push(
   r:[()=>`¡Bienvenido al SIS Innovation Summit! Es el encuentro de Unifranz, organizado por las carreras de Ingeniería de Sistemas e Innovación Digital y Derecho de la sede Cochabamba, que promueve el talento, la innovación y la vinculación entre la academia, el sector público y la industria. ${CONFIG.summitHora?"Empieza "+CONFIG.summitHora+". ":""}En el acto se presentan oficialmente los rediseños curriculares de ambas carreras.`],
   t:["La nueva Ingeniería de Sistemas e Innovación Digital incorpora áreas estratégicas como inteligencia artificial, ciencia de datos, ciberseguridad, blockchain y computación en la nube. Derecho fortalece su enfoque hacia los nuevos escenarios jurídicos con ámbitos como legal tech, gobernanza digital y justicia penal digital. Las dos mallas incluyen microcredenciales y menciones de especialidad."],
   d:["🎉 SIS Innovation Summit · Unifranz Cochabamba","👩‍💻 Ingeniería de Sistemas e Innovación Digital: IA, Ciencia de Datos, Ciberseguridad, Blockchain y Nube","⚖️ Derecho: Legal Tech, Gobernanza Digital y Justicia Penal Digital","🕕 Desde las 18:00, aproximadamente hasta las 19:30","📍 Quinto piso"],
-  of:{t:"¿Quieres ver la nueva malla de Sistemas o la de Derecho?", id:"mallas_general"}},
+  of:{t:"¿Te invito a conocer las carreras por facultad?", id:"carreras_por_facultad"}},
  {id:"summit_horario", g:"reloj", p:"reloj", k:["a que hora es el summit","a que hora empieza el evento","hasta que hora es el evento","donde es el evento","en que piso es","horario del summit","a que hora termina el evento"],
   r:["El SIS Innovation Summit empieza a las seis de la tarde y dura aproximadamente hasta las siete y media, en el quinto piso. ¡Estás en el lugar correcto!"]},
  {id:"legal_tech", g:"idea", p:"foco", k:["legal tech","legaltech","que es legal tech","tecnologia legal","derecho y tecnologia","abogados y tecnologia","ia en el derecho"],
@@ -1615,12 +1639,12 @@ TEMAS.push(
   t:["Incluye la tipificación de delitos informáticos, la cadena de custodia de la evidencia digital, la informática forense, la criminología digital, la prevención del lavado de activos y la cooperación penal internacional. El reto es garantizar el debido proceso y los derechos humanos en entornos digitales."],
   f:["Es como ser detective y abogado a la vez, pero de los delitos que pasan en internet."]},
  {id:"todas_carreras", g:"senalar", p:"cv", k:["todas las carreras","lista de carreras","que carreras hay en unifranz","cuales son todas las carreras","carreras de unifranz con malla nueva"],
-  r:["Unifranz tiene diecisiete carreras, todas con malla nueva: Ingeniería de Sistemas e Innovación Digital; Derecho, Psicología y Comunicación y Periodismo Digital; Negocios, Turismo, Gastronomía, Auditoría, Ingeniería Comercial e Ingeniería Económica; Arquitectura, Diseño Digital y Publicidad; y Bioquímica, Enfermería, Medicina y Odontología. ¡Pregúntame por la malla de la que quieras!"],
-  sig:["Malla de Sistemas","Malla de Derecho","Malla de Psicología","Malla de Comunicación","Malla de Negocios","Malla de Medicina","Malla de Odontología","Malla de Arquitectura"]}
+  r:["Unifranz tiene diecisiete carreras, todas con malla nueva: Ingeniería de Sistemas e Innovación Digital; Derecho, Psicología y Comunicación y Periodismo Digital; Negocios, Turismo, Gastronomía, Auditoría, Ingeniería Comercial e Ingeniería Económica; Arquitectura, Diseño Digital y Publicidad; y Bioquímica, Enfermería, Medicina y Odontología. ¿Las vemos por facultad?"],
+  sig:CHIPS_FACULTADES}
 );
 // Las microcredenciales y menciones de Sistemas también responden a «microcredenciales» y «menciones» en general
-{ const m=TEMAS.find(t=>t.id==="microcredenciales"); if(m){ m.r=["Las microcredenciales son certificaciones que vas ganando durante la carrera al aprobar un grupo de materias de un área. En las nuevas mallas de Unifranz, cada carrera tiene seis. Así sales con habilidades certificadas antes de titularte. ¿De qué carrera quieres conocer las microcredenciales?"]; m.d=null; m.of={t:"¿Te cuento para qué te sirven?", id:"beneficios_microcredenciales"}; m.sig=null; } }
-{ const m=TEMAS.find(t=>t.id==="menciones"); if(m){ m.r=["Las menciones son las especialidades que eliges en el tramo final de la carrera. En las nuevas mallas, cada carrera ofrece dos, salvo Enfermería, Medicina y Odontología, que tienen una. Por ejemplo, en Sistemas puedes elegir Inteligencia Artificial y Ciencia de Datos, o Ciberseguridad y Blockchain; y en Derecho, Legal Tech y Gobernanza Digital, o Justicia Penal Digital."]; m.d=null; m.of={t:"¿Te cuento para qué sirve elegir una mención?", id:"beneficios_menciones"}; } }
+{ const m=TEMAS.find(t=>t.id==="microcredenciales"); if(m){ m.r=["Las microcredenciales son certificaciones que vas ganando durante la carrera al aprobar un grupo de materias de un área. En las nuevas mallas de Unifranz, cada carrera tiene seis. Así sales con habilidades certificadas antes de titularte. ¿Te cuento para qué te sirven, o prefieres elegir una facultad?"]; m.d=null; m.of={t:"", id:"beneficios_microcredenciales"}; m.of=null; m.sig=["¿Para qué sirven?",...CHIPS_FACULTADES]; } }
+{ const m=TEMAS.find(t=>t.id==="menciones"); if(m){ m.r=["Las menciones son las especialidades que eliges en el tramo final de la carrera. En las nuevas mallas, cada carrera ofrece dos, salvo Enfermería, Medicina y Odontología, que tienen una. Elige una facultad y luego tu carrera, y te cuento sus menciones."]; m.d=null; m.of=null; m.sig=["¿Para qué sirve la mención?",...CHIPS_FACULTADES]; } }
 // Carreras: también entiende "tienen medicina", "quiero estudiar medicina", "carrera de medicina", "ser médico"
 TEMAS.filter(t=>t.id.startsWith("c_")).forEach(t=>{ const e=[]; t.k.filter(k=>!k.includes(" ")&&!k.includes(":")).forEach(k=>e.push("tienen "+k,"estudiar "+k,"carrera de "+k,"ser "+k,"hay "+k)); t.k.push(...e); });
 // Precalcula las claves normalizadas con su peso
@@ -1753,7 +1777,7 @@ function construir(t, nivel){
   // botones para pedir la explicación a otro nivel
   const niveles=[t.t&&nivel!=="t"?"Más a fondo":null, t.f&&nivel!=="f"?"Más fácil":null].filter(Boolean);
   const base=t.sig||(t.of && t.of.id!=="_nombre" && !nivel?["Sí, cuéntame","No, gracias"]:SUGERENCIAS_INICIO);
-  return {texto, textoSin, html, g:nivel==="t"?"idea":t.g, p:t.p, relleno, sig:niveles.length?[...niveles,...base].slice(0,8):base, id:t.id, verPanel:t.verPanel};
+  return {texto, textoSin, html, g:nivel==="t"?"idea":Array.isArray(t.g)?pick(t.g):t.g, p:t.p, relleno, sig:niveles.length?[...niveles,...base].slice(0,8):base, id:t.id, verPanel:t.verPanel};
 }
 const simple = (texto,g,sig) => ({texto, textoSin:texto, html:esc(texto), g, sig:sig||SUGERENCIAS_INICIO});
 
@@ -1895,7 +1919,7 @@ const VISEMAS={
   u:"M193 250 Q200 244 207 250 Q209 263 200 265 Q191 263 193 250Z"
 };
 const DURACION={saludar:1800,saltar:1200,celebrar:1900,bailar:3150,asentir:900,asentirMini:450,encoger:1500,pulgar:1600,reir:1550,
-  corazon:1900,sorpresa:650,girar:1200,voltereta:1300,aplaudir:1650,guino:900,empatia:2400,estirar:2200,peinar:1800,tararear:2900,mirar:2600,reloj:2000,birrete:2000,senalar:1800,carcajada:1800,timida:2000,rascar:2000,estrella:1300,unifranz:2300,idea:1700,fuerza:1600,abrazo:2100};
+  corazon:1900,sorpresa:650,girar:1200,voltereta:1300,aplaudir:1650,guino:900,empatia:2400,estirar:2200,peinar:1800,tararear:2900,mirar:2600,reloj:2000,birrete:2000,senalar:1800,carcajada:1800,timida:2000,rascar:2000,estrella:1300,unifranz:2300,idea:1700,fuerza:1600,abrazo:2100,robot:3200,disco:3200,caporal:3000,macarena:3600,twist:3000,moonwalk:3000};
 const PROPS=["cv","lupa","maletin","trofeo","foco","reloj","corazon","regalo"];
 let gestoHasta=0;
 function estado(e){ P.classList.remove("escuchando","pensando","hablando","pregunta","enfasis"); if(e) P.classList.add(e); }
@@ -1963,7 +1987,12 @@ setInterval(()=>{
 function ocupada(){ return hablandoAhora||escuchando||P.classList.contains("pensando")||Date.now()<gestoHasta+600; }
 setInterval(()=>{
   if(ocupada()) return;
-  if(modoEspera){ gesto(pick(["saludar","saltar","girar","celebrar","bailar","tararear","guino","voltereta","aplaudir","birrete","estrella","carcajada"])); subtituloFijo(pick(FRASES_ESPERA)); }
+  if(modoEspera){
+    // cada siete segundos un gesto llamativo; cada tres vueltas, una invitación en voz alta
+    turnoEspera++; const frase=pick(FRASES_ESPERA);
+    gesto(pick(["saludar","saludar","senalar","bailar","robot","disco","caporal","macarena","twist","moonwalk","saltar","girar","voltereta","estrella","celebrar","guino","unifranz"]));
+    if(CONFIG.invitarConVoz && sonidoListo && turnoEspera%3===0) decir(frase); else subtituloFijo(frase);
+  }
   else gesto(pick(["mirar","tararear","peinar","estirar","reloj","guino","asentirMini","mirar","rascar","senalar"]));
 },7000);
 
@@ -2360,7 +2389,14 @@ P.addEventListener("click",()=>{
 
 /* ====== Inicio, modo espera (kiosco) y ajustes ====== */
 let modoEspera=true, temporizador;
-const FRASES_ESPERA=["¡Hola! 👋 Toca el micrófono y háblame","¿Buscas trabajo o prácticas? ¡Pregúntame! 💼","Psst… ¿quieres ver cómo bailo? 💃","¡Te ayudo con tu currículum! 📄","Tócame para empezar a conversar 😊","¿Nervios por una entrevista? ¡Te doy tips! 💪"];
+// Frases para atraer al público cuando nadie está conversando (se muestran y, cada tanto, se dicen en voz alta)
+const FRASES_ESPERA=["¡Hola! 👋 Acércate y pregúntame lo que quieras","¡Hey, sí, tú! 👀 ¿Me haces una pregunta?","¿Quieres ver la nueva malla de tu carrera? ¡Pregúntame! 📚",
+  "Te invito a conocer las carreras de Unifranz por facultad. ¡Acércate! 🎓","¿Sabes qué es una microcredencial? Acércate y te cuento 🏅",
+  "Soy Petrova, ¡una inteligencia artificial! Ven a probarme 🤖","¿Inteligencia artificial, blockchain o ciberseguridad? ¡Pregúntame! 🔐",
+  "Toca el micrófono y háblame, ¡no muerdo! 😄","Te reto: hazme la pregunta más difícil que se te ocurra 😎","Psst… ¿quieres ver cómo bailo? Ven y pídemelo 💃",
+  "¿Quieres conocer las carreras de cada facultad? ¡Pregúntame! 📄","¡Estoy aburrida sin ti! Ven a conversar un ratito 🥺",
+  "Puedes hablarme con tus propias palabras, ¡hasta con jerga! 😉","Elige una facultad y te muestro la nueva malla de tus carreras favoritas 🎯"];
+let turnoEspera=0, sonidoListo=false;
 function entrarEspera(){
   modoEspera=true; turnoIA++; historialIA=[]; callar(); estado(null); mostrarProp(null);
   if(escuchando){ cancelado=true; rec.abort(); }
@@ -2381,7 +2417,8 @@ function saludoInicial(){
 }
 function reiniciarTemporizador(){ clearTimeout(temporizador); if(CONFIG.reinicioInactividadSeg>0) temporizador=setTimeout(()=>{ if(hablandoAhora||escuchando) return reiniciarTemporizador(); entrarEspera(); }, CONFIG.reinicioInactividadSeg*1000); }
 ["click","keydown","touchstart"].forEach(ev=>document.addEventListener(ev,()=>{ if(!modoEspera) reiniciarTemporizador(); },{passive:true}));
-document.getElementById("inicio").onclick=e=>{ e.currentTarget.remove(); saludoInicial(); };
+document.getElementById("inicio").onclick=e=>{ e.currentTarget.remove(); sonidoListo=true; saludoInicial(); };
+["click","touchstart","keydown"].forEach(ev=>document.addEventListener(ev,()=>{ sonidoListo=true; },{once:true,passive:true}));
 document.getElementById("btnReiniciar").onclick=()=>entrarEspera();
 document.getElementById("btnHistorial").onclick=()=>app.classList.toggle("ver-historial");
 document.getElementById("cerrarHistorial").onclick=()=>app.classList.remove("ver-historial");
@@ -2407,6 +2444,6 @@ entrarEspera();
 </script>
 <!-- Petrova 3D: si no carga (sin internet o sin WebGL) se queda la Petrova 2D -->
 <script src="lib/three.min.js"></script>
-<script src="alumi3d.js?v=7"></script>
+<script src="alumi3d.js?v=8"></script>
 </body>
 </html>

@@ -55,7 +55,6 @@ creador | quién te hizo
 creador | quién te programó
 creador | cómo te hicieron
 creador | quién es tu creador
-creador | quién es sebastián
 creador | quién te inventó
 creador | quién es tu papá
 gustos | qué te gusta hacer
@@ -1842,3 +1841,31 @@ sis_summit | qué evento hay hoy
 sis_summit | qué se celebra esta noche
 beneficios_menciones | por qué elegir una especialidad
 beneficios_menciones | vale la pena elegir una mención
+# --- Carreras por facultad (los botones dicen el nombre completo de la carrera) ---
+c_sistemas | ingeniería de sistemas e innovación digital
+c_derecho | derecho
+c_psicologia | psicología
+c_comunicacion | comunicación y periodismo digital
+c_negocios | negocios y gestión empresarial
+c_turismo | turismo y hotelería
+c_gastronomia | gastronomía y artes culinarias
+c_auditoria | auditoría financiera y control de gestión
+c_comercial | ingeniería comercial
+c_economica | ingeniería económica y financiera
+c_arquitectura | arquitectura
+c_diseno | diseño digital y producción transmedia
+c_publicidad | publicidad y marketing
+c_bioquimica | bioquímica y farmacia
+c_enfermeria | enfermería
+c_medicina | medicina
+c_odontologia | odontología
+carreras_por_facultad | carreras por facultad
+carreras_por_facultad | qué carreras hay en cada facultad
+carreras_por_facultad | quiero conocer las facultades
+carreras_por_facultad | muéstrame las facultades
+fac_salud | qué carreras hay en ciencias de la salud
+fac_salud | carreras de salud
+fac_ingenieria | qué carreras hay en la facultad de ingeniería
+fac_juridicas | qué carreras hay en ciencias jurídicas y sociales
+fac_economicas | qué carreras hay en ciencias económicas y empresariales
+fac_diseno | qué carreras hay en diseño y tecnologías crossmedia
